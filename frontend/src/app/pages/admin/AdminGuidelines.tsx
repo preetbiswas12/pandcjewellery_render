@@ -45,7 +45,7 @@ export default function AdminGuidelines() {
               How Categories Work
             </h3>
             <ul className="list-disc list-inside space-y-1 text-gray-700">
-              <li>Categories are the primary product classification (e.g., Dyeable Fabrics, Printed Fabrics)</li>
+              <li>Categories are the primary product classification (e.g., Dyeable Jewellery, Printed Jewellery)</li>
               <li>Each category has multiple sub-categories for detailed organization</li>
               <li>Categories can be toggled active/inactive without deletion</li>
               <li>Changes to categories immediately reflect across:

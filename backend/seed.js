@@ -29,7 +29,7 @@ const seedData = async () => {
           { name: 'Printed Cotton', slug: 'printed-cotton' }
         ],
         isActive: true,
-        description: 'Breathable and comfortable cotton fabrics perfect for everyday wear and crafting'
+        description: 'Breathable and comfortable cotton Jewellery perfect for everyday wear and crafting'
       },
       {
         name: 'Silk',
@@ -39,7 +39,7 @@ const seedData = async () => {
           { name: 'Banarasi', slug: 'banarasi' }
         ],
         isActive: true,
-        description: 'Luxurious silk fabrics known for elegance and smooth texture'
+        description: 'Luxurious silk Jewellery known for elegance and smooth texture'
       }
     ];
     await Category.insertMany(categories);
@@ -50,10 +50,10 @@ const seedData = async () => {
       {
         type: 'hero-main',
         title: 'Premium Fabric Collections',
-        subtitle: 'Finest selection of cotton, silk, and specialty fabrics for your creative projects',
+        subtitle: 'Finest selection of cotton, silk, and specialty Jewellery for your creative projects',
         image: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1200',
         link: '/shop',
-        buttonText: 'EXPLORE FABRICS',
+        buttonText: 'EXPLORE Jewellery',
         isActive: true,
         order: 1
       },

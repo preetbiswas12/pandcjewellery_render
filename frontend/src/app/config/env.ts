@@ -99,7 +99,7 @@ export const config = {
 
   // Admin
   admin: {
-    email: import.meta.env.VITE_ADMIN_EMAIL || 'admin@fabricstore.com',
+    email: import.meta.env.VITE_ADMIN_EMAIL || 'admin@Jewellerytore.com',
   },
 
   // Development

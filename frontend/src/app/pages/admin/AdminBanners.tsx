@@ -291,7 +291,7 @@ export default function AdminBanners() {
                   value={formData.subtitle}
                   onChange={(e) => setFormData(prev => ({ ...prev, subtitle: e.target.value }))}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
-                  placeholder="Explore our latest premium fabrics"
+                  placeholder="Explore our latest premium Jewellery"
                 />
               </div>
 

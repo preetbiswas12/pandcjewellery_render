@@ -49,7 +49,7 @@ export default function CartPage() {
             <ShoppingBag size={80} className="mx-auto mb-6 opacity-20" />
             <h2 className="text-2xl mb-4">Your cart is empty</h2>
             <p className="text-lg opacity-70 mb-8">
-              Add some fabrics to get started
+              Add some Jewellery to get started
             </p>
             <NoiseButton onClick={() => navigate('/shop')}>
               Start Shopping

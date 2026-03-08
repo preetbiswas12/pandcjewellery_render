@@ -77,7 +77,7 @@ export default function ShopPage() {
       <div className="bg-gradient-to-b from-gray-50 to-white border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-[60px] py-12 md:py-16">
           <h1 className="text-4xl md:text-5xl lg:text-6xl tracking-tight mb-4">
-            {currentCategory ? currentCategory.name : 'All Fabrics'}
+            {currentCategory ? currentCategory.name : 'All Jewellery'}
           </h1>
           <p className="text-lg opacity-70">
             {sortedProducts.length} products available
@@ -133,7 +133,7 @@ export default function ShopPage() {
                     !selectedCategory ? 'bg-magenta-950 text-white' : 'hover:bg-gray-100'
                   }`}
                 >
-                  All Fabrics
+                  All Jewellery
                 </button>
                 {categories.filter(cat => cat.isActive).map(cat => (
                   <div key={cat._id}>

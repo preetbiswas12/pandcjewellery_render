@@ -11,7 +11,7 @@ export function seedDatabase() {
         price: 2499,
         offerPercentage: 15,
         quantity: 50,
-        category: 'dyeable-fabrics',
+        category: 'dyeable-Jewellery',
         subCategory: 'silk',
         fabricType: 'Pure Mulberry Silk',
         careInstructions: 'Dry clean only. Iron on low heat.',
@@ -26,7 +26,7 @@ export function seedDatabase() {
         price: 1899,
         offerPercentage: 10,
         quantity: 75,
-        category: 'dyeable-fabrics',
+        category: 'dyeable-Jewellery',
         subCategory: 'linen',
         fabricType: '100% Pure Linen',
         careInstructions: 'Machine wash cold. Tumble dry low.',
@@ -41,7 +41,7 @@ export function seedDatabase() {
         price: 899,
         offerPercentage: 20,
         quantity: 100,
-        category: 'dyeable-fabrics',
+        category: 'dyeable-Jewellery',
         subCategory: 'cotton',
         fabricType: 'Organic Cotton',
         careInstructions: 'Machine wash warm. Tumble dry medium.',
@@ -56,7 +56,7 @@ export function seedDatabase() {
         price: 1299,
         offerPercentage: 12,
         quantity: 80,
-        category: 'dyeable-fabrics',
+        category: 'dyeable-Jewellery',
         subCategory: 'viscose',
         fabricType: 'Pure Viscose',
         careInstructions: 'Hand wash or dry clean. Do not wring.',
@@ -71,7 +71,7 @@ export function seedDatabase() {
         price: 1599,
         offerPercentage: 8,
         quantity: 60,
-        category: 'dyeable-fabrics',
+        category: 'dyeable-Jewellery',
         subCategory: 'modal',
         fabricType: 'Modal with Spandex',
         careInstructions: 'Machine wash cold. Hang dry.',
@@ -86,7 +86,7 @@ export function seedDatabase() {
         price: 599,
         offerPercentage: 15,
         quantity: 120,
-        category: 'lining-fabrics',
+        category: 'lining-Jewellery',
         subCategory: 'cotton',
         fabricType: 'Cotton Voile',
         careInstructions: 'Machine wash cold. Iron if needed.',
@@ -101,7 +101,7 @@ export function seedDatabase() {
         price: 699,
         offerPercentage: 10,
         quantity: 90,
-        category: 'lining-fabrics',
+        category: 'lining-Jewellery',
         subCategory: 'viscose',
         fabricType: 'Viscose Taffeta',
         careInstructions: 'Dry clean recommended.',
@@ -116,7 +116,7 @@ export function seedDatabase() {
         price: 1799,
         offerPercentage: 18,
         quantity: 45,
-        category: 'printed-fabrics',
+        category: 'printed-Jewellery',
         subCategory: 'handblock',
         fabricType: 'Block Printed Cotton',
         careInstructions: 'Hand wash cold. Dry in shade.',
@@ -131,7 +131,7 @@ export function seedDatabase() {
         price: 2899,
         offerPercentage: 10,
         quantity: 35,
-        category: 'printed-fabrics',
+        category: 'printed-Jewellery',
         subCategory: 'digital-print',
         fabricType: 'Digital Printed Silk',
         careInstructions: 'Dry clean only.',
@@ -146,7 +146,7 @@ export function seedDatabase() {
         price: 3999,
         offerPercentage: 20,
         quantity: 25,
-        category: 'embroidered-fabrics',
+        category: 'embroidered-Jewellery',
         subCategory: 'beaded-sequin',
         fabricType: 'Net with Beadwork',
         careInstructions: 'Dry clean only. Handle with care.',
@@ -161,7 +161,7 @@ export function seedDatabase() {
         price: 3499,
         offerPercentage: 15,
         quantity: 30,
-        category: 'embroidered-fabrics',
+        category: 'embroidered-Jewellery',
         subCategory: 'traditional',
         fabricType: 'Embroidered Silk',
         careInstructions: 'Dry clean only.',
@@ -176,7 +176,7 @@ export function seedDatabase() {
         price: 2199,
         offerPercentage: 12,
         quantity: 40,
-        category: 'dyeable-fabrics',
+        category: 'dyeable-Jewellery',
         subCategory: 'silk',
         fabricType: 'Tussar Silk',
         careInstructions: 'Dry clean recommended.',
@@ -292,8 +292,8 @@ export function seedDatabase() {
   if (existingCategories.length === 0) {
     const categories: Omit<Category, '_id' | 'createdAt' | 'updatedAt'>[] = [
       {
-        name: 'Dyeable Fabrics',
-        slug: 'dyeable-fabrics',
+        name: 'Dyeable Jewellery',
+        slug: 'dyeable-Jewellery',
         subCategories: [
           { name: 'Silk', slug: 'silk' },
           { name: 'Linen', slug: 'linen' },
@@ -304,8 +304,8 @@ export function seedDatabase() {
         isActive: true
       },
       {
-        name: 'Lining Fabrics',
-        slug: 'lining-fabrics',
+        name: 'Lining Jewellery',
+        slug: 'lining-Jewellery',
         subCategories: [
           { name: 'Cotton', slug: 'cotton' },
           { name: 'Viscose', slug: 'viscose' }
@@ -313,8 +313,8 @@ export function seedDatabase() {
         isActive: true
       },
       {
-        name: 'Printed Fabrics',
-        slug: 'printed-fabrics',
+        name: 'Printed Jewellery',
+        slug: 'printed-Jewellery',
         subCategories: [
           { name: 'Handblock', slug: 'handblock' },
           { name: 'Digital Print', slug: 'digital-print' }
@@ -322,8 +322,8 @@ export function seedDatabase() {
         isActive: true
       },
       {
-        name: 'Embroidered Fabrics',
-        slug: 'embroidered-fabrics',
+        name: 'Embroidered Jewellery',
+        slug: 'embroidered-Jewellery',
         subCategories: [
           { name: 'Beaded & Sequin', slug: 'beaded-sequin' },
           { name: 'Traditional', slug: 'traditional' }

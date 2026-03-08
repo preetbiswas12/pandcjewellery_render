@@ -8,7 +8,7 @@ export default function AboutPage() {
             About P&C Jewellery
           </h1>
           <p className="text-lg text-gray-600">
-            Discover our story and commitment to quality fabrics.
+            Discover our story and commitment to quality Jewellery.
           </p>
         </div>
       </div>
@@ -19,7 +19,7 @@ export default function AboutPage() {
         <section>
           <h2 className="text-3xl font-bold mb-6">Our Story</h2>
           <p className="text-lg text-gray-700 leading-relaxed mb-4">
-            P&C Jewellery was founded with a passion for bringing premium quality fabrics to creative minds around the world. We believe that the right fabric can transform any vision into reality.
+            P&C Jewellery was founded with a passion for bringing premium quality Jewellery to creative minds around the world. We believe that the right fabric can transform any vision into reality.
           </p>
           <p className="text-lg text-gray-700 leading-relaxed">
             What started as a small initiative has grown into a trusted platform where designers, crafters, and fashion enthusiasts find inspiration and quality materials for their projects.
@@ -30,7 +30,7 @@ export default function AboutPage() {
         <section className="bg-magenta-50 p-8 md:p-12 rounded-lg">
           <h2 className="text-3xl font-bold mb-6">Our Mission</h2>
           <p className="text-lg text-gray-700 leading-relaxed">
-            To provide the finest quality fabrics, exceptional customer service, and inspiration that empowers our customers to create beautiful pieces that matter. We're committed to sustainability, ethical sourcing, and supporting the creative community.
+            To provide the finest quality Jewellery, exceptional customer service, and inspiration that empowers our customers to create beautiful pieces that matter. We're committed to sustainability, ethical sourcing, and supporting the creative community.
           </p>
         </section>
 
@@ -39,7 +39,7 @@ export default function AboutPage() {
           <h2 className="text-3xl font-bold mb-8">Our Values</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
-              { title: 'Quality', description: 'We source only the finest fabrics from trusted suppliers worldwide.' },
+              { title: 'Quality', description: 'We source only the finest Jewellery from trusted suppliers worldwide.' },
               { title: 'Innovation', description: 'We constantly explore new designs and patterns to inspire creativity.' },
               { title: 'Sustainability', description: 'We\'re committed to eco-friendly practices and ethical production.' }
             ].map((value, i) => (
@@ -56,7 +56,7 @@ export default function AboutPage() {
           <h2 className="text-3xl font-bold mb-8">Why Choose Us?</h2>
           <ul className="space-y-4">
             {[
-              'Premium quality fabrics from world-renowned suppliers',
+              'Premium quality Jewellery from world-renowned suppliers',
               'Curated collections for every project and season',
               'Fast and reliable shipping worldwide',
               'Expert customer support and guidance',

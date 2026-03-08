@@ -21,7 +21,7 @@ export default function SitemapPage() {
     {
       category: 'Products',
       links: [
-        { title: 'All Fabrics', href: '/shop' },
+        { title: 'All Jewellery', href: '/shop' },
         { title: 'Banarasi', href: '/shop/banarasi' },
         { title: 'Silk', href: '/shop/silk' },
         { title: 'Cotton', href: '/shop/cotton' }
@@ -96,7 +96,7 @@ export default function SitemapPage() {
         <div className="mt-16 bg-gray-50 p-8 rounded-lg border-2 border-gray-200">
           <h2 className="text-2xl font-bold mb-4">Explore Collections</h2>
           <p className="text-gray-700 mb-4">
-            Browse our complete collection of premium fabrics organized by type, category, and color. Each product page includes detailed information, pricing, and availability.
+            Browse our complete collection of premium Jewellery organized by type, category, and color. Each product page includes detailed information, pricing, and availability.
           </p>
           <a href="/shop" className="inline-block text-magenta-600 font-semibold hover:underline">
             View All Products →

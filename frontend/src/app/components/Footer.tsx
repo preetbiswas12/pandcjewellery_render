@@ -82,11 +82,11 @@ export function Footer() {
           <div>
             <h4 className="text-base font-bold tracking-wider mb-6 uppercase">Shop</h4>
             <ul className="space-y-3">
-              <li><a href="/shop" className="text-gray-400 text-sm md:text-base hover:text-white transition-colors">All Fabrics</a></li>
-              <li><a href="/shop/dyeable-fabrics" className="text-gray-400 text-sm md:text-base hover:text-white transition-colors">Dyeable Fabrics</a></li>
-              <li><a href="/shop/printed-fabrics" className="text-gray-400 text-sm md:text-base hover:text-white transition-colors">Printed Fabrics</a></li>
-              <li><a href="/shop/embroidered-fabrics" className="text-gray-400 text-sm md:text-base hover:text-white transition-colors">Embroidered Collections</a></li>
-              <li><a href="/shop/lining-fabrics" className="text-gray-400 text-sm md:text-base hover:text-white transition-colors">Lining Fabrics</a></li>
+              <li><a href="/shop" className="text-gray-400 text-sm md:text-base hover:text-white transition-colors">All Jewellery</a></li>
+              <li><a href="/shop/dyeable-Jewellery" className="text-gray-400 text-sm md:text-base hover:text-white transition-colors">Dyeable Jewellery</a></li>
+              <li><a href="/shop/printed-Jewellery" className="text-gray-400 text-sm md:text-base hover:text-white transition-colors">Printed Jewellery</a></li>
+              <li><a href="/shop/embroidered-Jewellery" className="text-gray-400 text-sm md:text-base hover:text-white transition-colors">Embroidered Collections</a></li>
+              <li><a href="/shop/lining-Jewellery" className="text-gray-400 text-sm md:text-base hover:text-white transition-colors">Lining Jewellery</a></li>
             </ul>
           </div>
 

@@ -34,7 +34,7 @@ export default function FAQPage() {
       answer: "Currently, we operate online only. However, we're working on opening physical locations. Follow us on social media for updates!"
     },
     {
-      question: "How do I care for my fabrics?",
+      question: "How do I care for my Jewellery?",
       answer: "Each fabric comes with detailed care instructions. Generally, hand wash or gentle machine wash in cold water is recommended. Avoid bleach and tumble drying."
     }
   ];
