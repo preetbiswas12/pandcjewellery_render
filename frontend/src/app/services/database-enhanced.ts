@@ -1,8 +1,9 @@
 // Enhanced Database Service
-// Supports both localStorage (development) and MongoDB API (production)
+// Uses MongoDB API directly - no localStorage fallback to ensure real-time data sync
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
-const USE_LOCAL_STORAGE = !API_URL.includes('localhost:5000');
+// Always use MongoDB API (set to false to completely remove localStorage)
+const USE_LOCAL_STORAGE = false;
 
 export interface Product {
   _id: string;

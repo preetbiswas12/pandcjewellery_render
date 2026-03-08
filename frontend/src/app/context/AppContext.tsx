@@ -74,9 +74,16 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
   // Initialize database and seed data (load only on page load, not real-time)
   useEffect(() => {
+    // Clear any cached localStorage to ensure fresh MongoDB API data
+    localStorage.removeItem('products');
+    localStorage.removeItem('orders');
+    localStorage.removeItem('coupons');
+    localStorage.removeItem('banners');
+    localStorage.removeItem('categories');
+    
     seedDatabase();
     
-    // Load initial data
+    // Load initial data from MongoDB API
     const loadData = async () => {
       const loadedProducts = (await db.getAll<DBProduct>('products')).map(p => ({ ...p, id: p._id }));
       const loadedOrders = await db.getAll<Order>('orders');
