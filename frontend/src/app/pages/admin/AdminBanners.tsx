@@ -113,7 +113,7 @@ export default function AdminBanners() {
   const handleGoogleDriveImage = (urls: string[]) => {
     if (urls && urls.length > 0) {
       // Update form data with the first selected image
-      formDataRef.current.image = urls[0];
+      setFormData(prev => ({ ...prev, image: urls[0] }));
       // Reset picker
       setShowGoogleDrivePicker(false);
     }
