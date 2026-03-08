@@ -108,7 +108,7 @@ export default function AdminCategories() {
         </div>
         <button
           onClick={() => openModal()}
-          className="bg-black text-white px-4 py-2 rounded-lg hover:bg-gray-800 flex items-center gap-2"
+          className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 flex items-center gap-2"
         >
           <Plus className="w-4 h-4" />
           Add Category
@@ -213,7 +213,7 @@ export default function AdminCategories() {
                   <button
                     type="button"
                     onClick={addSubCategory}
-                    className="bg-gray-800 text-white px-4 py-2 rounded-lg hover:bg-black"
+                    className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
                   >
                     <Plus className="w-4 h-4" />
                   </button>
@@ -267,7 +267,7 @@ export default function AdminCategories() {
                 </button>
                 <button
                   type="submit"
-                  className="flex-1 bg-black text-white px-4 py-2 rounded-lg hover:bg-gray-800"
+                  className="flex-1 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
                 >
                   {editingCategory ? 'Update' : 'Create'} Category
                 </button>

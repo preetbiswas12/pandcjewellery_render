@@ -131,7 +131,7 @@ export default function AdminBanners() {
         </div>
         <button
           onClick={() => openModal()}
-          className="bg-black text-white px-6 py-3 rounded-full font-medium hover:bg-gray-800 transition-all flex items-center gap-2"
+          className="bg-blue-600 text-white px-6 py-3 rounded-full font-medium hover:bg-blue-700 transition-all flex items-center gap-2"
         >
           <Plus size={20} />
           Add Banner
@@ -195,14 +195,14 @@ export default function AdminBanners() {
                     <button
                       onClick={() => moveOrder(banner, 'up')}
                       disabled={banner.order === 1}
-                      className="w-10 h-10 border-2 border-black rounded-full flex items-center justify-center hover:bg-black hover:text-white transition-all disabled:opacity-30 disabled:cursor-not-allowed"
+                      className="w-10 h-10 border-2 border-blue-600 rounded-full flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all disabled:opacity-30 disabled:cursor-not-allowed"
                     >
                       <ChevronUp size={18} />
                     </button>
                     <button
                       onClick={() => moveOrder(banner, 'down')}
                       disabled={banner.order === banners.length}
-                      className="w-10 h-10 border-2 border-black rounded-full flex items-center justify-center hover:bg-black hover:text-white transition-all disabled:opacity-30 disabled:cursor-not-allowed"
+                      className="w-10 h-10 border-2 border-blue-600 rounded-full flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all disabled:opacity-30 disabled:cursor-not-allowed"
                     >
                       <ChevronDown size={18} />
                     </button>
@@ -223,7 +223,7 @@ export default function AdminBanners() {
                   </button>
                   <button
                     onClick={() => openModal(banner)}
-                    className="px-4 py-2 border-2 border-black rounded-full font-medium hover:bg-black hover:text-white transition-all flex items-center gap-2"
+                    className="px-4 py-2 border-2 border-blue-600 rounded-full font-medium hover:bg-blue-600 hover:text-white transition-all flex items-center gap-2"
                   >
                     <Edit size={16} />
                     Edit
@@ -398,7 +398,7 @@ export default function AdminBanners() {
                 </button>
                 <button
                   type="submit"
-                  className="flex-1 bg-black text-white px-6 py-3 rounded-full font-medium hover:bg-gray-800 transition-all"
+                  className="flex-1 bg-blue-600 text-white px-6 py-3 rounded-full font-medium hover:bg-blue-700 transition-all"
                 >
                   {editingBanner ? 'Update Banner' : 'Add Banner'}
                 </button>

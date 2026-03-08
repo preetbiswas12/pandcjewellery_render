@@ -103,7 +103,7 @@ export default function AdminCoupons() {
         </div>
         <button
           onClick={() => openModal()}
-          className="bg-magenta-950 text-white px-6 py-3 rounded-full font-medium hover:bg-magenta-900 transition-all flex items-center gap-2"
+          className="bg-blue-600 text-white px-6 py-3 rounded-full font-medium hover:bg-blue-700 transition-all flex items-center gap-2"
         >
           <Plus size={20} />
           Add Coupon
@@ -196,7 +196,7 @@ export default function AdminCoupons() {
                 </button>
                 <button
                   onClick={() => openModal(coupon)}
-                  className="w-10 h-10 border-2 border-magenta-950 rounded-full flex items-center justify-center hover:bg-magenta-950 hover:text-white transition-all"
+                  className="w-10 h-10 border-2 border-blue-600 rounded-full flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all"
                 >
                   <Edit size={16} />
                 </button>
@@ -353,7 +353,7 @@ export default function AdminCoupons() {
                 </button>
                 <button
                   type="submit"
-                  className="flex-1 bg-magenta-950 text-white px-6 py-3 rounded-full font-medium hover:bg-magenta-900 transition-all"
+                  className="flex-1 bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition-all"
                 >
                   {editingCoupon ? 'Update Coupon' : 'Add Coupon'}
                 </button>

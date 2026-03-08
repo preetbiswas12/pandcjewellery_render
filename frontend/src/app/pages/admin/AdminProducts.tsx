@@ -233,7 +233,7 @@ export default function AdminProducts() {
         </div>
         <button
           onClick={() => openModal()}
-          className="bg-magenta-950 text-white px-6 py-3 rounded-full font-medium hover:bg-magenta-900 transition-all flex items-center gap-2"
+          className="bg-blue-600 text-white px-6 py-3 rounded-full font-medium hover:bg-blue-700 transition-all flex items-center gap-2"
         >
           <Plus size={20} />
           Add Product
@@ -279,7 +279,7 @@ export default function AdminProducts() {
                 <div className="flex gap-2">
                   <button
                     onClick={() => openModal(product)}
-                    className="flex-1 border-2 border-magenta-950 px-4 py-2 rounded-full font-medium hover:bg-magenta-950 hover:text-white transition-all flex items-center justify-center gap-2"
+                    className="flex-1 border-2 border-blue-600 px-4 py-2 rounded-full font-medium hover:bg-blue-600 hover:text-white transition-all flex items-center justify-center gap-2"
                   >
                     <Edit size={16} />
                     Edit
@@ -557,7 +557,7 @@ export default function AdminProducts() {
                 <button
                   type="submit"
                   disabled={uploadingImages}
-                  className="flex-1 bg-magenta-950 text-white px-6 py-3 rounded-full font-medium hover:bg-magenta-900 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="flex-1 bg-blue-600 text-white px-6 py-3 rounded-full font-medium hover:bg-blue-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {editingProduct ? 'Update Product' : 'Add Product'}
                 </button>
