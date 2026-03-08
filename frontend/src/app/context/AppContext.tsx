@@ -410,6 +410,7 @@ export function useApp() {
       refreshCoupons: () => {},
       refreshBanners: () => {},
       refreshCategories: () => {},
+      refreshAllData: async () => {},
       createOrder: async () => ({ _id: '', orderNumber: '', customerName: '', customerEmail: '', customerPhone: '', shippingAddress: { street: '', city: '', state: '', zipCode: '', country: '' }, items: [], subtotal: 0, discount: 0, shipping: 0, total: 0, status: 'pending', paymentStatus: 'pending', createdAt: new Date().toISOString(), updatedAt: new Date().toISOString() }),
       updateOrderStatus: async () => {},
       createProduct: async () => ({ _id: '', id: '', sku: '', name: '', price: 0, offerPercentage: 0, quantity: 0, category: '', subCategory: '', fabricType: '', careInstructions: '', description: '', images: [], colors: [], features: [], createdAt: new Date().toISOString(), updatedAt: new Date().toISOString() }),
