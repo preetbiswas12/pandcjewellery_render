@@ -4,10 +4,7 @@ require('dotenv').config();
 
 const seedAdmin = async () => {
   try {
-    await mongoose.connect(process.env.MONGODB_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    await mongoose.connect(process.env.MONGODB_URI);
 
     // Check if admin already exists
     const existingAdmin = await Admin.findOne({ email: 'pandctexfab@gmail.com' });

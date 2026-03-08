@@ -80,14 +80,16 @@ let isDBConnected = false;
 const connectDB = async () => {
   try {
     await mongoose.connect(process.env.MONGODB_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
       connectTimeoutMS: 15000,
       serverSelectionTimeoutMS: 15000,
+      socketTimeoutMS: 45000,
+      maxPoolSize: 10,
     });
     isDBConnected = true;
+    console.log('✓ MongoDB connected successfully');
   } catch (err) {
     isDBConnected = false;
+    console.error('✗ MongoDB connection error:', err.message);
     setTimeout(connectDB, 5000);
   }
 };
