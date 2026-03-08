@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: fabric-store
+    runtime: node
+    plan: starter
+    rootDir: .
+    buildCommand: cd frontend && pnpm install && pnpm build && cd ../backend && pnpm install
+    startCommand: cd backend && pnpm start
+    
+    # Environment variables
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 5000
+    
+    # Auto-deploy when main branch is updated
+    autoDeploy: true
+    
+    # Health check - improved for reliability
+    healthCheckPath: /api/health
+    healthCheckInterval: 10
+    healthCheckTimeout: 5
+    healthCheckInitialDelay: 30

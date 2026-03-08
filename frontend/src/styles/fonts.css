@@ -1,0 +1,57 @@
+/* Google Fonts Import - Audiowide, DM Serif Text, Heebo, Montserrat, Noto Serif */
+@import url('https://fonts.googleapis.com/css2?family=Audiowide&family=DM+Serif+Text:ital@0;1&family=Heebo:wght@100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* Custom local fonts */
+@font-face {
+  font-family: 'Against';
+  src: url('/fonts/against-regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+:root {
+  --font-audiowide: 'Audiowide', sans-serif;
+  --font-dm-serif: 'DM Serif Text', serif;
+  --font-heebo: 'Heebo', sans-serif;
+  --font-montserrat: 'Montserrat', sans-serif;
+  --font-noto-serif: 'Noto Serif', serif;
+  --font-against: 'Against', sans-serif;
+  
+  /* Legacy aliases for backward compatibility */
+  --font-garamond: 'Noto Serif', serif;
+}
+
+/* Apply Montserrat to body text (default) */
+body, p, span, a, button {
+  font-family: var(--font-montserrat) !important;
+}
+
+/* Apply Noto Serif to headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-noto-serif) !important;
+}
+
+/* Optional: Use specific fonts for specific elements */
+.font-audiowide {
+  font-family: var(--font-audiowide) !important;
+}
+
+.font-dm-serif {
+  font-family: var(--font-dm-serif) !important;
+}
+
+.font-heebo {
+  font-family: var(--font-heebo) !important;
+}
+
+.font-noto-serif {
+  font-family: var(--font-noto-serif) !important;
+}
+
+.font-montserrat {
+  font-family: var(--font-montserrat) !important;
+}
+
+.font-against {
+  font-family: var(--font-against) !important;
+}

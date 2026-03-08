@@ -1,0 +1,21 @@
+{
+  "name": "fabric-store-monorepo",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "build": "cd frontend && pnpm install && pnpm build && cd ../backend && pnpm install",
+    "dev:frontend": "cd frontend && pnpm dev",
+    "dev:backend": "cd backend && pnpm dev",
+    "dev": "pnpm -r dev",
+    "start": "cd backend && pnpm start",
+    "seed": "cd backend && pnpm seed"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "pnpm": {
+    "overrides": {
+      "vite": "6.3.5"
+    }
+  }
+}
