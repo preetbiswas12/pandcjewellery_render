@@ -31,6 +31,7 @@ interface AppContextType {
   refreshCoupons: () => Promise<void>;
   refreshBanners: () => Promise<void>;
   refreshCategories: () => Promise<void>;
+  refreshAllData: () => Promise<void>; // Refresh all data at once
   
   // Order Management
   createOrder: (orderData: Omit<Order, '_id' | 'orderNumber' | 'createdAt' | 'updatedAt'>) => Promise<Order>;
@@ -183,6 +184,21 @@ export function AppProvider({ children }: { children: ReactNode }) {
       setCategories(data);
     } catch (error) {
       console.error('Error refreshing categories:', error);
+    }
+  };
+
+  const refreshAllData = async () => {
+    try {
+      await Promise.all([
+        refreshProducts(),
+        refreshOrders(),
+        refreshCoupons(),
+        refreshBanners(),
+        refreshCategories()
+      ]);
+      console.log('✓ All data refreshed successfully');
+    } catch (error) {
+      console.error('Error refreshing all data:', error);
     }
   };
 
@@ -340,6 +356,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
         refreshCoupons,
         refreshBanners,
         refreshCategories,
+        refreshAllData,
         createOrder,
         updateOrderStatus,
         createProduct,

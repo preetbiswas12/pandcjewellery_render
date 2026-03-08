@@ -1,6 +1,8 @@
 import { Outlet, useNavigate, useLocation } from 'react-router';
-import { LayoutDashboard, Package, ShoppingCart, Tag, Image, LogOut, FolderTree, User, FileText } from 'lucide-react';
+import { LayoutDashboard, Package, ShoppingCart, Tag, Image, LogOut, FolderTree, User, FileText, RefreshCw } from 'lucide-react';
+import { useState } from 'react';
 import { useAdmin } from '../../context/AdminContext';
+import { useApp } from '../../context/AppContext';
 
 const menuItems = [
   { icon: LayoutDashboard, label: 'Dashboard', path: '/admin' },
@@ -16,9 +18,20 @@ export default function AdminDashboard() {
   const navigate = useNavigate();
   const location = useLocation();
   const { admin, logout } = useAdmin();
+  const { refreshAllData } = useApp();
+  const [isRefreshing, setIsRefreshing] = useState(false);
 
   const handleLogout = async () => {
     await logout();
+  };
+
+  const handleRefreshData = async () => {
+    setIsRefreshing(true);
+    try {
+      await refreshAllData();
+    } finally {
+      setIsRefreshing(false);
+    }
   };
 
   return (
@@ -27,7 +40,17 @@ export default function AdminDashboard() {
         {/* Sidebar */}
         <aside className="w-64 bg-black text-white min-h-screen flex flex-col">
           <div className="p-6 border-b border-gray-800">
-            <h2 className="text-2xl font-bold">Admin Panel</h2>
+            <div className="flex items-center justify-between">
+              <h2 className="text-2xl font-bold">Admin Panel</h2>
+              <button
+                onClick={handleRefreshData}
+                disabled={isRefreshing}
+                className="p-2 hover:bg-gray-800 rounded-lg transition-colors disabled:opacity-50"
+                title="Refresh all data from database"
+              >
+                <RefreshCw size={20} className={isRefreshing ? 'animate-spin' : ''} />
+              </button>
+            </div>
           </div>
           
           <nav className="flex-1 p-4">
