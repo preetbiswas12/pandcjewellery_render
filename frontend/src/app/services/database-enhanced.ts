@@ -297,7 +297,9 @@ class MongoDBService {
         this.notifyListeners(collection, allData);
         return result.data;
       }
-      throw new Error(result.error || 'Failed to create item');
+      // Include the backend error message in the thrown error
+      const errorMessage = result.error || result.message || 'Failed to create item';
+      throw new Error(errorMessage);
     } catch (error) {
       console.error(`Error creating ${collection}:`, error);
       throw error;
