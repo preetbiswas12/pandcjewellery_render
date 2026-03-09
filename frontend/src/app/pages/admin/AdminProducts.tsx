@@ -22,7 +22,7 @@ export default function AdminProducts() {
     description: '',
     sku: '',
     quantity: '',
-    fabricType: '',
+    jewelleryType: '',
     careInstructions: '',
     colors: '',
     features: ''
@@ -39,7 +39,7 @@ export default function AdminProducts() {
       description: '',
       sku: '',
       quantity: '',
-      fabricType: '',
+      jewelleryType: '',
       careInstructions: '',
       colors: '',
       features: ''
@@ -157,7 +157,7 @@ export default function AdminProducts() {
         description: product.description,
         sku: product.sku,
         quantity: product.quantity.toString(),
-        fabricType: product.fabricType || '',
+        jewelleryType: product.jewelleryType || '',
         careInstructions: product.careInstructions || '',
         colors: product.colors?.join(', ') || '',
         features: product.features?.join(', ') || ''
@@ -199,7 +199,7 @@ export default function AdminProducts() {
       quantity: parseInt(formData.quantity),
       category: formData.category,
       subCategory: formData.subCategory,
-      fabricType: formData.fabricType,
+      jewelleryType: formData.jewelleryType,
       careInstructions: formData.careInstructions,
       description: formData.description,
       sku: formData.sku,
@@ -428,8 +428,8 @@ export default function AdminProducts() {
                   <label className="block text-sm font-medium mb-2">Jewellery Type</label>
                   <input
                     type="text"
-                    value={formData.fabricType}
-                    onChange={(e) => setFormData(prev => ({ ...prev, fabricType: e.target.value }))}
+                    value={formData.jewelleryType}
+                    onChange={(e) => setFormData(prev => ({ ...prev, jewelleryType: e.target.value }))}
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
                   />
                 </div>

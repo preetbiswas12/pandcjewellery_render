@@ -14,7 +14,7 @@ export interface Product {
   quantity: number;
   category: string;
   subCategory: string;
-  fabricType: string;
+  jewelleryType: string;
   careInstructions: string;
   description: string;
   images: string[];
