@@ -11,6 +11,25 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
+// Cache-busting headers for production
+// HTML files: never cache - users always see fresh content
+app.use((req, res, next) => {
+  if (req.path.endsWith('.html') || req.path === '/') {
+    res.set('Cache-Control', 'no-cache, no-store, must-revalidate');
+    res.set('Pragma', 'no-cache');
+    res.set('Expires', '0');
+  }
+  next();
+});
+
+// JS/CSS/Image files: cache for 1 year (safe because Vite adds version hashes)
+app.use((req, res, next) => {
+  if (req.path.match(/\.(js|css|png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot)$/)) {
+    res.set('Cache-Control', 'public, max-age=31536000, immutable');
+  }
+  next();
+});
+
 // Serve static files from the frontend build directory
 const staticFilePath = path.join(__dirname, '../frontend/dist');
 app.use(express.static(staticFilePath));
