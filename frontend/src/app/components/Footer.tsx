@@ -18,18 +18,13 @@ export function Footer() {
     <footer className="w-full bg-[#ffae00] text-black mt-20 overflow-x-hidden">
       {/* Main Footer Content */}
       <div className="w-full px-4 md:px-8 lg:px-[60px] py-16 md:py-24">
-        {/* Logo Section */}
-        <div className="mb-12 pb-8 border-b border-white/10 flex justify-center">
-          <img src="/logo.png" alt="P&C Jewellery" className="h-16 w-auto rounded-full shadow-lg" />
-        </div>
-
         {/* Newsletter Section */}
         <div className="mb-16 pb-16 border-b border-white/10 flex justify-center">
           <div className="w-full max-w-2xl text-center">
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight mb-3">
               Subscribe to Our Newsletter
             </h2>
-            <p className="text-sm md:text-base lg:text-lg text-gray-300 mb-8">
+            <p className="text-sm md:text-base lg:text-lg text-black mb-8">
               Get exclusive updates on new fabric collections, special offers, and premium design inspiration delivered to your inbox.
             </p>
             <form onSubmit={handleSubmit} className="flex flex-col md:flex-row gap-2 md:gap-3 justify-center">
@@ -132,7 +127,7 @@ export function Footer() {
       </div>
 
       {/* Bottom Bar */}
-      <div className="border-t border-white/10 bg-black/80">
+      <div className="border-t border-white/10 bg-[#ff9500]">
         <div className="w-full px-4 md:px-8 lg:px-[60px] py-6 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-black text-sm md:text-base">
             © 2024 P&C Jewellery. All rights reserved.
