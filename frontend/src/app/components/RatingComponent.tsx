@@ -320,7 +320,7 @@ export default function RatingComponent({
                   onChange={(e) =>
                     setFormData((prev) => ({ ...prev, comment: e.target.value }))
                   }
-                  placeholder="Share your detailed thoughts about this fabric..."
+                  placeholder="Share your detailed thoughts about this jewellery..."
                   rows={4}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
                 />

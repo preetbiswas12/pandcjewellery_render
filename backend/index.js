@@ -62,7 +62,7 @@ app.use('/api/admin/users', adminAuth, userRoutes);
 
 // Health check
 app.get('/api/health', (req, res) => {
-  res.json({ status: 'Fabric Store API is running...' });
+  res.json({ status: 'P&C Jewellery Store API is running...' });
 });
 
 // Serve index.html for all non-API routes (client-side routing)

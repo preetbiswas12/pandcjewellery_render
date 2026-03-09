@@ -49,7 +49,7 @@ const seedData = async () => {
     const banners = [
       {
         type: 'hero-main',
-        title: 'Premium Fabric Collections',
+        title: 'Premium Jewellery Collections',
         subtitle: 'Finest selection of cotton, silk, and specialty Jewellery for your creative projects',
         image: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1200',
         link: '/shop',

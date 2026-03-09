@@ -91,7 +91,7 @@ export default function AdminGuidelines() {
                   </ul>
                 </li>
                 <li><strong>Upload Images:</strong> Click "Upload Images" or "Add from Google Drive"</li>
-                <li><strong>Optional Fields:</strong> Offer %, Fabric Type, Care Instructions, Colors, Features</li>
+                <li><strong>Optional Fields:</strong> Offer %, Jewellery Type, Care Instructions, Colors, Features</li>
                 <li><strong>Review</strong> all details before saving</li>
               </ol>
             </div>
@@ -184,7 +184,7 @@ export default function AdminGuidelines() {
                   <p className="text-gray-600">Available stock count (required)</p>
                 </div>
                 <div className="bg-gray-100 rounded p-3">
-                  <p className="font-semibold">Fabric Type</p>
+                  <p className="font-semibold">Jewellery Type</p>
                   <p className="text-gray-600">Material composition (e.g., 100% Silk, Cotton Blend)</p>
                 </div>
                 <div className="bg-gray-100 rounded p-3">
@@ -329,7 +329,7 @@ export default function AdminGuidelines() {
               <li>Respond to customers promptly</li>
               <li>Use proper SKU naming conventions</li>
               <li>Double-check prices before saving</li>
-              <li>Keep fabric type/care info accurate</li>
+              <li>Keep jewellery type/care info accurate</li>
               <li>Use consistent categorization</li>
             </ul>
           </div>

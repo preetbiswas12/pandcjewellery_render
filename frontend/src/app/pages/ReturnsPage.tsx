@@ -36,7 +36,7 @@ export default function ReturnsPage() {
               { title: 'Unused & Unwashed', desc: 'Item must be in original condition' },
               { title: 'Original Tags', desc: 'All tags and labels must be attached' },
               { title: 'Original Packaging', desc: 'Item should be in original packaging if possible' },
-              { title: 'No Damage', desc: 'No stains, tears, or damage to the fabric' }
+              { title: 'No Damage', desc: 'No scratches, dents, or damage to the jewellery' }
             ].map((condition, i) => (
               <div key={i} className="border-2 border-gray-200 p-6 rounded-lg hover:border-magenta-300 transition-colors">
                 <h3 className="text-lg font-bold text-magenta-600 mb-2">{condition.title}</h3>

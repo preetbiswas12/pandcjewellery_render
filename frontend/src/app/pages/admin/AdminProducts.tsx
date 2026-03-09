@@ -403,7 +403,7 @@ export default function AdminProducts() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium mb-2">Fabric Type</label>
+                  <label className="block text-sm font-medium mb-2">Jewellery Type</label>
                   <input
                     type="text"
                     value={formData.fabricType}

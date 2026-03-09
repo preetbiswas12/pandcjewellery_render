@@ -35,7 +35,7 @@ export default function FAQPage() {
     },
     {
       question: "How do I care for my Jewellery?",
-      answer: "Each fabric comes with detailed care instructions. Generally, hand wash or gentle machine wash in cold water is recommended. Avoid bleach and tumble drying."
+      answer: "Each piece comes with detailed care instructions. Generally, hand wash or gentle care in cold water is recommended. Avoid harsh chemicals and excessive wear."
     }
   ];
 

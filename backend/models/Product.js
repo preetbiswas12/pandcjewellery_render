@@ -30,7 +30,7 @@ const productSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  fabricType: {
+  jewelleryType: {
     type: String,
     required: true,
   },

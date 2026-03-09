@@ -25,7 +25,7 @@ export function Footer() {
               Subscribe to Our Newsletter
             </h2>
             <p className="text-sm md:text-base lg:text-lg text-black mb-8">
-              Get exclusive updates on new fabric collections, special offers, and premium design inspiration delivered to your inbox.
+              Get exclusive updates on new jewellery collections, special offers, and premium design inspiration delivered to your inbox.
             </p>
             <form onSubmit={handleSubmit} className="flex flex-col md:flex-row gap-2 md:gap-3 justify-center">
               <input
@@ -55,7 +55,7 @@ export function Footer() {
           <div>
             <h3 className="text-lg font-bold tracking-wide mb-6">P&C Jewellery</h3>
             <p className="text-black text-sm md:text-base leading-relaxed mb-6">
-              Export quality organic clothing designed for conscious consumers. Sustainable fashion with premium craftsmanship.
+              Premium quality jewellery designed for conscious consumers. Elegant craftsmanship with exceptional artistry.
             </p>
             <div className="space-y-4">
               <div className="flex items-center gap-3">

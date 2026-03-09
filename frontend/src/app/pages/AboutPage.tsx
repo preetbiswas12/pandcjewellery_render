@@ -19,7 +19,7 @@ export default function AboutPage() {
         <section>
           <h2 className="text-3xl font-bold mb-6">Our Story</h2>
           <p className="text-lg text-gray-700 leading-relaxed mb-4">
-            P&C Jewellery was founded with a passion for bringing premium quality Jewellery to creative minds around the world. We believe that the right fabric can transform any vision into reality.
+            P&C Jewellery was founded with a passion for bringing premium quality Jewellery to creative minds around the world. We believe that the right piece can transform any vision into reality.
           </p>
           <p className="text-lg text-gray-700 leading-relaxed">
             What started as a small initiative has grown into a trusted platform where designers, crafters, and fashion enthusiasts find inspiration and quality materials for their projects.
