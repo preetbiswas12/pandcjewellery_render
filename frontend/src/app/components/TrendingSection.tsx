@@ -24,7 +24,16 @@ export function TrendingSection({ onAddToCart, wishlist, onToggleWishlist }: Tre
 
   const filteredProducts = selectedCategory === 'ALL' 
     ? products.slice(0, 6) // Show first 6 products for 'ALL'
-    : products.filter(p => p.category === selectedCategory).slice(0, 6);
+    : (() => {
+        // Find the category ID/slug that matches the selected category name
+        const selectedCat = categories.find(cat => cat.name === selectedCategory);
+        if (!selectedCat) return [];
+        // Filter by category ID or slug
+        return products.filter(p => 
+          p.category === selectedCat._id || 
+          p.category === selectedCat.slug
+        ).slice(0, 6);
+      })();
 
   useEffect(() => {
     const ctx = gsap.context(() => {
