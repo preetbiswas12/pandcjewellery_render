@@ -173,8 +173,24 @@ export default function AdminProducts() {
     resetForm();
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Validate required fields
+    if (!formData.name || !formData.price || !formData.category) {
+      alert('Please fill in all required fields: Name, Price, and Category');
+      return;
+    }
+
+    if (!formData.sku) {
+      alert('SKU is required');
+      return;
+    }
+
+    if (!formData.quantity) {
+      alert('Quantity is required');
+      return;
+    }
     
     const productData = {
       name: formData.name,
@@ -192,13 +208,19 @@ export default function AdminProducts() {
       features: formData.features.split(',').map(f => f.trim()).filter(Boolean)
     };
 
-    if (editingProduct) {
-      updateProduct(editingProduct._id, productData);
-    } else {
-      createProduct(productData);
+    try {
+      if (editingProduct) {
+        await updateProduct(editingProduct._id, productData);
+        alert('Product updated successfully!');
+      } else {
+        await createProduct(productData);
+        alert('Product created successfully!');
+      }
+      closeModal();
+    } catch (error) {
+      console.error('Error saving product:', error);
+      alert('Error saving product: ' + (error instanceof Error ? error.message : 'Unknown error'));
     }
-    
-    closeModal();
   };
 
   const handleDelete = (id: string) => {

@@ -130,7 +130,7 @@ export default function ShopPage() {
                     setSelectedSubCategory('');
                   }}
                   className={`w-full text-left px-4 py-2 rounded-lg transition-colors ${
-                    !selectedCategory ? 'bg-magenta-950 text-white' : 'hover:bg-gray-100'
+                    !selectedCategory ? 'bg-magenta-950 text-black' : 'hover:bg-gray-100'
                   }`}
                 >
                   All Jewellery
