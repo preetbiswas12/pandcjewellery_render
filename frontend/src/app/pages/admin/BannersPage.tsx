@@ -205,7 +205,7 @@ export default function BannersPage() {
                 </button>
                 <button
                   type="submit"
-                  className="flex-1 bg-magenta-950 text-white py-3 rounded-lg hover:bg-magenta-900 transition-colors font-medium"
+                  className="flex-1 bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors font-semibold"
                 >
                   {editingBanner ? 'Update Banner' : 'Create Banner'}
                 </button>

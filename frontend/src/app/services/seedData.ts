@@ -198,42 +198,42 @@ export function seedDatabase() {
     const banners: Omit<Banner, '_id' | 'createdAt' | 'updatedAt'>[] = [
       {
         type: 'hero-main',
-        title: 'Color of\nSummer\nOutfit',
-        subtitle: '100+ Collections for your outfit inspirations in this summer',
-        image: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1200',
+        title: 'Timeless\nElegance\nAwaits',
+        subtitle: 'Discover our exquisite collection of premium jewellery crafted with passion and precision',
+        image: 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=1200',
         link: '/shop',
-        buttonText: 'VIEW COLLECTIONS',
+        buttonText: 'EXPLORE JEWELLERY',
         isActive: true,
         order: 1
       },
       {
         type: 'hero-side',
-        title: 'Outdoor\nActive',
-        image: 'https://images.unsplash.com/photo-1445205170230-053b83016050?w=800',
+        title: 'Luxury\nBracelets',
+        image: 'https://images.unsplash.com/photo-1515562141207-5dca89f11e5e?w=800',
         link: '/shop',
         isActive: true,
         order: 2
       },
       {
         type: 'hero-side',
-        title: 'Casual\nComfort',
-        image: 'https://images.unsplash.com/photo-1483985988355-763728e1935b?w=800',
+        title: 'Golden\nNecklaces',
+        image: 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800',
         link: '/shop',
         isActive: true,
         order: 3
       },
       {
         type: 'casual-inspiration',
-        title: 'Say it\nwith Shirt',
-        image: 'https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?w=800',
+        title: 'Statement\nEarrings',
+        image: 'https://images.unsplash.com/photo-1540632066927-08ff05865a84?w=800',
         link: '/shop',
         isActive: true,
         order: 4
       },
       {
         type: 'casual-inspiration',
-        title: 'Funky never\nget old',
-        image: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800',
+        title: 'Precious\nRings',
+        image: 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800',
         link: '/shop',
         isActive: true,
         order: 5

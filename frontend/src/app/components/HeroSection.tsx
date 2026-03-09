@@ -88,21 +88,21 @@ export function HeroSection() {
 
   // Default fallback data
   const defaultHeroMain = {
-    title: 'Color of\nSummer\nOutfit',
-    subtitle: '100+ Collections for your outfit inspirations in this summer',
+    title: 'Timeless\nElegance\nAwaits',
+    subtitle: 'Discover our exquisite collection of premium jewellery crafted with passion and precision',
     image: imgImage3,
     link: '/shop',
-    buttonText: 'VIEW COLLECTIONS'
+    buttonText: 'EXPLORE JEWELLERY'
   };
 
   const defaultHeroSide = [
-    { title: 'Outdoor\nActive', image: imgImage5, link: '/shop' },
-    { title: 'Casual\nComfort', image: imgImage7, link: '/shop' }
+    { title: 'Luxury\nBracelets', image: imgImage5, link: '/shop' },
+    { title: 'Golden\nNecklaces', image: imgImage7, link: '/shop' }
   ];
 
   const defaultCasual = [
-    { title: 'Say it\nwith Shirt', image: imgImage10, link: '/shop' },
-    { title: 'Funky never\nget old', image: imgImage12, link: '/shop' }
+    { title: 'Statement\nEarrings', image: imgImage10, link: '/shop' },
+    { title: 'Precious\nRings', image: imgImage12, link: '/shop' }
   ];
 
   return (
@@ -164,10 +164,10 @@ export function HeroSection() {
       <div ref={inspirationRef} className="px-4 md:px-8 lg:px-14 xl:px-24 2xl:px-32 flex flex-col lg:flex-row justify-start items-stretch gap-2.5 w-full mt-6 md:mt-10 lg:mt-12 max-w-[2000px] mx-auto">
         <div className="w-full lg:w-[35%] h-auto lg:h-[450px] xl:h-[500px] bg-white rounded-[40px] p-[20px] md:p-[40px] lg:p-[50px] xl:p-[60px] flex flex-col justify-center flex-shrink-0">
           <h2 className="text-[28px] md:text-[45px] lg:text-[55px] xl:text-[65px] leading-[32px] md:leading-[50px] lg:leading-[60px] xl:leading-[65px] tracking-[-1px] md:tracking-[-2px] lg:tracking-[-3px] xl:tracking-[-4px] mb-3 md:mb-5 lg:mb-6 font-normal">
-            Casual<br />Inspirations
+            Jewellery<br />Collections
           </h2>
           <p className="text-xs md:text-sm lg:text-sm xl:text-base opacity-80 mb-4 md:mb-8 lg:mb-10 xl:mb-12 leading-5 lg:leading-5 xl:leading-6">
-            Our favorite combinations for casual outfit that can inspire you to apply on your daily activity.
+            Explore our curated collections of handcrafted jewellery pieces designed to complement your unique style and elevate every occasion.
           </p>
           <NoiseButton>
             BROWSE INSPIRATIONS

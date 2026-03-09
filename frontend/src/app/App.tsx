@@ -1,7 +1,6 @@
 import { RouterProvider } from "react-router";
 import { ClerkProvider } from "@clerk/clerk-react";
 import { router } from "./routes";
-import { LoadingScreen } from "./components/LoadingScreen";
 
 const clerkPubKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
@@ -17,7 +16,6 @@ export default function App() {
       signUpFallbackRedirectUrl="https://pandcjewellery.com/"
       afterSignOutUrl="https://pandcjewellery.com/"
     >
-      <LoadingScreen />
       <RouterProvider router={router} />
     </ClerkProvider>
   );

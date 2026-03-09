@@ -52,7 +52,13 @@ export default function ShopPage() {
   }, [selectedCategory, selectedSubCategory]);
 
   const filteredProducts = products.filter(product => {
-    if (selectedCategory && product.category !== selectedCategory) return false;
+    // Filter by category - match by ID or slug
+    if (selectedCategory) {
+      const category = categories.find(cat => cat.slug === selectedCategory);
+      if (category && product.category !== category._id && product.category !== category.slug) {
+        return false;
+      }
+    }
     if (selectedSubCategory && product.subCategory !== selectedSubCategory) return false;
     if (product.price < priceRange[0] || product.price > priceRange[1]) return false;
     if (selectedColor && !product.colors.includes(selectedColor)) return false;
