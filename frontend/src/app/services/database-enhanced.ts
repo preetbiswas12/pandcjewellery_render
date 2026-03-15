@@ -258,9 +258,14 @@ class MongoDBService {
     }
   }
 
-  async getAll<T>(collection: CollectionName): Promise<T[]> {
+  async getAll<T>(collection: CollectionName, params?: Record<string, any>): Promise<T[]> {
     try {
-      const response = await fetch(`${API_URL}/${collection}`);
+      let url = `${API_URL}/${collection}`;
+      if (params) {
+        const queryString = new URLSearchParams(params).toString();
+        url += `?${queryString}`;
+      }
+      const response = await fetch(url);
       const result: ApiResponse<T[]> = await response.json();
       if (result.success && result.data) {
         this.notifyListeners(collection, result.data);
@@ -353,6 +358,151 @@ class MongoDBService {
     } catch (error) {
       console.error(`Error querying ${collection}:`, error);
       return [];
+    }
+  }
+
+  // ⚠️ OPTIMIZED: New method for paginated queries with comprehensive error handling
+  async getPaginated<T>(collection: CollectionName, params: {
+    page?: number;
+    limit?: number;
+    category?: string;
+    subCategory?: string;
+    color?: string;
+    minPrice?: number;
+    maxPrice?: number;
+    sortBy?: string;
+    sortOrder?: 'asc' | 'desc';
+  } = {}): Promise<{
+    data: T[];
+    pagination: {
+      page: number;
+      limit: number;
+      total: number;
+      pages: number;
+      hasMore: boolean;
+    };
+  }> {
+    // ⚠️ DEFENSIVE: Set safe defaults
+    const pageNum = Math.max(1, params.page || 1);
+    const limitNum = Math.max(1, Math.min(50, params.limit || 24));
+
+    try {
+      // ⚠️ DEFENSIVE: Build query params, filtering out undefined/null/empty values
+      const queryParams = new URLSearchParams();
+      
+      // Always include pagination params
+      queryParams.append('page', String(pageNum));
+      queryParams.append('limit', String(limitNum));
+
+      // Conditionally add filter params only if they have values
+      if (params.category && String(params.category).trim()) {
+        queryParams.append('category', String(params.category).trim());
+      }
+
+      if (params.subCategory && String(params.subCategory).trim()) {
+        queryParams.append('subCategory', String(params.subCategory).trim());
+      }
+
+      if (params.color && String(params.color).trim()) {
+        queryParams.append('color', String(params.color).trim());
+      }
+
+      // Handle price range - only add if meaningful
+      if (typeof params.minPrice === 'number' && params.minPrice > 0) {
+        queryParams.append('minPrice', String(Math.max(0, params.minPrice)));
+      }
+      if (typeof params.maxPrice === 'number' && params.maxPrice > 0) {
+        queryParams.append('maxPrice', String(Math.max(0, params.maxPrice)));
+      }
+
+      if (params.sortBy && String(params.sortBy).trim()) {
+        queryParams.append('sortBy', String(params.sortBy).trim());
+      }
+
+      const url = `${API_URL}/${collection}?${queryParams.toString()}`;
+      console.log(`[API] Fetching: ${url}`);
+
+      // ⚠️ DEFENSIVE: Create a timeout signal for the fetch
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+
+      const response = await fetch(url, {
+        headers: { 'Accept': 'application/json' },
+        signal: controller.signal,
+      });
+
+      clearTimeout(timeoutId);
+
+      // ⚠️ DEFENSIVE: Check response status
+      if (!response.ok) {
+        console.warn(`[API] Non-200 status: ${response.status}`);
+        throw new Error(`HTTP ${response.status}`);
+      }
+
+      const result: any = await response.json();
+
+      // ⚠️ DEFENSIVE: Validate response structure
+      if (!result || typeof result !== 'object') {
+        console.warn('[API] Invalid response format');
+        throw new Error('Invalid response format');
+      }
+
+      // ⚠️ DEFENSIVE: Check for success flag
+      if (!result.success) {
+        console.warn('[API] Success flag is false', result);
+        throw new Error(result.message || 'API returned success: false');
+      }
+
+      // ⚠️ DEFENSIVE: Validate data is an array
+      const data = Array.isArray(result.data) ? result.data : [];
+
+      // ⚠️ DEFENSIVE: Validate pagination object
+      const pagination = result.pagination || {};
+      if (
+        typeof pagination !== 'object' ||
+        typeof pagination.page !== 'number' ||
+        typeof pagination.limit !== 'number' ||
+        typeof pagination.total !== 'number'
+      ) {
+        console.warn('[API] Invalid pagination structure', pagination);
+        // Fallback to safe pagination values
+        return {
+          data,
+          pagination: {
+            page: pageNum,
+            limit: limitNum,
+            total: data.length,
+            pages: 1,
+            hasMore: false,
+          }
+        };
+      }
+
+      return {
+        data,
+        pagination: {
+          page: Math.max(1, pagination.page || pageNum),
+          limit: Math.max(1, pagination.limit || limitNum),
+          total: Math.max(0, pagination.total || 0),
+          pages: Math.max(0, pagination.pages || 1),
+          hasMore: Boolean(pagination.hasMore),
+        }
+      };
+    } catch (error) {
+      // ⚠️ DEFENSIVE: Log error and return safe empty response
+      const errorMsg = error instanceof Error ? error.message : String(error);
+      console.error(`[API] Error fetching paginated ${collection}: ${errorMsg}`);
+      
+      return {
+        data: [],
+        pagination: {
+          page: pageNum,
+          limit: limitNum,
+          total: 0,
+          pages: 0,
+          hasMore: false
+        }
+      };
     }
   }
 

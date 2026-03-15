@@ -1,12 +1,21 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { useParams, useSearchParams } from 'react-router';
 import { ProductCard } from '../components/ProductCard';
 import { useApp } from '../context/AppContext';
+import { db } from '../services/database-enhanced';
 import { ChevronDown } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
+
+interface PaginationState {
+  page: number;
+  limit: number;
+  total: number;
+  pages: number;
+  hasMore: boolean;
+}
 
 export default function ShopPage() {
   const { category, subCategory } = useParams();
@@ -14,24 +23,149 @@ export default function ShopPage() {
   const [selectedCategory, setSelectedCategory] = useState(category || '');
   const [selectedSubCategory, setSelectedSubCategory] = useState(subCategory || '');
   const [selectedColor, setSelectedColor] = useState(searchParams.get('color') || '');
-  const [priceRange, setPriceRange] = useState([0, 5000]);
+  const [priceRange, setPriceRange] = useState<[number, number]>([0, 5000]);
   const [sortBy, setSortBy] = useState('featured');
   
-  const { addToCart, wishlist, toggleWishlist, products, categories } = useApp();
+  // ⚠️ OPTIMIZED: Server-side pagination and filtering
+  const [displayedProducts, setDisplayedProducts] = useState<any[]>([]);
+  const [pagination, setPagination] = useState<PaginationState>({
+    page: 1,
+    limit: 24,
+    total: 0,
+    pages: 0,
+    hasMore: false
+  });
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  
+  const { addToCart, wishlist, toggleWishlist, categories } = useApp();
   const pageRef = useRef<HTMLDivElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
+  const abortControllerRef = useRef<AbortController | null>(null);
+
+  // ⚠️ FIXED: Map sort options properly
+  const mapSortBy = useCallback((sort: string): string => {
+    switch (sort) {
+      case 'price-low': return 'price';
+      case 'price-high': return '-price';
+      case 'newest': return '-createdAt';
+      case 'best-selling': return '-quantity';
+      case 'featured':
+      default: return '-createdAt';
+    }
+  }, []);
+
+  // ⚠️ OPTIMIZED: Fetch products from server with filters
+  const fetchProducts = useCallback(async (pageNum: number = 1) => {
+    // Cancel previous request if still pending
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort();
+    }
+    
+    setIsLoading(true);
+    setError(null);
+    
+    try {
+      // Validate price range
+      const minPrice = Math.max(0, Math.min(priceRange[0], priceRange[1]));
+      const maxPrice = Math.max(priceRange[0], priceRange[1] || 5000);
+      
+      // Build filter params - only include non-empty values
+      const filterParams: Record<string, any> = {
+        page: pageNum,
+        limit: 24,
+      };
+
+      if (selectedCategory && selectedCategory.trim()) {
+        filterParams.category = selectedCategory.trim();
+      }
+
+      if (selectedSubCategory && selectedSubCategory.trim()) {
+        filterParams.subCategory = selectedSubCategory.trim();
+      }
+
+      if (selectedColor && selectedColor.trim()) {
+        filterParams.color = selectedColor.trim();
+      }
+
+      if (minPrice > 0 || maxPrice < 5000) {
+        filterParams.minPrice = minPrice;
+        filterParams.maxPrice = maxPrice;
+      }
+
+      filterParams.sortBy = mapSortBy(sortBy);
+
+      const result = await (db as any).getPaginated('products', filterParams);
+
+      if (result && result.data && Array.isArray(result.data)) {
+        const mappedProducts = result.data.map((p: any) => ({
+          ...p,
+          id: p._id || p.id, // Fallback for id
+          _id: p._id || p.id,
+        }));
+
+        setDisplayedProducts(mappedProducts);
+        setPagination(result.pagination || {
+          page: pageNum,
+          limit: 24,
+          total: mappedProducts.length,
+          pages: 1,
+          hasMore: false,
+        });
+      } else {
+        setDisplayedProducts([]);
+        setPagination({
+          page: pageNum,
+          limit: 24,
+          total: 0,
+          pages: 0,
+          hasMore: false,
+        });
+      }
+    } catch (error) {
+      // Only set error if not aborted
+      if (error instanceof Error && error.name !== 'AbortError') {
+        console.error('Error fetching products:', error);
+        setError('Failed to load products. Please try again.');
+        setDisplayedProducts([]);
+      }
+    } finally {
+      setIsLoading(false);
+    }
+  }, [selectedCategory, selectedSubCategory, selectedColor, priceRange, sortBy, mapSortBy]);
+
+  // ⚠️ FIXED: Debounced filter changes - only depends on filter values, not pagination
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      fetchProducts(1); // Reset to page 1 when filters change
+    }, 500); // Increased debounce delay
+
+    return () => clearTimeout(timer);
+  }, [selectedCategory, selectedSubCategory, selectedColor, priceRange, sortBy, fetchProducts]);
+
+  // ⚠️ FIXED: Load initial products on mount only
+  useEffect(() => {
+    fetchProducts(1);
+    
+    return () => {
+      if (abortControllerRef.current) {
+        abortControllerRef.current.abort();
+      }
+    };
+  }, []);
 
   // Update selected color when URL changes
   useEffect(() => {
     const colorParam = searchParams.get('color');
-    if (colorParam) {
+    if (colorParam && colorParam !== selectedColor) {
       setSelectedColor(colorParam);
     }
   }, [searchParams]);
 
+  // GSAP animations
   useEffect(() => {
     const ctx = gsap.context(() => {
-      if (gridRef.current) {
+      if (gridRef.current && gridRef.current.children.length > 0) {
         const cards = gridRef.current.children;
         gsap.from(cards, {
           scrollTrigger: {
@@ -42,40 +176,33 @@ export default function ShopPage() {
           y: 80,
           opacity: 0,
           duration: 0.8,
-          stagger: 0.15,
+          stagger: 0.1,
           ease: 'power3.out'
         });
       }
     }, pageRef);
 
     return () => ctx.revert();
-  }, [selectedCategory, selectedSubCategory]);
+  }, [displayedProducts]);
 
-  const filteredProducts = products.filter(product => {
-    // Filter by category - match by ID or slug
-    if (selectedCategory) {
-      const category = categories.find(cat => cat.slug === selectedCategory);
-      if (category && product.category !== category._id && product.category !== category.slug) {
-        return false;
-      }
+  const currentCategory = useMemo(
+    () => categories.find(cat => cat.slug === selectedCategory),
+    [selectedCategory, categories]
+  );
+
+  const handleLoadMore = () => {
+    if (pagination.hasMore && !isLoading) {
+      fetchProducts(pagination.page + 1);
     }
-    if (selectedSubCategory && product.subCategory !== selectedSubCategory) return false;
-    if (product.price < priceRange[0] || product.price > priceRange[1]) return false;
-    if (selectedColor && !product.colors.includes(selectedColor)) return false;
-    return true;
-  });
+  };
 
-  const sortedProducts = [...filteredProducts].sort((a, b) => {
-    switch (sortBy) {
-      case 'price-low': return a.price - b.price;
-      case 'price-high': return b.price - a.price;
-      case 'newest': return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
-      case 'best-selling': return b.quantity - a.quantity; // Use quantity as proxy for popularity
-      default: return 0;
-    }
-  });
-
-  const currentCategory = categories.find(cat => cat.slug === selectedCategory);
+  const handleClearFilters = () => {
+    setSelectedCategory('');
+    setSelectedSubCategory('');
+    setPriceRange([0, 5000]);
+    setSelectedColor('');
+    setSearchParams({});
+  };
 
   return (
     <div ref={pageRef} className="min-h-screen">
@@ -86,7 +213,11 @@ export default function ShopPage() {
             {currentCategory ? currentCategory.name : 'All Jewellery'}
           </h1>
           <p className="text-lg opacity-70">
-            {sortedProducts.length} products available
+            {isLoading && displayedProducts.length === 0 
+              ? 'Loading...' 
+              : pagination.total === 0 
+              ? 'No products found'
+              : `${pagination.total} product${pagination.total !== 1 ? 's' : ''} available`}
           </p>
         </div>
       </div>
@@ -95,33 +226,44 @@ export default function ShopPage() {
         <div className="grid grid-cols-1 lg:grid-cols-[280px,1fr] gap-8">
           {/* Filters Sidebar */}
           <div className="space-y-6">
+            {/* Error Display */}
+            {error && (
+              <div className="bg-red-50 border border-red-200 p-4 rounded-lg">
+                <p className="text-sm text-red-700">{error}</p>
+              </div>
+            )}
+
             {/* Active Filters Display */}
-            {selectedColor && (
+            {(selectedColor || selectedCategory) && (
               <div className="bg-gray-50 p-4 rounded-lg">
-                <div className="flex items-center justify-between mb-2">
+                <div className="flex items-center justify-between mb-3">
                   <h3 className="text-sm font-semibold">Active Filters</h3>
                   <button
-                    onClick={() => {
-                      setSelectedColor('');
-                      setSearchParams({});
-                    }}
-                    className="text-xs text-red-600 hover:text-red-700 font-medium"
+                    onClick={handleClearFilters}
+                    className="text-xs text-red-600 hover:text-red-700 font-medium transition-colors"
                   >
                     Clear All
                   </button>
                 </div>
-                <div className="flex items-center gap-2 bg-white px-3 py-2 rounded-full border border-gray-200">
-                  <span className="text-xs font-semibold">Color:</span>
-                  <span className="text-xs">{selectedColor}</span>
-                  <button
-                    onClick={() => {
-                      setSelectedColor('');
-                      setSearchParams({});
-                    }}
-                    className="ml-auto text-gray-500 hover:text-magenta-950"
-                  >
-                    ✕
-                  </button>
+                <div className="flex flex-wrap gap-2">
+                  {selectedColor && (
+                    <button
+                      onClick={() => setSelectedColor('')}
+                      className="inline-flex items-center gap-1 bg-white px-3 py-1 rounded-full border border-gray-300 text-xs hover:border-red-500 transition-colors"
+                    >
+                      Color: {selectedColor}
+                      <span className="ml-1 text-gray-500 hover:text-red-600">✕</span>
+                    </button>
+                  )}
+                  {selectedCategory && (
+                    <button
+                      onClick={() => setSelectedCategory('')}
+                      className="inline-flex items-center gap-1 bg-white px-3 py-1 rounded-full border border-gray-300 text-xs hover:border-red-500 transition-colors"
+                    >
+                      Category: {currentCategory?.name}
+                      <span className="ml-1 text-gray-500 hover:text-red-600">✕</span>
+                    </button>
+                  )}
                 </div>
               </div>
             )}
@@ -136,12 +278,14 @@ export default function ShopPage() {
                     setSelectedSubCategory('');
                   }}
                   className={`w-full text-left px-4 py-2 rounded-lg transition-colors ${
-                    !selectedCategory ? 'bg-magenta-950 text-black' : 'hover:bg-gray-100'
+                    !selectedCategory 
+                      ? 'bg-black text-white' 
+                      : 'hover:bg-gray-100'
                   }`}
                 >
                   All Jewellery
                 </button>
-                {categories.filter(cat => cat.isActive).map(cat => (
+                {categories && categories.filter(cat => cat.isActive).map(cat => (
                   <div key={cat._id}>
                     <button
                       onClick={() => {
@@ -149,19 +293,23 @@ export default function ShopPage() {
                         setSelectedSubCategory('');
                       }}
                       className={`w-full text-left px-4 py-2 rounded-lg transition-colors ${
-                        selectedCategory === cat.slug ? 'bg-black text-white' : 'hover:bg-gray-100'
+                        selectedCategory === cat.slug 
+                          ? 'bg-magenta-950 text-white' 
+                          : 'hover:bg-gray-100'
                       }`}
                     >
                       {cat.name}
                     </button>
-                    {selectedCategory === cat.slug && (
+                    {selectedCategory === cat.slug && cat.subCategories && cat.subCategories.length > 0 && (
                       <div className="ml-4 mt-2 space-y-1">
-                        {cat.subCategories?.map((sub: any) => (
+                        {cat.subCategories.map((sub: any) => (
                           <button
                             key={sub.slug}
                             onClick={() => setSelectedSubCategory(sub.slug)}
                             className={`w-full text-left px-4 py-2 rounded-lg text-sm transition-colors ${
-                              selectedSubCategory === sub.slug ? 'bg-gray-200' : 'hover:bg-gray-100'
+                              selectedSubCategory === sub.slug 
+                                ? 'bg-gray-300' 
+                                : 'hover:bg-gray-100'
                             }`}
                           >
                             {sub.name}
@@ -177,16 +325,22 @@ export default function ShopPage() {
             {/* Price Range */}
             <div>
               <h3 className="text-lg font-semibold mb-4">Price Range</h3>
-              <div className="space-y-2">
+              <div className="space-y-3">
                 <input
                   type="range"
                   min="0"
                   max="5000"
+                  step="100"
                   value={priceRange[1]}
-                  onChange={(e) => setPriceRange([0, parseInt(e.target.value)])}
-                  className="w-full"
+                  onChange={(e) => {
+                    const val = parseInt(e.target.value);
+                    setPriceRange([0, val]);
+                  }}
+                  className="w-full cursor-pointer"
                 />
-                <p className="text-sm opacity-70">Up to ₹{priceRange[1]}</p>
+                <p className="text-sm opacity-70">
+                  ₹{priceRange[0].toLocaleString('en-IN')} - ₹{priceRange[1].toLocaleString('en-IN')}
+                </p>
               </div>
             </div>
 
@@ -196,11 +350,11 @@ export default function ShopPage() {
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
-                className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-black"
+                className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-black transition-colors"
               >
                 <option value="featured">Featured</option>
                 <option value="best-selling">Best Selling</option>
-                <option value="newest">Newest</option>
+                <option value="newest">Newest First</option>
                 <option value="price-low">Price: Low to High</option>
                 <option value="price-high">Price: High to Low</option>
               </select>
@@ -209,32 +363,57 @@ export default function ShopPage() {
 
           {/* Products Grid */}
           <div>
-            {sortedProducts.length === 0 ? (
+            {isLoading && displayedProducts.length === 0 ? (
               <div className="text-center py-20">
-                <p className="text-xl opacity-70">No products found</p>
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-black mx-auto mb-4"></div>
+                <p className="text-xl opacity-70">Loading products...</p>
+              </div>
+            ) : displayedProducts.length === 0 ? (
+              <div className="text-center py-20">
+                <p className="text-xl opacity-70 mb-4">No products found</p>
+                <p className="text-sm opacity-50 mb-6">Try adjusting your filters</p>
                 <button
-                  onClick={() => {
-                    setSelectedCategory('');
-                    setSelectedSubCategory('');
-                    setPriceRange([0, 5000]);
-                  }}
-                  className="mt-4 px-6 py-2 border-2 border-black rounded-full hover:bg-black hover:text-white transition-all"
+                  onClick={handleClearFilters}
+                  className="px-6 py-2 border-2 border-black rounded-full hover:bg-black hover:text-white transition-all"
                 >
                   Clear Filters
                 </button>
               </div>
             ) : (
-              <div ref={gridRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {sortedProducts.map((product) => (
-                  <ProductCard
-                    key={product.id}
-                    product={product}
-                    onAddToCart={addToCart}
-                    onToggleWishlist={toggleWishlist}
-                    isInWishlist={wishlist.includes(product._id)}
-                  />
-                ))}
-              </div>
+              <>
+                <div ref={gridRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {displayedProducts.map((product) => (
+                    <ProductCard
+                      key={product._id}
+                      product={{
+                        ...product,
+                        id: product._id,
+                      }}
+                      onAddToCart={addToCart}
+                      onToggleWishlist={toggleWishlist}
+                      isInWishlist={wishlist.includes(product._id)}
+                    />
+                  ))}
+                </div>
+
+                {/* Load More Button */}
+                {pagination.hasMore && (
+                  <div className="flex justify-center mt-12">
+                    <button
+                      onClick={handleLoadMore}
+                      disabled={isLoading}
+                      className="px-8 py-3 border-2 border-black rounded-full hover:bg-black hover:text-white transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      {isLoading ? 'Loading...' : 'Load More Products'}
+                    </button>
+                  </div>
+                )}
+
+                {/* Pagination info */}
+                <div className="text-center mt-8 opacity-70 text-sm">
+                  Showing {displayedProducts.length} of {pagination.total} products
+                </div>
+              </>
             )}
           </div>
         </div>

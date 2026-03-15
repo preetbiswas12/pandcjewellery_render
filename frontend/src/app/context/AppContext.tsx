@@ -83,19 +83,35 @@ export function AppProvider({ children }: { children: ReactNode }) {
     
     seedDatabase();
     
-    // Load initial data from MongoDB API
+    // Load initial data from MongoDB API - OPTIMIZED for speed
     const loadData = async () => {
-      const loadedProducts = (await db.getAll<DBProduct>('products')).map(p => ({ ...p, id: p._id }));
-      const loadedOrders = await db.getAll<Order>('orders');
-      const loadedCoupons = await db.getAll<Coupon>('coupons');
-      const loadedBanners = await db.getAll<Banner>('banners');
-      const loadedCategories = await db.getAll<Category>('categories');
-      
-      setProducts(loadedProducts);
-      setOrders(loadedOrders);
-      setCoupons(loadedCoupons);
-      setBanners(loadedBanners);
-      setCategories(loadedCategories);
+      try {
+        // Load categories and banners first (usually smaller)
+        const [loadedBanners, loadedCategories, loadedCoupons] = await Promise.all([
+          db.getAll<Banner>('banners'),
+          db.getAll<Category>('categories'),
+          db.getAll<Coupon>('coupons'),
+        ]);
+        
+        setBanners(loadedBanners);
+        setCategories(loadedCategories);
+        setCoupons(loadedCoupons);
+        
+        // Load products with pagination - only first 24 items for fast initial load
+        const productsResult = await (db as any).getPaginated<DBProduct>('products', {
+          page: 1,
+          limit: 50 // Load more for homepage visibility
+        });
+        
+        const loadedProducts = productsResult.data.map(p => ({ ...p, id: p._id }));
+        setProducts(loadedProducts);
+        
+        // Load orders separately
+        const loadedOrders = await db.getAll<Order>('orders');
+        setOrders(loadedOrders);
+      } catch (error) {
+        console.error('Error loading data:', error);
+      }
     };
 
     loadData();
@@ -148,10 +164,14 @@ export function AppProvider({ children }: { children: ReactNode }) {
     setCartItems([]);
   };
 
-  // Refresh functions (reload data from database)
+  // Refresh functions (reload data from database) - OPTIMIZED pagination
   const refreshProducts = async () => {
     try {
-      const data = (await db.getAll<DBProduct>('products')).map(p => ({ ...p, id: p._id }));
+      const result = await (db as any).getPaginated<DBProduct>('products', {
+        page: 1,
+        limit: 50
+      });
+      const data = result.data.map(p => ({ ...p, id: p._id }));
       setProducts(data);
     } catch (error) {
       console.error('Error refreshing products:', error);

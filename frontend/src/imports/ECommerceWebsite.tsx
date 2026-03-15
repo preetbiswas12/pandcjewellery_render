@@ -1,19 +1,19 @@
-import svgPaths from "./svg-z8o24wj8oe";
-import imgImage3 from "../assets/3071b1fc729091cd0452fb9d0b89106ceec16368.png";
-import imgImage5 from "../assets/17aa3a2f29a85f64d93c41afa6b64d31b3a88038.png";
-import imgImage7 from "../assets/837e11f00233936f837e7b69d6a545511b1ba132.png";
-import imgImage8 from "../assets/6972db764beefc93072c91dba3bbf52a478ee908.png";
-import imgImage10 from "../assets/5e143183ca0df25c3d226a223269e70541e09760.png";
-import imgImage12 from "../assets/b0b782c02a24c60e5479cec788203caf906828d8.png";
-import imgImage14 from "../assets/5a88e5962507976b1988e6d9a08599fcba5247bd.png";
-import imgImage15 from "../assets/0b42775b5c482fd10ff96fad137ae5ca5aa7a561.png";
-import imgImage17 from "../assets/7150a0e902536ab1a554d315fc11f4ef6f9c1302.png";
-import imgImage18 from "../assets/c8c225ce10fd34a19ed897401decf4c2dd4806d5.png";
-import imgImage20 from "../assets/6202a986df950869c406241f2f48f416d0807241.png";
-import imgImage21 from "../assets/f8ae4065476b2a224ae85cd40fd6b1c7d34bc9ae.png";
-import imgImage23 from "../assets/57cd86eaec4b399b54263e873dd87745943b8f88.png";
-import imgImage25 from "../assets/ff3c0bb419ab7a36a466902e4bb611c667f4c3c4.png";
-import { imgImage2, imgImage4, imgImage6, imgImage9, imgImage11, imgImage13, imgImage16, imgImage19, imgImage22, imgImage24 } from "./svg-e2wau";
+// import svgPaths from "./svg-z8o24wj8oe";
+// import imgImage3 from "../assets/3071b1fc729091cd0452fb9d0b89106ceec16368.png";
+// import imgImage5 from "../assets/17aa3a2f29a85f64d93c41afa6b64d31b3a88038.png";
+// import imgImage7 from "../assets/837e11f00233936f837e7b69d6a545511b1ba132.png";
+// import imgImage8 from "../assets/6972db764beefc93072c91dba3bbf52a478ee908.png";
+// import imgImage10 from "../assets/5e143183ca0df25c3d226a223269e70541e09760.png";
+// import imgImage12 from "../assets/b0b782c02a24c60e5479cec788203caf906828d8.png";
+// import imgImage14 from "../assets/5a88e5962507976b1988e6d9a08599fcba5247bd.png";
+// import imgImage15 from "../assets/0b42775b5c482fd10ff96fad137ae5ca5aa7a561.png";
+// import imgImage17 from "../assets/7150a0e902536ab1a554d315fc11f4ef6f9c1302.png";
+// import imgImage18 from "../assets/c8c225ce10fd34a19ed897401decf4c2dd4806d5.png";
+// import imgImage20 from "../assets/6202a986df950869c406241f2f48f416d0807241.png";
+// import imgImage21 from "../assets/f8ae4065476b2a224ae85cd40fd6b1c7d34bc9ae.png";
+// import imgImage23 from "../assets/57cd86eaec4b399b54263e873dd87745943b8f88.png";
+// import imgImage25 from "../assets/ff3c0bb419ab7a36a466902e4bb611c667f4c3c4.png";
+// import { imgImage2, imgImage4, imgImage6, imgImage9, imgImage11, imgImage13, imgImage16, imgImage19, imgImage22, imgImage24 } from "./svg-e2wau";
 
 function Frame() {
   return (
@@ -57,7 +57,7 @@ function Search() {
       <div className="opacity-50 overflow-clip relative shrink-0 size-[20px]" data-name="edit / search">
         <div className="absolute inset-[12.5%_16.28%_18.3%_14.52%]" data-name="coolicon">
           <svg className="absolute block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 13.8389 13.8397">
-            <path d={svgPaths.p19476380} fill="var(--fill-0, #2E3A59)" id="coolicon" />
+            <path d={""} fill="var(--fill-0, #2E3A59)" id="coolicon" />
           </svg>
         </div>
       </div>
@@ -72,7 +72,7 @@ function AllCategory() {
       <div className="overflow-clip relative shrink-0 size-[24px]" data-name="arrow / chevron_down">
         <div className="absolute inset-[34.53%_24.96%]" data-name="coolicon">
           <svg className="absolute block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 12.02 7.425">
-            <path d={svgPaths.pbafc180} fill="var(--fill-0, #2E3A59)" id="coolicon" />
+            <path d={""} fill="var(--fill-0, #2E3A59)" id="coolicon" />
           </svg>
         </div>
       </div>
@@ -120,9 +120,9 @@ function Component8666616ShoppingCartIcon() {
     <div className="relative shrink-0 size-[21px]" data-name="8666616_shopping_cart_icon 1">
       <svg className="absolute block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 21 21">
         <g clipPath="url(#clip0_1_508)" id="8666616_shopping_cart_icon 1">
-          <path d={svgPaths.p13d0b6b0} id="Vector" stroke="var(--stroke-0, #2E3A59)" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" />
-          <path d={svgPaths.p3cc5b500} id="Vector_2" stroke="var(--stroke-0, #2E3A59)" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" />
-          <path d={svgPaths.p9f3b0a0} id="Vector_3" stroke="var(--stroke-0, #2E3A59)" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" />
+          <path d={""} id="Vector" stroke="var(--stroke-0, #2E3A59)" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" />
+          <path d={""} id="Vector_2" stroke="var(--stroke-0, #2E3A59)" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" />
+          <path d={""} id="Vector_3" stroke="var(--stroke-0, #2E3A59)" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" />
         </g>
         <defs>
           <clipPath id="clip0_1_508">
@@ -140,7 +140,7 @@ function Icon() {
       <div className="overflow-clip relative shrink-0 size-[24px]" data-name="basic / heart_outline">
         <div className="absolute inset-[12.5%_8.33%_12.47%_8.33%]" data-name="coolicon">
           <svg className="absolute block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 20 18.0091">
-            <path d={svgPaths.p3c053800} fill="var(--fill-0, #2E3A59)" id="coolicon" />
+            <path d={""} fill="var(--fill-0, #2E3A59)" id="coolicon" />
           </svg>
         </div>
       </div>
@@ -148,8 +148,8 @@ function Icon() {
         <div className="absolute inset-[12.5%_16.67%_8.33%_16.67%]" data-name="coolicon">
           <svg className="absolute block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 16 19">
             <g id="coolicon">
-              <path d={svgPaths.p11153e00} fill="var(--fill-0, #2E3A59)" />
-              <path d={svgPaths.p216f4400} fill="var(--fill-0, #2E3A59)" />
+              <path d={""} fill="var(--fill-0, #2E3A59)" />
+              <path d={""} fill="var(--fill-0, #2E3A59)" />
             </g>
           </svg>
         </div>
@@ -184,7 +184,7 @@ function TitleData() {
 
 function TitleCta() {
   return (
-    <div className="absolute content-stretch flex flex-col gap-[28px] items-start left-[60px] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[-60px_-60px] mask-size-[958px_770px] top-[60px] w-[328px]" data-name="Title & CTA" style={{ maskImage: `url('${imgImage2}')` }}>
+    <div className="absolute content-stretch flex flex-col gap-[28px] items-start left-[60px] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[-60px_-60px] mask-size-[958px_770px] top-[60px] w-[328px]" data-name="Title & CTA" style={{ maskImage: `url('')` }}>
       <TitleData />
       <div className="bg-[#121212] content-stretch flex h-[50px] items-center justify-center relative rounded-[200px] shrink-0 w-[280px]" data-name="Button">
         <p className="font-['Inter:Medium',sans-serif] font-medium h-[24px] leading-[24px] not-italic relative shrink-0 text-[14px] text-center text-white tracking-[1px] w-[169px] whitespace-pre-wrap">VIEW COLLECTIONS</p>
@@ -196,11 +196,11 @@ function TitleCta() {
 function Card() {
   return (
     <div className="h-[770px] overflow-clip relative shrink-0 w-[958px]" data-name="Card">
-      <div className="absolute h-[770px] left-0 mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[0px_0px] mask-size-[958px_770px] top-0 w-[1155px]" data-name="image 2" style={{ maskImage: `url('${imgImage2}')` }}>
-        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgImage3} />
+      <div className="absolute h-[770px] left-0 mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[0px_0px] mask-size-[958px_770px] top-0 w-[1155px]" data-name="image 2" style={{ maskImage: `url('')` }}>
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={""} />
       </div>
-      <div className="absolute h-[770px] left-[70px] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[-70px_0px] mask-size-[958px_770px] top-0 w-[1155px]" data-name="image 3" style={{ maskImage: `url('${imgImage2}')` }}>
-        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgImage3} />
+      <div className="absolute h-[770px] left-[70px] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[-70px_0px] mask-size-[958px_770px] top-0 w-[1155px]" data-name="image 3" style={{ maskImage: `url('')` }}>
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={""} />
       </div>
       <TitleCta />
     </div>
@@ -210,10 +210,10 @@ function Card() {
 function Card1() {
   return (
     <div className="h-[380px] overflow-clip relative shrink-0 w-full" data-name="Card">
-      <div className="-translate-y-1/2 absolute h-[405px] left-[-107px] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[107px_24px] mask-size-[352px_380px] top-[calc(50%-11.5px)] w-[644px]" data-name="image 4" style={{ maskImage: `url('${imgImage4}')` }}>
-        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgImage5} />
+      <div className="-translate-y-1/2 absolute h-[405px] left-[-107px] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[107px_24px] mask-size-[352px_380px] top-[calc(50%-11.5px)] w-[644px]" data-name="image 4" style={{ maskImage: `url('')` }}>
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={""} />
       </div>
-      <div className="absolute font-['Inter:Regular',sans-serif] font-normal leading-[40px] left-[30px] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[-30px_-30px] mask-size-[352px_380px] not-italic text-[#121212] text-[40px] top-[30px] tracking-[-3px] whitespace-nowrap" style={{ maskImage: `url('${imgImage4}')` }}>
+      <div className="absolute font-['Inter:Regular',sans-serif] font-normal leading-[40px] left-[30px] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[-30px_-30px] mask-size-[352px_380px] not-italic text-[#121212] text-[40px] top-[30px] tracking-[-3px] whitespace-nowrap" style={{ maskImage: `url('')` }}>
         <p className="mb-0">Outdoor</p>
         <p>Active</p>
       </div>
@@ -224,13 +224,13 @@ function Card1() {
 function Card2() {
   return (
     <div className="h-[380px] overflow-clip relative shrink-0 w-full" data-name="Card">
-      <div className="-translate-x-1/2 absolute h-[565px] left-[calc(50%+54.5px)] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[192px_98px] mask-size-[352px_380px] top-[-98px] w-[845px]" data-name="image 5" style={{ maskImage: `url('${imgImage6}')` }}>
-        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgImage7} />
+      <div className="-translate-x-1/2 absolute h-[565px] left-[calc(50%+54.5px)] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[192px_98px] mask-size-[352px_380px] top-[-98px] w-[845px]" data-name="image 5" style={{ maskImage: `url('')` }}>
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={""} />
       </div>
-      <div className="-translate-x-1/2 absolute h-[599.637px] left-1/2 mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[24px_1108px] mask-size-[352px_380px] top-[-1108px] w-[400px]" data-name="image 6" style={{ maskImage: `url('${imgImage6}')` }}>
-        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgImage8} />
+      <div className="-translate-x-1/2 absolute h-[599.637px] left-1/2 mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[24px_1108px] mask-size-[352px_380px] top-[-1108px] w-[400px]" data-name="image 6" style={{ maskImage: `url('')` }}>
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={""} />
       </div>
-      <div className="absolute font-['Inter:Regular',sans-serif] font-normal leading-[40px] left-[30px] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[-30px_-30px] mask-size-[352px_380px] not-italic text-[#121212] text-[40px] top-[30px] tracking-[-3px] whitespace-nowrap" style={{ maskImage: `url('${imgImage6}')` }}>
+      <div className="absolute font-['Inter:Regular',sans-serif] font-normal leading-[40px] left-[30px] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[-30px_-30px] mask-size-[352px_380px] not-italic text-[#121212] text-[40px] top-[30px] tracking-[-3px] whitespace-nowrap" style={{ maskImage: `url('')` }}>
         <p className="mb-0">Casual</p>
         <p>Comfort</p>
       </div>
@@ -289,7 +289,7 @@ function ArrowShortRight() {
     <div className="relative shrink-0 size-[50px]" data-name="arrow / short_right">
       <svg className="absolute block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 50 50">
         <g id="arrow / short_right">
-          <path d={svgPaths.p38ed2280} fill="var(--fill-0, white)" id="coolicon" />
+          <path d={""} fill="var(--fill-0, white)" id="coolicon" />
         </g>
       </svg>
     </div>
@@ -298,7 +298,7 @@ function ArrowShortRight() {
 
 function Frame2() {
   return (
-    <div className="absolute content-stretch flex items-end justify-between left-[30px] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[-30px_-270px] mask-size-[479px_380px] top-[270px] w-[420px]" style={{ maskImage: `url('${imgImage9}')` }}>
+    <div className="absolute content-stretch flex items-end justify-between left-[30px] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[-30px_-270px] mask-size-[479px_380px] top-[270px] w-[420px]" style={{ maskImage: `url('')` }}>
       <div className="font-['Inter:Regular',sans-serif] font-normal leading-[40px] not-italic relative shrink-0 text-[40px] text-white tracking-[-3px] w-[225px] whitespace-pre-wrap">
         <p className="mb-0">{`Say it `}</p>
         <p>with Shirt</p>
@@ -311,9 +311,9 @@ function Frame2() {
 function Card3() {
   return (
     <div className="h-[380px] overflow-clip relative shrink-0 w-[479px]" data-name="Card">
-      <div className="-translate-x-1/2 absolute h-[380px] left-[calc(50%+0.5px)] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[0px_0px] mask-size-[479px_380px] top-0 w-[480px]" data-name="image 7" style={{ maskImage: `url('${imgImage9}')` }}>
+      <div className="-translate-x-1/2 absolute h-[380px] left-[calc(50%+0.5px)] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[0px_0px] mask-size-[479px_380px] top-0 w-[480px]" data-name="image 7" style={{ maskImage: `url('')` }}>
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <img alt="" className="absolute h-[113.12%] left-0 max-w-none top-0 w-full" src={imgImage10} />
+          <img alt="" className="absolute h-[113.12%] left-0 max-w-none top-0 w-full" src={""} />
         </div>
       </div>
       <Frame2 />
@@ -326,7 +326,7 @@ function ArrowShortRight1() {
     <div className="relative shrink-0 size-[50px]" data-name="arrow / short_right">
       <svg className="absolute block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 50 50">
         <g id="arrow / short_right">
-          <path d={svgPaths.p38ed2280} fill="var(--fill-0, white)" id="coolicon" />
+          <path d={""} fill="var(--fill-0, white)" id="coolicon" />
         </g>
       </svg>
     </div>
@@ -335,7 +335,7 @@ function ArrowShortRight1() {
 
 function Frame3() {
   return (
-    <div className="absolute content-stretch flex items-end justify-between left-[30px] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[-30px_-270px] mask-size-[480px_380px] top-[270px] w-[420px]" style={{ maskImage: `url('${imgImage11}')` }}>
+    <div className="absolute content-stretch flex items-end justify-between left-[30px] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[-30px_-270px] mask-size-[480px_380px] top-[270px] w-[420px]" style={{ maskImage: `url('')` }}>
       <div className="font-['Inter:Regular',sans-serif] font-normal leading-[40px] not-italic relative shrink-0 text-[40px] text-white tracking-[-3px] w-[225px] whitespace-pre-wrap">
         <p className="mb-0">{`Funky never `}</p>
         <p>get old</p>
@@ -348,9 +348,9 @@ function Frame3() {
 function Card4() {
   return (
     <div className="h-[380px] overflow-clip relative shrink-0 w-[480px]" data-name="Card">
-      <div className="-translate-x-1/2 -translate-y-1/2 absolute h-[484px] left-1/2 mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[0px_104px] mask-size-[480px_380px] top-[calc(50%-52px)] w-[480px]" data-name="image 8" style={{ maskImage: `url('${imgImage11}')` }}>
+      <div className="-translate-x-1/2 -translate-y-1/2 absolute h-[484px] left-1/2 mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[0px_104px] mask-size-[480px_380px] top-[calc(50%-52px)] w-[480px]" data-name="image 8" style={{ maskImage: `url('')` }}>
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <img alt="" className="absolute h-[148.76%] left-0 max-w-none top-0 w-full" src={imgImage12} />
+          <img alt="" className="absolute h-[148.76%] left-0 max-w-none top-0 w-full" src={""} />
         </div>
       </div>
       <Frame3 />
@@ -433,14 +433,14 @@ function Header() {
 function Group1() {
   return (
     <div className="col-1 grid-cols-[max-content] grid-rows-[max-content] inline-grid ml-0 mt-0 place-items-start relative row-1">
-      <div className="col-1 h-[572px] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[60px_99px] mask-size-[322px_374px] ml-[-60px] mt-[-99px] relative row-1 w-[408px]" data-name="image 9" style={{ maskImage: `url('${imgImage13}')` }}>
-        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgImage14} />
+      <div className="col-1 h-[572px] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[60px_99px] mask-size-[322px_374px] ml-[-60px] mt-[-99px] relative row-1 w-[408px]" data-name="image 9" style={{ maskImage: `url('${""}')` }}>
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={""} />
       </div>
-      <div className="bg-[#f15353] col-1 mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[-262px_-20px] mask-size-[322px_374px] ml-[262px] mt-[20px] overflow-clip relative rounded-[100px] row-1 size-[40px]" data-name="Love icon" style={{ maskImage: `url('${imgImage13}')` }}>
+      <div className="bg-[#f15353] col-1 mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[-262px_-20px] mask-size-[322px_374px] ml-[262px] mt-[20px] overflow-clip relative rounded-[100px] row-1 size-[40px]" data-name="Love icon" style={{ maskImage: `url('${""}')` }}>
         <div className="absolute left-[8px] overflow-clip size-[24px] top-[8px]" data-name="basic / heart_outline">
           <div className="absolute inset-[12.5%_8.33%_12.47%_8.33%]" data-name="coolicon">
             <svg className="absolute block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 20 18.0091">
-              <path d={svgPaths.p3c053800} fill="var(--fill-0, white)" id="coolicon" />
+              <path d={""} fill="var(--fill-0, white)" id="coolicon" />
             </svg>
           </div>
         </div>
@@ -462,14 +462,14 @@ function Card5() {
 function Group4() {
   return (
     <div className="col-1 grid-cols-[max-content] grid-rows-[max-content] inline-grid ml-0 mt-0 place-items-start relative row-1">
-      <div className="col-1 h-[450px] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[11px_0px] mask-size-[322px_374px] ml-[-11px] mt-0 relative row-1 w-[360px]" data-name="image 11" style={{ maskImage: `url('${imgImage13}')` }}>
-        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgImage15} />
+      <div className="col-1 h-[450px] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[11px_0px] mask-size-[322px_374px] ml-[-11px] mt-0 relative row-1 w-[360px]" data-name="image 11" style={{ maskImage: `url('${""}')` }}>
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={""} />
       </div>
-      <div className="bg-[rgba(18,18,18,0.2)] col-1 mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[-262px_-20px] mask-size-[322px_374px] ml-[262px] mt-[20px] overflow-clip relative rounded-[100px] row-1 size-[40px]" data-name="Love icon" style={{ maskImage: `url('${imgImage13}')` }}>
+      <div className="bg-[rgba(18,18,18,0.2)] col-1 mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[-262px_-20px] mask-size-[322px_374px] ml-[262px] mt-[20px] overflow-clip relative rounded-[100px] row-1 size-[40px]" data-name="Love icon" style={{ maskImage: `url('${""}')` }}>
         <div className="absolute left-[8px] overflow-clip size-[24px] top-[8px]" data-name="basic / heart_outline">
           <div className="absolute inset-[12.5%_8.33%_12.47%_8.33%]" data-name="coolicon">
             <svg className="absolute block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 20 18.0091">
-              <path d={svgPaths.p3c053800} fill="var(--fill-0, white)" id="coolicon" />
+              <path d={""} fill="var(--fill-0, white)" id="coolicon" />
             </svg>
           </div>
         </div>
@@ -491,14 +491,14 @@ function Card6() {
 function Group5() {
   return (
     <div className="col-1 grid-cols-[max-content] grid-rows-[max-content] inline-grid ml-0 mt-0 place-items-start relative row-1">
-      <div className="col-1 h-[436px] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[0px_42px] mask-size-[654px_374px] ml-0 mt-[-42px] relative row-1 w-[654px]" data-name="image 14" style={{ maskImage: `url('${imgImage16}')` }}>
-        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgImage17} />
+      <div className="col-1 h-[436px] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[0px_42px] mask-size-[654px_374px] ml-0 mt-[-42px] relative row-1 w-[654px]" data-name="image 14" style={{ maskImage: `url('${""}')` }}>
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={""} />
       </div>
-      <div className="bg-[rgba(18,18,18,0.2)] col-1 mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[-594px_-20px] mask-size-[654px_374px] ml-[594px] mt-[20px] overflow-clip relative rounded-[100px] row-1 size-[40px]" data-name="Love icon" style={{ maskImage: `url('${imgImage16}')` }}>
+      <div className="bg-[rgba(18,18,18,0.2)] col-1 mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[-594px_-20px] mask-size-[654px_374px] ml-[594px] mt-[20px] overflow-clip relative rounded-[100px] row-1 size-[40px]" data-name="Love icon" style={{ maskImage: `url('${""}')` }}>
         <div className="absolute left-[8px] overflow-clip size-[24px] top-[8px]" data-name="basic / heart_outline">
           <div className="absolute inset-[12.5%_8.33%_12.47%_8.33%]" data-name="coolicon">
             <svg className="absolute block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 20 18.0091">
-              <path d={svgPaths.p3c053800} fill="var(--fill-0, white)" id="coolicon" />
+              <path d={""} fill="var(--fill-0, white)" id="coolicon" />
             </svg>
           </div>
         </div>
@@ -530,14 +530,14 @@ function Row() {
 function Group6() {
   return (
     <div className="col-1 grid-cols-[max-content] grid-rows-[max-content] inline-grid ml-0 mt-0 place-items-start relative row-1">
-      <div className="col-1 h-[513.013px] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[53px_112px] mask-size-[654px_374px] ml-[-53px] mt-[-112px] relative row-1 w-[770px]" data-name="image 15" style={{ maskImage: `url('${imgImage16}')` }}>
-        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgImage18} />
+      <div className="col-1 h-[513.013px] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[53px_112px] mask-size-[654px_374px] ml-[-53px] mt-[-112px] relative row-1 w-[770px]" data-name="image 15" style={{ maskImage: `url('${""}')` }}>
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={""} />
       </div>
-      <div className="bg-[rgba(18,18,18,0.2)] col-1 mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[-594px_-20px] mask-size-[654px_374px] ml-[594px] mt-[20px] overflow-clip relative rounded-[100px] row-1 size-[40px]" data-name="Love icon" style={{ maskImage: `url('${imgImage16}')` }}>
+      <div className="bg-[rgba(18,18,18,0.2)] col-1 mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[-594px_-20px] mask-size-[654px_374px] ml-[594px] mt-[20px] overflow-clip relative rounded-[100px] row-1 size-[40px]" data-name="Love icon" style={{ maskImage: `url('${""}')` }}>
         <div className="absolute left-[8px] overflow-clip size-[24px] top-[8px]" data-name="basic / heart_outline">
           <div className="absolute inset-[12.5%_8.33%_12.47%_8.33%]" data-name="coolicon">
             <svg className="absolute block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 20 18.0091">
-              <path d={svgPaths.p3c053800} fill="var(--fill-0, white)" id="coolicon" />
+              <path d={""} fill="var(--fill-0, white)" id="coolicon" />
             </svg>
           </div>
         </div>
@@ -559,14 +559,14 @@ function Card8() {
 function Group3() {
   return (
     <div className="col-1 grid-cols-[max-content] grid-rows-[max-content] inline-grid ml-0 mt-0 place-items-start relative row-1">
-      <div className="col-1 h-[593px] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[80px_119px] mask-size-[324px_374px] ml-[-80px] mt-[-119px] relative row-1 w-[474px]" data-name="image 12" style={{ maskImage: `url('${imgImage19}')` }}>
-        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgImage20} />
+      <div className="col-1 h-[593px] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[80px_119px] mask-size-[324px_374px] ml-[-80px] mt-[-119px] relative row-1 w-[474px]" data-name="image 12" style={{ maskImage: `url('${""}')` }}>
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={""} />
       </div>
-      <div className="bg-[rgba(18,18,18,0.2)] col-1 mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[-262px_-20px] mask-size-[324px_374px] ml-[262px] mt-[20px] overflow-clip relative rounded-[100px] row-1 size-[40px]" data-name="Love icon" style={{ maskImage: `url('${imgImage19}')` }}>
+      <div className="bg-[rgba(18,18,18,0.2)] col-1 mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[-262px_-20px] mask-size-[324px_374px] ml-[262px] mt-[20px] overflow-clip relative rounded-[100px] row-1 size-[40px]" data-name="Love icon" style={{ maskImage: `url('${""}')` }}>
         <div className="absolute left-[8px] overflow-clip size-[24px] top-[8px]" data-name="basic / heart_outline">
           <div className="absolute inset-[12.5%_8.33%_12.47%_8.33%]" data-name="coolicon">
             <svg className="absolute block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 20 18.0091">
-              <path d={svgPaths.p3c053800} fill="var(--fill-0, white)" id="coolicon" />
+              <path d={""} fill="var(--fill-0, white)" id="coolicon" />
             </svg>
           </div>
         </div>
@@ -588,14 +588,14 @@ function Card9() {
 function Group2() {
   return (
     <div className="col-1 grid-cols-[max-content] grid-rows-[max-content] inline-grid ml-0 mt-0 place-items-start relative row-1">
-      <div className="col-1 h-[421px] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[91px_19px] mask-size-[322px_374px] ml-[-91px] mt-[-19px] relative row-1 w-[527px]" data-name="image 13" style={{ maskImage: `url('${imgImage13}')` }}>
-        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgImage21} />
+      <div className="col-1 h-[421px] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[91px_19px] mask-size-[322px_374px] ml-[-91px] mt-[-19px] relative row-1 w-[527px]" data-name="image 13" style={{ maskImage: `url('${""}')` }}>
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={""} />
       </div>
-      <div className="bg-[rgba(18,18,18,0.2)] col-1 mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[-262px_-20px] mask-size-[322px_374px] ml-[262px] mt-[20px] overflow-clip relative rounded-[100px] row-1 size-[40px]" data-name="Love icon" style={{ maskImage: `url('${imgImage13}')` }}>
+      <div className="bg-[rgba(18,18,18,0.2)] col-1 mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[-262px_-20px] mask-size-[322px_374px] ml-[262px] mt-[20px] overflow-clip relative rounded-[100px] row-1 size-[40px]" data-name="Love icon" style={{ maskImage: `url('${""}')` }}>
         <div className="absolute left-[8px] overflow-clip size-[24px] top-[8px]" data-name="basic / heart_outline">
           <div className="absolute inset-[12.5%_8.33%_12.47%_8.33%]" data-name="coolicon">
             <svg className="absolute block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 20 18.0091">
-              <path d={svgPaths.p3c053800} fill="var(--fill-0, white)" id="coolicon" />
+              <path d={""} fill="var(--fill-0, white)" id="coolicon" />
             </svg>
           </div>
         </div>
@@ -770,8 +770,8 @@ function ExploreByColors() {
 function Group8() {
   return (
     <div className="col-1 grid-cols-[max-content] grid-rows-[max-content] inline-grid ml-0 mt-0 place-items-start relative row-1">
-      <div className="col-1 h-[1411px] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[91px_303px] mask-size-[1320px_556px] ml-[-91px] mt-[-303px] relative row-1 w-[2116px]" data-name="image 16" style={{ maskImage: `url('${imgImage22}')` }}>
-        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgImage23} />
+      <div className="col-1 h-[1411px] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[91px_303px] mask-size-[1320px_556px] ml-[-91px] mt-[-303px] relative row-1 w-[2116px]" data-name="image 16" style={{ maskImage: `url('${""}')` }}>
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={""} />
       </div>
     </div>
   );
@@ -814,7 +814,7 @@ function Service1() {
         <div className="-translate-x-1/2 -translate-y-1/2 absolute left-1/2 overflow-clip size-[48px] top-1/2" data-name="basic / heart_fill">
           <div className="absolute inset-[12.5%_8.33%]" data-name="coolicon">
             <svg className="absolute block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 40 36.0019">
-              <path d={svgPaths.p2fd5b500} fill="var(--fill-0, white)" id="coolicon" />
+              <path d={""} fill="var(--fill-0, white)" id="coolicon" />
             </svg>
           </div>
         </div>
@@ -840,7 +840,7 @@ function Service2() {
         <div className="-translate-x-1/2 -translate-y-1/2 absolute left-1/2 overflow-clip size-[48px] top-1/2" data-name="basic / phone">
           <div className="absolute inset-[16.67%]" data-name="coolicon">
             <svg className="absolute block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 32 32">
-              <path d={svgPaths.p333d4e80} fill="var(--fill-0, white)" id="coolicon" />
+              <path d={""} fill="var(--fill-0, white)" id="coolicon" />
             </svg>
           </div>
         </div>
@@ -866,7 +866,7 @@ function Service3() {
         <div className="-translate-x-1/2 -translate-y-1/2 absolute left-1/2 overflow-clip size-[48px] top-1/2" data-name="basic / refresh_02">
           <div className="absolute inset-[16.67%]" data-name="coolicon">
             <svg className="absolute block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 32 32.0003">
-              <path d={svgPaths.pc58d780} fill="var(--fill-0, white)" id="coolicon" />
+              <path d={""} fill="var(--fill-0, white)" id="coolicon" />
             </svg>
           </div>
         </div>
@@ -899,8 +899,8 @@ function Service() {
 function Group7() {
   return (
     <div className="col-1 grid-cols-[max-content] grid-rows-[max-content] inline-grid ml-0 mt-0 place-items-start relative row-1">
-      <div className="col-1 h-[1121px] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[33px_139px] mask-size-[654px_367px] ml-[-33px] mt-[-139px] relative row-1 w-[747px]" data-name="image 18" style={{ maskImage: `url('${imgImage24}')` }}>
-        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgImage25} />
+      <div className="col-1 h-[1121px] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[33px_139px] mask-size-[654px_367px] ml-[-33px] mt-[-139px] relative row-1 w-[747px]" data-name="image 18" style={{ maskImage: `url('${""}')` }}>
+        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={""} />
       </div>
     </div>
   );

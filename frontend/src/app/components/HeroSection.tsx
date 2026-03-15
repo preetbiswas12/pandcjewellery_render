@@ -3,11 +3,11 @@ import { Link, useNavigate } from 'react-router';
 import { useApp } from '../context/AppContext';
 import { convertGoogleDriveLink } from '../../lib/googleDriveUtils';
 import { NoiseButton } from '../../components/ui/noise-button';
-import imgImage3 from "../../assets/3071b1fc729091cd0452fb9d0b89106ceec16368.png";
-import imgImage5 from "../../assets/17aa3a2f29a85f64d93c41afa6b64d31b3a88038.png";
-import imgImage7 from "../../assets/837e11f00233936f837e7b69d6a545511b1ba132.png";
-import imgImage10 from "../../assets/5e143183ca0df25c3d226a223269e70541e09760.png";
-import imgImage12 from "../../assets/b0b782c02a24c60e5479cec788203caf906828d8.png";
+// import imgImage3 from "../../assets/3071b1fc729091cd0452fb9d0b89106ceec16368.png";
+// import imgImage5 from "../../assets/17aa3a2f29a85f64d93c41afa6b64d31b3a88038.png";
+// import imgImage7 from "../../assets/837e11f00233936f837e7b69d6a545511b1ba132.png";
+// import imgImage10 from "../../assets/5e143183ca0df25c3d226a223269e70541e09760.png";
+// import imgImage12 from "../../assets/b0b782c02a24c60e5479cec788203caf906828d8.png";
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -88,21 +88,21 @@ export function HeroSection() {
 
   // Default fallback data
   const defaultHeroMain = {
-    title: 'Timeless\nElegance\nAwaits',
-    subtitle: 'Discover our exquisite collection of premium jewellery crafted with passion and precision',
-    image: imgImage3,
+    title: '',
+    subtitle: '',
+    image: "",
     link: '/shop',
-    buttonText: 'EXPLORE JEWELLERY'
+    buttonText: ''
   };
 
   const defaultHeroSide = [
-    { title: 'Luxury\nBracelets', image: imgImage5, link: '/shop' },
-    { title: 'Golden\nNecklaces', image: imgImage7, link: '/shop' }
+    { title: '', image: "", link: '/shop' },
+    { title: '', image: "", link: '/shop' }
   ];
 
   const defaultCasual = [
-    { title: 'Statement\nEarrings', image: imgImage10, link: '/shop' },
-    { title: 'Precious\nRings', image: imgImage12, link: '/shop' }
+    { title: '', image: "", link: '/shop' },
+    { title: '', image: "", link: '/shop' }
   ];
 
   return (
@@ -112,7 +112,7 @@ export function HeroSection() {
         <div ref={mainHeroRef} className="relative w-full lg:w-1/2 xl:w-3/5 h-[300px] sm:h-[400px] md:h-[600px] lg:h-[650px] xl:h-[770px] rounded-[40px] overflow-hidden bg-zinc-300 flex-shrink-0">
           <img 
             src={convertGoogleDriveLink(heroMainBanner?.image || defaultHeroMain.image)} 
-            alt="Summer Outfit" 
+            alt="" 
             className="absolute inset-0 w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black/40 to-transparent" />

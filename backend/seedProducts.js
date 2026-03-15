@@ -3,11 +3,74 @@ const fs = require('fs');
 require('dotenv').config();
 
 const Product = require('./models/Product');
+const Category = require('./models/Category');
+
+// Helper function to create slug from name
+const createSlug = (name) => {
+  return name
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, '-')
+    .replace(/[^\w\-]/g, '');
+};
 
 const seedProducts = async () => {
   try {
     await mongoose.connect(process.env.MONGODB_URI);
     console.log('Connected to MongoDB for product seeding...');
+
+    // Ensure essential categories exist
+    const essentialCategories = [
+      {
+        name: 'Earrings',
+        slug: 'earrings',
+        subCategories: [
+          { name: 'Studs', slug: 'studs' },
+          { name: 'Drops', slug: 'drops' },
+          { name: 'Hoops', slug: 'hoops' },
+          { name: 'Clip-On', slug: 'clip-on' }
+        ],
+        isActive: true
+      },
+      {
+        name: 'Necklace',
+        slug: 'necklace',
+        subCategories: [
+          { name: 'Choker', slug: 'choker' },
+          { name: 'Pendant', slug: 'pendant' },
+          { name: 'Long Chain', slug: 'long-chain' }
+        ],
+        isActive: true
+      },
+      {
+        name: 'Heavy Necklace',
+        slug: 'heavy-necklace',
+        subCategories: [
+          { name: 'Kundan', slug: 'kundan' },
+          { name: 'Polki', slug: 'polki' },
+          { name: 'Statement', slug: 'statement' }
+        ],
+        isActive: true
+      }
+    ];
+
+    // Upsert categories
+    for (const cat of essentialCategories) {
+      await Category.findOneAndUpdate(
+        { slug: cat.slug },
+        cat,
+        { upsert: true, new: true }
+      );
+    }
+    console.log('✓ Categories ensured/created');
+
+    // Fetch all categories for mapping
+    const categories = await Category.find({});
+    const categoryMap = {};
+    categories.forEach(cat => {
+      categoryMap[cat.name] = cat._id;
+      categoryMap[cat.slug] = cat._id;
+    });
 
     // Read and parse CSV file
     const csvPath = '../pandc.products.csv';
@@ -20,6 +83,8 @@ const seedProducts = async () => {
 
     // Parse data rows
     const products = [];
+    const categoriesSet = new Set();
+    
     for (let i = 1; i < lines.length; i++) {
       const values = lines[i].split(',').map(v => v.trim());
       
@@ -45,16 +110,27 @@ const seedProducts = async () => {
       const price = parseFloat(row.price) || 0;
       const offerPercentage = mrp > 0 ? Math.round(((mrp - price) / mrp) * 100) : 0;
 
-      // Create product object
+      // Get category ID from mapping (or create mapping entry)
+      const categoryName = row.category || 'Other';
+      categoriesSet.add(categoryName);
+      
+      let categoryId = categoryMap[categoryName];
+      if (!categoryId) {
+        // Try slug-based lookup
+        const slug = createSlug(categoryName);
+        categoryId = categoryMap[slug];
+      }
+
+      // Create product object with category ID
       const product = {
         sku: row.id || `SKU-${Date.now()}`,
         name: row.name || 'Untitled Product',
         price: price,
         offerPercentage: offerPercentage,
         quantity: parseInt(row.stock) || 0,
-        category: row.category || 'Other',
+        category: categoryId || categoryName, // Use ID if found, otherwise name
         subCategory: row.category || 'General',
-        fabricType: 'Jewelry',
+        jewelleryType: 'Premium',
         careInstructions: 'Store in a dry, soft pouch. Avoid contact with water, perfume, and harsh chemicals.',
         description: row.description || '',
         images: images,
@@ -68,8 +144,10 @@ const seedProducts = async () => {
       };
 
       products.push(product);
-      console.log(`✓ Parsed: ${product.name}`);
+      console.log(`✓ Parsed: ${product.name} (Category: ${categoryName})`);
     }
+
+    console.log('\nUnique categories found:', Array.from(categoriesSet));
 
     // Clear existing products and insert new ones
     const result = await Product.deleteMany({});

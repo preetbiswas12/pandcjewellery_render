@@ -1,6 +1,13 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+let compression;
+try {
+  compression = require('compression');
+} catch {
+  // compression middleware is optional
+  compression = (req, res, next) => next();
+}
 const path = require('path');
 require('dotenv').config();
 
@@ -9,6 +16,7 @@ const PORT = process.env.PORT || 5000;
 
 // Middleware
 app.use(cors());
+app.use(compression()); // ⚠️ OPTIMIZED: Enable gzip compression for faster responses
 app.use(express.json());
 
 // Cache-busting headers for production

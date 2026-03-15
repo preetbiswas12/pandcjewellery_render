@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import imgImage23 from "../../assets/57cd86eaec4b399b54263e873dd87745943b8f88.png";
+// import imgImage23 from "../../assets/57cd86eaec4b399b54263e873dd87745943b8f88.png";
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -48,7 +48,7 @@ export function Testimonial() {
     <div className="w-full px-4 md:px-8 lg:px-[60px] py-8 md:py-12">
       <div ref={containerRef} className="relative h-[400px] md:h-[500px] lg:h-[556px] rounded-3xl overflow-hidden">
         <img 
-          src={imgImage23} 
+          src={""} 
           alt="Customer Testimonial" 
           className="absolute inset-0 w-full h-full object-cover"
         />
