@@ -81,7 +81,13 @@ export default function ShopPage() {
           _id: p._id || p.id,
         }));
 
-        setDisplayedProducts(mappedProducts);
+        // Append products for Load More (page > 1), replace for new filters (page = 1)
+        if (pageNum === 1) {
+          setDisplayedProducts(mappedProducts);
+        } else {
+          setDisplayedProducts(prev => [...prev, ...mappedProducts]);
+        }
+
         setPagination(result.pagination || {
           page: pageNum,
           limit: 24,
@@ -90,7 +96,10 @@ export default function ShopPage() {
           hasMore: false,
         });
       } else {
-        setDisplayedProducts([]);
+        // Only reset if on page 1, otherwise just update pagination
+        if (pageNum === 1) {
+          setDisplayedProducts([]);
+        }
         setPagination({
           page: pageNum,
           limit: 24,
@@ -300,7 +309,7 @@ export default function ShopPage() {
                   <p className="text-sm text-gray-600">
                     Showing <span className="font-semibold text-gray-900">{displayedProducts.length}</span> of <span className="font-semibold text-gray-900">{pagination.total}</span> products
                   </p>
-                  {isLoading && <span className="text-xs text-gray-500 animate-pulse">Loading...</span>}
+                  {isLoading && <span className="text-xs text-gray-500 animate-pulse">Loading more...</span>}
                 </div>
 
                 <div ref={gridRef} className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
@@ -319,7 +328,7 @@ export default function ShopPage() {
                 </div>
 
                 {/* Load More Button */}
-                {pagination.hasMore && (
+                {pagination.hasMore && displayedProducts.length < pagination.total && (
                   <div className="flex justify-center mt-12">
                     <button
                       onClick={handleLoadMore}
