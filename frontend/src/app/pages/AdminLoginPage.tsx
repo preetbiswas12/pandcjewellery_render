@@ -119,31 +119,32 @@ export default function AdminLoginPage() {
   };
 
   return (
-    <div ref={pageRef} className="min-h-screen bg-gradient-to-br from-gray-900 to-black flex items-center justify-center p-4">
-      {/* Background decoration */}
-      <div className="absolute top-0 left-0 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl" />
+    <div ref={pageRef} className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center p-4 relative overflow-hidden">
+      {/* Animated Background Orbs */}
+      <div className="absolute top-10 left-10 w-72 h-72 bg-magenta-500/20 rounded-full blur-3xl animate-pulse" />
+      <div className="absolute bottom-10 right-10 w-72 h-72 bg-pink-500/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+      <div className="absolute top-1/2 left-1/2 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl" />
 
       <div className="login-container relative z-10 w-full max-w-md">
-        <div className="bg-white/5 backdrop-blur-xl rounded-2xl border border-white/10 px-8 py-12 shadow-2xl">
+        <div className="bg-gradient-to-br from-slate-800/80 to-slate-900/80 backdrop-blur-2xl rounded-3xl border border-slate-700/50 px-8 py-12 shadow-2xl">
           {/* Header */}
           <div className="text-center mb-8">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 mb-4">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-magenta-500 to-pink-600 mb-4 shadow-lg shadow-magenta-500/50">
               <Lock size={32} className="text-white" />
             </div>
-            <h1 className="text-3xl font-bold text-white mb-2">Admin Login</h1>
-            <p className="text-gray-400">Secure access to dashboard</p>
+            <h1 className="text-3xl font-bold text-white mb-2">Admin Panel</h1>
+            <p className="text-slate-400 text-sm">Secure authentication required</p>
           </div>
 
           {/* Error message */}
           {loginError && (
-            <div className="mb-6 p-4 rounded-lg bg-red-500/10 border border-red-500/20 flex items-start gap-3">
-              <AlertCircle size={20} className="text-red-500 flex-shrink-0 mt-0.5" />
+            <div className="mb-6 p-4 rounded-xl bg-red-500/15 border border-red-500/30 flex items-start gap-3 shadow-lg shadow-red-500/10">
+              <AlertCircle size={20} className="text-red-400 flex-shrink-0 mt-0.5" />
               <div>
-                <p className="text-red-500 text-sm font-medium">{loginError}</p>
+                <p className="text-red-300 text-sm font-semibold">{loginError}</p>
                 {loginAttempts > 0 && (
                   <p className="text-red-400 text-xs mt-1">
-                    Attempt: {loginAttempts}
+                    Failed attempt: {loginAttempts}
                   </p>
                 )}
               </div>
@@ -154,11 +155,11 @@ export default function AdminLoginPage() {
           <form onSubmit={handleSubmit} className="space-y-5">
             {/* Email field */}
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
+              <label htmlFor="email" className="block text-sm font-semibold text-slate-200 mb-2">
                 Email Address
               </label>
-              <div className="relative">
-                <Mail size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" />
+              <div className="relative group">
+                <Mail size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-magenta-400 transition-colors" />
                 <input
                   type="email"
                   id="email"
@@ -167,25 +168,25 @@ export default function AdminLoginPage() {
                   onChange={handleChange}
                   disabled={isLoading}
                   placeholder="admin@example.com"
-                  className={`w-full pl-12 pr-4 py-3 rounded-lg bg-white/5 border transition-colors outline-none ${
+                  className={`w-full pl-12 pr-4 py-3 rounded-xl bg-slate-700/40 border transition-all outline-none backdrop-blur-sm ${
                     errors.email
-                      ? 'border-red-500 focus:border-red-500'
-                      : 'border-white/10 focus:border-blue-500'
-                  } text-white placeholder-gray-500 disabled:opacity-50`}
+                      ? 'border-red-500/50 focus:border-red-400 focus:ring-2 focus:ring-red-500/20'
+                      : 'border-slate-600/50 focus:border-magenta-500 focus:ring-2 focus:ring-magenta-500/20'
+                  } text-white placeholder-slate-500 disabled:opacity-50`}
                 />
               </div>
               {errors.email && (
-                <p className="text-red-500 text-sm mt-1.5">{errors.email}</p>
+                <p className="text-red-400 text-xs mt-2 font-medium">{errors.email}</p>
               )}
             </div>
 
             {/* Password field */}
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-300 mb-2">
+              <label htmlFor="password" className="block text-sm font-semibold text-slate-200 mb-2">
                 Password
               </label>
-              <div className="relative">
-                <Lock size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" />
+              <div className="relative group">
+                <Lock size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-magenta-400 transition-colors" />
                 <input
                   type={showPassword ? 'text' : 'password'}
                   id="password"
@@ -194,22 +195,22 @@ export default function AdminLoginPage() {
                   onChange={handleChange}
                   disabled={isLoading}
                   placeholder="••••••••"
-                  className={`w-full pl-12 pr-12 py-3 rounded-lg bg-white/5 border transition-colors outline-none ${
+                  className={`w-full pl-12 pr-12 py-3 rounded-xl bg-slate-700/40 border transition-all outline-none backdrop-blur-sm ${
                     errors.password
-                      ? 'border-red-500 focus:border-red-500'
-                      : 'border-white/10 focus:border-blue-500'
-                  } text-white placeholder-gray-500 disabled:opacity-50`}
+                      ? 'border-red-500/50 focus:border-red-400 focus:ring-2 focus:ring-red-500/20'
+                      : 'border-slate-600/50 focus:border-magenta-500 focus:ring-2 focus:ring-magenta-500/20'
+                  } text-white placeholder-slate-500 disabled:opacity-50`}
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-400 transition-colors"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-magenta-400 transition-colors"
                 >
                   {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                 </button>
               </div>
               {errors.password && (
-                <p className="text-red-500 text-sm mt-1.5">{errors.password}</p>
+                <p className="text-red-400 text-xs mt-2 font-medium">{errors.password}</p>
               )}
             </div>
 
@@ -217,23 +218,26 @@ export default function AdminLoginPage() {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full py-3 px-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed mt-6"
+              className="w-full py-3 px-4 bg-gradient-to-r from-magenta-600 to-pink-600 hover:from-magenta-500 hover:to-pink-500 text-white font-bold rounded-xl transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed mt-6 shadow-lg shadow-magenta-500/30 hover:shadow-xl hover:shadow-magenta-500/50 flex items-center justify-center gap-2"
             >
               {isLoading ? (
-                <span className="flex items-center justify-center gap-2">
+                <>
                   <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                  Signing in...
-                </span>
+                  <span>Signing in...</span>
+                </>
               ) : (
-                'Sign In'
+                <>
+                  <Lock size={18} />
+                  <span>Sign In to Admin</span>
+                </>
               )}
             </button>
           </form>
 
           {/* Footer */}
-          <div className="mt-8 pt-6 border-t border-white/10 text-center">
-            <p className="text-gray-400 text-sm">
-              Protected Admin Area
+          <div className="mt-8 pt-6 border-t border-slate-700/50 text-center">
+            <p className="text-slate-400 text-xs">
+              🔐 Secure Admin Area - Unauthorized access is prohibited
             </p>
           </div>
         </div>
