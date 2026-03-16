@@ -37,14 +37,14 @@ export function Navbar({ }: NavbarProps) {
 
   return (
     <>
-      <div ref={navRef} className="border-b border-golden-200 px-4 md:px-8 lg:px-[60px] py-4 md:py-5 sticky top-0 bg-white z-40 w-full overflow-x-hidden">
-        <div className="flex items-center justify-between relative w-full">
+      <div ref={navRef} className="border-b border-golden-200 px-3 sm:px-4 md:px-8 lg:px-[60px] py-3 sm:py-4 md:py-5 sticky top-0 bg-white z-40 w-full overflow-x-hidden">
+        <div className="flex items-center justify-between relative w-full max-w-full">
           {/* Mobile Menu Button - Left */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden text-gray-700 hover:text-gray-900 flex-shrink-0 z-10"
+            className="md:hidden text-gray-700 hover:text-gray-900 flex-shrink-0 z-10 p-1 sm:p-2"
           >
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
 
           {/* Logo - Centered absolutely */}
@@ -84,11 +84,11 @@ export function Navbar({ }: NavbarProps) {
             </div>
 
             {/* Mobile Auth */}
-            <div className="md:hidden flex items-center gap-3">
+            <div className="md:hidden flex items-center gap-2 sm:gap-3">
               {isLoaded && user ? (
                 <>
                   <Link to={`/${(user.firstName || '').toLowerCase()}/profile`} className="hover:opacity-70 transition-opacity flex items-center">
-                    <User size={20} className="text-gray-700" />
+                    <User size={18} className="text-gray-700" />
                   </Link>
                   <button
                     onClick={async () => {
@@ -97,12 +97,12 @@ export function Navbar({ }: NavbarProps) {
                     }}
                     className="hover:opacity-70 transition-opacity flex items-center"
                   >
-                    <LogOut size={18} className="text-gray-700" />
+                    <LogOut size={16} className="text-gray-700" />
                   </button>
                 </>
               ) : (
                 <Link to="/sign-in" className="hover:opacity-70 transition-opacity flex items-center">
-                  <span className="text-xs font-semibold tracking-tight text-magenta-600 hover:text-magenta-700">Login</span>
+                  <span className="text-xs sm:text-sm font-semibold tracking-tight text-magenta-600 hover:text-magenta-700">Login</span>
                 </Link>
               )}
             </div>
@@ -120,7 +120,7 @@ export function Navbar({ }: NavbarProps) {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setIsMenuOpen(false)}
-              className="fixed inset-0 bg-magenta-950/30 md:hidden z-40\"
+              className="fixed inset-0 bg-magenta-950/30 md:hidden z-40"
             />
 
             {/* Sidebar */}
@@ -129,37 +129,37 @@ export function Navbar({ }: NavbarProps) {
               animate={{ x: 0 }}
               exit={{ x: -300 }}
               transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-              className="fixed left-0 top-0 h-screen w-64 bg-white z-50 overflow-y-auto md:hidden shadow-lg"
+              className="fixed left-0 top-0 h-screen w-[75vw] sm:w-64 bg-white z-50 overflow-y-auto md:hidden shadow-lg"
             >
               {/* Close button */}
-              <div className="flex items-center justify-between p-4 border-b border-gray-200">
-                <span className="font-bold text-gray-900">Menu</span>
+              <div className="flex items-center justify-between p-3 sm:p-4 border-b border-gray-200">
+                <span className="font-bold text-xs sm:text-sm text-gray-900">Menu</span>
                 <button
                   onClick={() => setIsMenuOpen(false)}
-                  className="text-gray-700 hover:text-gray-900"
+                  className="text-gray-700 hover:text-gray-900 p-1 sm:p-2 flex-shrink-0"
                 >
-                  <X size={24} />
+                  <X size={18} />
                 </button>
               </div>
 
               {/* Menu items */}
-              <div className="px-4 py-4 flex flex-col gap-1">
+              <div className="px-2 sm:px-4 py-3 sm:py-4 flex flex-col gap-1">
                 <Link
                   to="/"
                   onClick={() => setIsMenuOpen(false)}
-                  className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100 text-gray-700 hover:text-gray-900 transition-colors"
+                  className="flex items-center gap-3 px-3 py-2 sm:p-3 rounded-lg hover:bg-gray-100 text-gray-700 hover:text-gray-900 transition-colors"
                 >
-                  <Home size={20} />
-                  <span className="text-sm font-medium">Home</span>
+                  <Home size={18} className="flex-shrink-0" />
+                  <span className="text-xs sm:text-sm font-medium">Home</span>
                 </Link>
 
                 <Link
                   to="/shop"
                   onClick={() => setIsMenuOpen(false)}
-                  className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100 text-gray-700 hover:text-gray-900 transition-colors"
+                  className="flex items-center gap-3 px-3 py-2 sm:p-3 rounded-lg hover:bg-gray-100 text-gray-700 hover:text-gray-900 transition-colors"
                 >
-                  <ShoppingBag size={20} />
-                  <span className="text-sm font-medium">Shop All</span>
+                  <ShoppingBag size={18} className="flex-shrink-0" />
+                  <span className="text-xs sm:text-sm font-medium">Shop All</span>
                 </Link>
 
                 {categories.filter(cat => cat.isActive).map((category) => (
@@ -167,21 +167,21 @@ export function Navbar({ }: NavbarProps) {
                     key={category._id}
                     to={`/shop/${category.slug}`}
                     onClick={() => setIsMenuOpen(false)}
-                    className="flex items-center gap-3 p-3 pl-8 rounded-lg hover:bg-gray-100 text-gray-600 hover:text-gray-900 transition-colors"
+                    className="flex items-center gap-3 px-3 py-2 sm:p-3 pl-8 rounded-lg hover:bg-gray-100 text-gray-600 hover:text-gray-900 transition-colors"
                   >
-                    <span className="text-sm font-medium">{category.name}</span>
+                    <span className="text-xs sm:text-sm font-medium">{category.name}</span>
                   </Link>
                 ))}
 
-                <div className="border-t border-gray-200 my-3"></div>
+                <div className="border-t border-gray-200 my-2 sm:my-3"></div>
 
                 <Link
                   to="/wishlist"
                   onClick={() => setIsMenuOpen(false)}
-                  className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100 text-gray-700 hover:text-gray-900 transition-colors"
+                  className="flex items-center gap-3 px-3 py-2 sm:p-3 rounded-lg hover:bg-gray-100 text-gray-700 hover:text-gray-900 transition-colors"
                 >
-                  <Heart size={20} />
-                  <span className="text-sm font-medium">Wishlist {wishlist.length > 0 && `(${wishlist.length})`}</span>
+                  <Heart size={18} className="flex-shrink-0" />
+                  <span className="text-xs sm:text-sm font-medium">Wishlist {wishlist.length > 0 && `(${wishlist.length})`}</span>
                 </Link>
 
                 {isLoaded && user && (
@@ -189,19 +189,19 @@ export function Navbar({ }: NavbarProps) {
                     <Link
                       to="/cart"
                       onClick={() => setIsMenuOpen(false)}
-                      className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100 text-gray-700 hover:text-gray-900 transition-colors"
+                      className="flex items-center gap-3 px-3 py-2 sm:p-3 rounded-lg hover:bg-gray-100 text-gray-700 hover:text-gray-900 transition-colors"
                     >
-                      <ShoppingCart size={20} />
-                      <span className="text-sm font-medium">Cart {totalCartItems > 0 && `(${totalCartItems})`}</span>
+                      <ShoppingCart size={18} className="flex-shrink-0" />
+                      <span className="text-xs sm:text-sm font-medium">Cart {totalCartItems > 0 && `(${totalCartItems})`}</span>
                     </Link>
 
                     <Link
                       to="/my-orders"
                       onClick={() => setIsMenuOpen(false)}
-                      className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100 text-gray-700 hover:text-gray-900 transition-colors"
+                      className="flex items-center gap-3 px-3 py-2 sm:p-3 rounded-lg hover:bg-gray-100 text-gray-700 hover:text-gray-900 transition-colors"
                     >
-                      <Package size={20} />
-                      <span className="text-sm font-medium">My Orders</span>
+                      <Package size={18} className="flex-shrink-0" />
+                      <span className="text-xs sm:text-sm font-medium">My Orders</span>
                     </Link>
                   </>
                 )}
@@ -209,10 +209,10 @@ export function Navbar({ }: NavbarProps) {
                 <Link
                   to={user ? `/${(user.firstName || '').toLowerCase()}/profile` : '/sign-in'}
                   onClick={() => setIsMenuOpen(false)}
-                  className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100 text-gray-700 hover:text-gray-900 transition-colors"
+                  className="flex items-center gap-3 px-3 py-2 sm:p-3 rounded-lg hover:bg-gray-100 text-gray-700 hover:text-gray-900 transition-colors"
                 >
-                  <User size={20} />
-                  <span className="text-sm font-medium">Profile</span>
+                  <User size={18} className="flex-shrink-0" />
+                  <span className="text-xs sm:text-sm font-medium">Profile</span>
                 </Link>
 
                 
