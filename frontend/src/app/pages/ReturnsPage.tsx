@@ -51,7 +51,7 @@ export default function ReturnsPage() {
           <h2 className="text-3xl font-bold mb-8">How to Return</h2>
           <div className="space-y-6">
             {[
-              { num: 1, title: 'Contact Support', desc: 'Email pandctexfab@gmail.com or call +91 7044457914' },
+              { num: 1, title: 'Contact Support', desc: 'Email pandctexfab@gmail.com or call +91 9804915374' },
               { num: 2, title: 'Get Return Approval', desc: 'We\'ll provide you with a return authorization number and shipping label' },
               { num: 3, title: 'Ship Item Back', desc: 'Pack the item securely and ship it to our return address' },
               { num: 4, title: 'Receive Refund', desc: 'Once received and inspected, your refund will be processed within 5-7 business days' }

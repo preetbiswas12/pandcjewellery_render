@@ -80,7 +80,7 @@ export function ProductCard({ product, onAddToCart, onToggleWishlist, isInWishli
             e.stopPropagation();
             onAddToCart(product);
           }}
-          className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black text-white px-6 py-2 rounded-full text-sm font-medium opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 hover:scale-105 active:scale-95"
+          className="hidden md:block absolute bottom-4 left-1/2 -translate-x-1/2 bg-black text-white px-6 py-2 rounded-full text-sm font-medium opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 hover:scale-105 active:scale-95"
         >
           Add to Cart
         </button>
@@ -104,6 +104,15 @@ export function ProductCard({ product, onAddToCart, onToggleWishlist, isInWishli
           </>
         )}
       </div>
+      <button
+        onClick={(e) => {
+          e.stopPropagation();
+          onAddToCart(product);
+        }}
+        className="md:hidden w-full mt-4 bg-black text-white px-6 py-2 rounded-full text-sm font-medium hover:scale-105 active:scale-95 transition-transform"
+      >
+        Add to Cart
+      </button>
     </div>
   );
 }

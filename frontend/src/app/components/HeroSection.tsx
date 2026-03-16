@@ -3,11 +3,6 @@ import { Link, useNavigate } from 'react-router';
 import { useApp } from '../context/AppContext';
 import { convertGoogleDriveLink } from '../../lib/googleDriveUtils';
 import { NoiseButton } from '../../components/ui/noise-button';
-// import imgImage3 from "../../assets/3071b1fc729091cd0452fb9d0b89106ceec16368.png";
-// import imgImage5 from "../../assets/17aa3a2f29a85f64d93c41afa6b64d31b3a88038.png";
-// import imgImage7 from "../../assets/837e11f00233936f837e7b69d6a545511b1ba132.png";
-// import imgImage10 from "../../assets/5e143183ca0df25c3d226a223269e70541e09760.png";
-// import imgImage12 from "../../assets/b0b782c02a24c60e5479cec788203caf906828d8.png";
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -130,7 +125,7 @@ export function HeroSection() {
                 {heroMainBanner?.subtitle || defaultHeroMain.subtitle}
               </p>
             </div>
-            <Link to={heroMainBanner?.link || defaultHeroMain.link} className="w-48 md:w-64 lg:w-60 xl:w-72">
+            <Link to={heroMainBanner?.link || defaultHeroMain.link} className="self-end w-48 md:w-64 lg:w-60 xl:w-72">
               <NoiseButton className="text-xs lg:text-xs xl:text-sm">
                 {heroMainBanner?.buttonText || defaultHeroMain.buttonText}
               </NoiseButton>

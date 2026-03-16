@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router';
 import { Package, Truck, CheckCircle, Clock, XCircle, ChevronRight } from 'lucide-react';
 import { useUser } from '@clerk/clerk-react';
@@ -96,18 +96,18 @@ export default function MyOrdersPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8 md:py-16">
-      <div className="max-w-6xl mx-auto px-4 md:px-8">
-        <div className="mb-8">
-          <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-2">My Orders</h1>
-          <p className="text-lg opacity-70">{userEmail}</p>
+    <div className="min-h-screen bg-gray-50 py-4 md:py-6 lg:py-8">
+      <div className="max-w-6xl mx-auto px-4 md:px-6 lg:px-8">
+        <div className="mb-4 md:mb-6 lg:mb-8">
+          <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight mb-1 md:mb-2">My Orders</h1>
+          <p className="text-xs md:text-sm lg:text-base opacity-70 truncate">{userEmail}</p>
         </div>
 
         {myOrders.length === 0 ? (
-          <div className="bg-white rounded-3xl p-12 text-center shadow-sm">
-            <Package size={80} className="mx-auto mb-6 opacity-30" />
-            <h2 className="text-2xl font-bold mb-4">No Orders Found</h2>
-            <p className="text-lg opacity-70 mb-8">
+          <div className="bg-white rounded-xl md:rounded-3xl p-6 md:p-8 lg:p-12 text-center shadow-sm">
+            <Package size={60} className="md:w-20 md:h-20 mx-auto mb-4 md:mb-6 opacity-30" />
+            <h2 className="text-lg md:text-2xl font-bold mb-2 md:mb-4">No Orders Found</h2>
+            <p className="text-sm md:text-base lg:text-lg opacity-70 mb-4 md:mb-6 lg:mb-8">
               You haven't placed any orders yet. Start shopping now!
             </p>
             <div className="flex justify-center">
@@ -120,22 +120,22 @@ export default function MyOrdersPage() {
             </div>
           </div>
         ) : (
-          <div className="space-y-4">
+          <div className="space-y-2 md:space-y-3 lg:space-y-4">
             {myOrders.map((order) => {
               const statusInfo = getStatusInfo(order.status);
               return (
                 <div
                   key={order._id}
                   onClick={() => navigate(`/order/${order._id}`)}
-                  className="bg-white rounded-3xl p-6 md:p-8 hover:shadow-lg transition-all cursor-pointer group"
+                  className="bg-white rounded-xl md:rounded-3xl p-4 md:p-6 lg:p-8 hover:shadow-lg transition-all cursor-pointer group"
                 >
-                  <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
-                    <div>
-                      <div className="flex items-center gap-3 mb-2">
-                        <h3 className="text-xl font-bold">{order.orderNumber}</h3>
-                        <ChevronRight size={20} className="opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 md:gap-4 mb-4 md:mb-6">
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 md:gap-3 mb-1 md:mb-2">
+                        <h3 className="text-base md:text-lg lg:text-xl font-bold truncate">{order.orderNumber}</h3>
+                        <ChevronRight size={16} className="md:w-5 md:h-5 opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0" />
                       </div>
-                      <p className="text-sm opacity-70">
+                      <p className="text-xs md:text-sm opacity-70">
                         Placed on {new Date(order.createdAt).toLocaleDateString('en-US', {
                           year: 'numeric',
                           month: 'long',
@@ -143,7 +143,7 @@ export default function MyOrdersPage() {
                         })}
                       </p>
                     </div>
-                    <div className={`flex items-center gap-3 px-4 py-3 rounded-2xl border-2 ${statusInfo.color}`}>
+                    <div className={`flex items-center gap-2 md:gap-3 px-3 md:px-4 py-2 md:py-3 rounded-xl md:rounded-2xl border-2 text-sm md:text-base ${statusInfo.color}`}>
                       {statusInfo.icon}
                       <span className="font-bold">{statusInfo.title}</span>
                     </div>

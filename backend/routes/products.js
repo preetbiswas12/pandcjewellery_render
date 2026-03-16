@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Product = require('../models/Product');
+const Category = require('../models/Category');
 const mongoose = require('mongoose');
 
 // Helper: Validate MongoDB ObjectId
@@ -17,12 +18,28 @@ router.get('/', async (req, res) => {
     const limit = Math.min(50, Math.max(1, limitParam));
     const skip = (page - 1) * limit;
 
+    console.log(`[Products] === REQUEST DEBUG ===`);
+    console.log(`[Products] Query params:`, req.query);
+    console.log(`[Products] minPrice param: ${req.query.minPrice} (type: ${typeof req.query.minPrice})`);
+    console.log(`[Products] maxPrice param: ${req.query.maxPrice} (type: ${typeof req.query.maxPrice})`);
+
     // ⚠️ DEFENSIVE: Build filter query with validation
     const filter = {};
     
-    // Filter by category if provided and not empty
+    // Filter by category - handle both slug (lookup ID) and direct ID
     if (req.query.category && typeof req.query.category === 'string' && req.query.category.trim()) {
-      filter.category = req.query.category.trim();
+      const categorySlug = req.query.category.trim();
+      
+      // Try to find category by slug first
+      const foundCategory = await Category.findOne({ slug: categorySlug });
+      
+      if (foundCategory) {
+        filter.category = foundCategory._id.toString();
+      } else if (isValidObjectId(categorySlug)) {
+        // If not found by slug and it's a valid ObjectId, use it directly
+        filter.category = categorySlug;
+      }
+      // If neither slug nor ID matches, filter will be empty (no products)
     }
     
     // Filter by subCategory if provided and not empty
@@ -36,20 +53,25 @@ router.get('/', async (req, res) => {
     }
 
     // ⚠️ DEFENSIVE: Validate and apply price range filtering
-    if (req.query.minPrice || req.query.maxPrice) {
+    const hasMinPrice = req.query.minPrice !== undefined && req.query.minPrice !== null && req.query.minPrice !== '';
+    const hasMaxPrice = req.query.maxPrice !== undefined && req.query.maxPrice !== null && req.query.maxPrice !== '';
+    
+    if (hasMinPrice || hasMaxPrice) {
       filter.price = {};
       
-      if (req.query.minPrice) {
+      if (hasMinPrice) {
         const minPrice = parseFloat(req.query.minPrice);
         if (!isNaN(minPrice) && minPrice >= 0) {
           filter.price.$gte = minPrice;
+          console.log(`[Products] ✓ Applied minPrice filter: $gte ${minPrice}`);
         }
       }
       
-      if (req.query.maxPrice) {
+      if (hasMaxPrice) {
         const maxPrice = parseFloat(req.query.maxPrice);
         if (!isNaN(maxPrice) && maxPrice >= 0) {
           filter.price.$lte = maxPrice;
+          console.log(`[Products] ✓ Applied maxPrice filter: $lte ${maxPrice}`);
         }
       }
     }
@@ -91,6 +113,22 @@ router.get('/', async (req, res) => {
       .limit(limit)
       .lean() // Returns plain JS objects instead of Mongoose documents
       .exec();
+
+    // 🔍 DEBUG: Log actual products returned and their prices
+    if (products.length > 0) {
+      console.log(`[Products] ✓ Query returned ${products.length} products`);
+      const priceRange = {
+        min: Math.min(...products.map(p => p.price || 0)),
+        max: Math.max(...products.map(p => p.price || 0))
+      };
+      console.log(`[Products] Price range in results: ₹${priceRange.min} - ₹${priceRange.max}`);
+      console.log(`[Products] Sample products (first 3):`, products.slice(0, 3).map(p => ({
+        name: p.name?.substring(0, 30),
+        price: p.price
+      })));
+    } else {
+      console.log(`[Products] ⚠️ Query returned 0 products with filter:`, JSON.stringify(filter));
+    }
 
     // ⚠️ DEFENSIVE: Get total count for pagination info with error handling
     let total = 0;
@@ -235,6 +273,55 @@ router.delete('/:id', async (req, res) => {
   } catch (err) {
     console.error('[Products] Delete error:', err.message);
     res.status(500).json({ success: false, message: 'Failed to delete product' });
+  }
+});
+
+// 🔍 DEBUG ENDPOINT: Check all product prices in database
+router.get('/debug/verify-prices', async (req, res) => {
+  try {
+    const { minPrice, maxPrice } = req.query;
+    
+    // Query all products to check price distribution
+    const allProducts = await Product.find({}).select('name price').lean().exec();
+    
+    // Calculate price statistics
+    const prices = allProducts.map(p => p.price || 0);
+    const stats = {
+      totalProducts: allProducts.length,
+      minPrice: Math.min(...prices),
+      maxPrice: Math.max(...prices),
+      avgPrice: Math.round(prices.reduce((a, b) => a + b, 0) / prices.length)
+    };
+    
+    // Get products in the requested range (if provided)
+    let filteredProducts = allProducts;
+    if (minPrice !== undefined && maxPrice !== undefined) {
+      const min = parseFloat(minPrice);
+      const max = parseFloat(maxPrice);
+      filteredProducts = allProducts.filter(p => p.price >= min && p.price <= max);
+    }
+    
+    // Get price distribution buckets
+    const buckets = {
+      '0-1000': allProducts.filter(p => p.price <= 1000).length,
+      '1000-5000': allProducts.filter(p => p.price > 1000 && p.price <= 5000).length,
+      '5000-10000': allProducts.filter(p => p.price > 5000 && p.price <= 10000).length,
+      '10000+': allProducts.filter(p => p.price > 10000).length,
+    };
+    
+    res.json({
+      success: true,
+      stats,
+      priceDistribution: buckets,
+      filteredCount: filteredProducts.length,
+      sampleProducts: filteredProducts.slice(0, 5).map(p => ({
+        name: p.name?.substring(0, 40),
+        price: p.price
+      }))
+    });
+  } catch (err) {
+    console.error('[Products] Debug error:', err.message);
+    res.status(500).json({ success: false, message: 'Debug error: ' + err.message });
   }
 });
 

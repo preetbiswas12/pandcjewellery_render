@@ -5,8 +5,8 @@ let compression;
 try {
   compression = require('compression');
 } catch {
-  // compression middleware is optional
-  compression = (req, res, next) => next();
+  // compression middleware is optional - return a no-op middleware function
+  compression = () => (req, res, next) => next();
 }
 const path = require('path');
 require('dotenv').config();

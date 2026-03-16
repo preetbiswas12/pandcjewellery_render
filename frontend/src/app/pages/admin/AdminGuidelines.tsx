@@ -26,7 +26,7 @@ export default function AdminGuidelines() {
         </h2>
         <div className="space-y-3">
           <p><strong>Business Email:</strong> <code className="bg-gray-100 px-3 py-1 rounded">pandctexfab@gmail.com</code></p>
-          <p><strong>Business Phone:</strong> <code className="bg-gray-100 px-3 py-1 rounded">+91 7044457914</code></p>
+          <p><strong>Business Phone:</strong> <code className="bg-gray-100 px-3 py-1 rounded">+91 9804915374</code></p>
           <p><strong>Business Address:</strong> P&C Jewellery, India</p>
           <p className="text-sm opacity-70 mt-4">Use the business email for all customer communications and support inquiries.</p>
         </div>
@@ -401,7 +401,7 @@ export default function AdminGuidelines() {
         <h2 className="text-2xl font-bold mb-4">Need Help?</h2>
         <div className="space-y-3">
           <p><strong>Email:</strong> pandctexfab@gmail.com</p>
-          <p><strong>Phone:</strong> +91 7044457914</p>
+          <p><strong>Phone:</strong> +91 9804915374</p>
           <p className="text-gray-300 text-sm mt-4">Last Updated: March 7, 2026 | Version 2.0</p>
         </div>
       </section>

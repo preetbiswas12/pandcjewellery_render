@@ -60,29 +60,22 @@ export function Footer() {
             <div className="space-y-4">
               <div className="flex items-center gap-3">
                 <MapPin size={20} className="text-black flex-shrink-0" />
-                <span className="text-black text-sm md:text-base">Kolkata, West Bengal, India</span>
+                <span className="text-black text-sm md:text-base">Delhi, India</span>
               </div>
               <div className="flex items-center gap-3">
                 <Phone size={20} className="text-black flex-shrink-0" />
-                <span className="text-black text-sm md:text-base">+91 7044457914</span>
+                <span className="text-black text-sm md:text-base">+91 9804915374</span>
               </div>
               <div className="flex items-center gap-3">
                 <Mail size={20} className="text-black flex-shrink-0" />
-                <span className="text-black text-sm md:text-base">info@P&C Jewellery.com</span>
+                <span className="text-black text-sm md:text-base">pandcjewellery@gmail.com</span>
               </div>
             </div>
           </div>
 
-          {/* Shop */}
+          {/* padding */}
           <div>
-            <h4 className="text-base font-bold tracking-wider mb-6 uppercase">Shop</h4>
-            <ul className="space-y-3">
-              <li><a href="/shop" className="text-black text-sm md:text-base hover:text-black transition-colors">All Jewellery</a></li>
-              <li><a href="/shop/dyeable-Jewellery" className="text-black text-sm md:text-base hover:text-black transition-colors">Dyeable Jewellery</a></li>
-              <li><a href="/shop/printed-Jewellery" className="text-black text-sm md:text-base hover:text-black transition-colors">Printed Jewellery</a></li>
-              <li><a href="/shop/embroidered-Jewellery" className="text-black text-sm md:text-base hover:text-black transition-colors">Embroidered Collections</a></li>
-              <li><a href="/shop/lining-Jewellery" className="text-black text-sm md:text-base hover:text-black transition-colors">Lining Jewellery</a></li>
-            </ul>
+            <h4 className="text-base font-bold tracking-wider mb-6 uppercase"></h4>
           </div>
 
           {/* Support */}

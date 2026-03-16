@@ -31,22 +31,22 @@ export default function WishlistPage() {
   return (
     <div ref={pageRef} className="min-h-screen">
       <div className="bg-gradient-to-b from-gray-50 to-white border-b border-gray-100">
-        <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-[60px] py-12 md:py-16">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl tracking-tight mb-4">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-[60px] py-6 md:py-8 lg:py-12">
+          <h1 className="text-2xl md:text-3xl lg:text-5xl tracking-tight mb-2 md:mb-4">
             My Wishlist
           </h1>
-          <p className="text-lg opacity-70">
+          <p className="text-sm md:text-base lg:text-lg opacity-70">
             {wishlistProducts.length} {wishlistProducts.length === 1 ? 'item' : 'items'}
           </p>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-[60px] py-8 md:py-12">
+      <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-[60px] py-4 md:py-6 lg:py-8">
         {wishlistProducts.length === 0 ? (
-          <div className="text-center py-20">
-            <Heart size={80} className="mx-auto mb-6 opacity-20" />
-            <h2 className="text-2xl mb-4">Your wishlist is empty</h2>
-            <p className="text-lg opacity-70 mb-8">
+          <div className="text-center py-12 md:py-16 lg:py-20">
+            <Heart size={60} className="md:w-20 md:h-20 mx-auto mb-4 md:mb-6 opacity-20" />
+            <h2 className="text-xl md:text-2xl font-semibold mb-2 md:mb-4">Your wishlist is empty</h2>
+            <p className="text-sm md:text-base lg:text-lg opacity-70 mb-4 md:mb-6 lg:mb-8">
               Save your favorite items for later
             </p>
             <NoiseButton
@@ -57,7 +57,7 @@ export default function WishlistPage() {
             </NoiseButton>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4 lg:gap-6">
             {wishlistProducts.map((product) => (
               <div key={product.id} className="wishlist-item group relative border border-gray-200 rounded-3xl overflow-hidden hover:shadow-lg transition-shadow">
                 <div className="aspect-square bg-gray-100 cursor-pointer" onClick={() => navigate(`/product/${product.id}`)}>

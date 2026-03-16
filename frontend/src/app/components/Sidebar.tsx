@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { X, ChevronDown, Home, ShoppingBag, ShoppingCart, Heart, User, Mail, Phone, MapPin, Search } from 'lucide-react';
+import { X, ChevronDown, Home, ShoppingBag, ShoppingCart, Heart, User, Package, Mail, Phone, MapPin, Search } from 'lucide-react';
 import { gsap } from 'gsap';
 import { Link } from 'react-router';
 import { useApp } from '../context/AppContext';
@@ -124,6 +124,7 @@ export function Sidebar() {
     { icon: Home, label: 'Home', href: '/' },
     { icon: ShoppingBag, label: 'Shop All', href: '/shop' },
     { icon: ShoppingCart, label: 'Cart', href: '/cart' },
+    { icon: Package, label: 'My Orders', href: '/my-orders' },
     { icon: Heart, label: 'Wishlist', href: '/wishlist' },
     { icon: User, label: 'Profile', href: '/profile/me' },
   ];
@@ -159,34 +160,34 @@ export function Sidebar() {
       {/* Centered Modal */}
       <div
         ref={modalRef}
-        className="fixed top-1/2 left-1/2 z-50 w-full max-w-2xl max-h-[80vh] bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col"
+        className="fixed top-1/2 left-1/2 z-50 w-[90%] md:w-full max-w-2xl max-h-[90vh] md:max-h-[80vh] bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col"
         style={{ transform: 'translate(-50%, -50%)' }}
       >
         {/* Header with Search */}
-        <div className="sticky top-0 bg-gradient-to-r from-magenta-50 to-golden-50 px-6 py-6 border-b border-gray-100">
-          <div className="flex items-center justify-between mb-4">
-            <h1 className="text-2xl font-black tracking-tight">P&C Jewellery</h1>
+        <div className="sticky top-0 bg-gradient-to-r from-magenta-50 to-golden-50 px-4 md:px-6 py-3 md:py-6 border-b border-gray-100 flex-shrink-0">
+          <div className="flex items-center justify-between mb-3">
+            <h1 className="text-lg md:text-2xl font-black tracking-tight">P&C Jewellery</h1>
             <button
               onClick={handleCloseSidebar}
-              className="p-1 hover:bg-gray-200 rounded-lg transition-colors"
+              className="p-1 hover:bg-gray-200 rounded-lg transition-colors flex-shrink-0"
             >
-              <X size={24} />
+              <X size={20} className="md:size-24" />
             </button>
           </div>
           <div className="relative">
-            <Search size={18} className="absolute left-3 top-3 text-gray-400" />
+            <Search size={16} className="absolute left-3 top-2 md:top-3 text-gray-400" />
             <input
               type="text"
-              placeholder="Search products, categories..."
-              className="w-full pl-10 pr-4 py-2 bg-white/50 border border-gray-200 rounded-lg focus:outline-none focus:border-magenta-600 focus:ring-1 focus:ring-magenta-600 text-sm"
+              placeholder="Search products..."
+              className="w-full pl-10 pr-4 py-1 md:py-2 bg-white/50 border border-gray-200 rounded-lg focus:outline-none focus:border-magenta-600 focus:ring-1 focus:ring-magenta-600 text-sm"
             />
           </div>
         </div>
 
         {/* Content */}
-        <div ref={contentRef} className="flex-1 overflow-y-auto">
+        <div ref={contentRef} className="flex-1 overflow-y-auto overscroll-contain">
           {/* Quick Navigation */}
-          <nav className="px-6 py-6 border-b border-gray-100">
+          <nav className="px-4 md:px-6 py-4 md:py-6 border-b border-gray-100">
             <p className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-4">Quick Links</p>
             <div className="space-y-2">
               {quickLinks.map((item, index) => {
@@ -207,14 +208,14 @@ export function Sidebar() {
           </nav>
 
           {/* Shop Categories */}
-          <nav className="px-6 py-6 border-b border-gray-100">
-            <p className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-4">Shop by Category</p>
-            <div className="space-y-2">
+          <nav className="px-4 md:px-6 py-4 md:py-6 border-b border-gray-100">
+            <p className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-3">Shop by Category</p>
+            <div className="space-y-1">
               {categories.map((category) => (
                 <div key={category.id} className="menu-item">
                   <button
                     onClick={() => toggleCategory(category.id)}
-                    className="w-full flex items-center justify-between px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors"
+                    className="w-full flex items-center justify-between px-3 py-1.5 md:px-4 md:py-2 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors text-sm"
                   >
                     <Link
                       to={category.href}
@@ -254,30 +255,30 @@ export function Sidebar() {
           </nav>
 
           {/* Support Links */}
-          <nav className="px-6 py-6">
-            <p className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-4">Support</p>
+          <nav className="px-4 md:px-6 py-4 md:py-6">
+            <p className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-3">Support</p>
             <div className="space-y-1">
-              <Link to="/faq" onClick={handleCloseSidebar} className="menu-item block px-4 py-1.5 text-xs text-gray-700 hover:text-magenta-600 rounded transition-colors">FAQ</Link>
-              <Link to="/shipping" onClick={handleCloseSidebar} className="menu-item block px-4 py-1.5 text-xs text-gray-700 hover:text-magenta-600 rounded transition-colors">Shipping Info</Link>
-              <Link to="/returns" onClick={handleCloseSidebar} className="menu-item block px-4 py-1.5 text-xs text-gray-700 hover:text-magenta-600 rounded transition-colors">Returns & Exchanges</Link>
-              <Link to="/contact" onClick={handleCloseSidebar} className="menu-item block px-4 py-1.5 text-xs text-gray-700 hover:text-magenta-600 rounded transition-colors">Contact Us</Link>
+              <Link to="/faq" onClick={handleCloseSidebar} className="menu-item block px-4 py-1 md:py-1.5 text-xs text-gray-700 hover:text-magenta-600 rounded transition-colors">FAQ</Link>
+              <Link to="/shipping" onClick={handleCloseSidebar} className="menu-item block px-4 py-1 md:py-1.5 text-xs text-gray-700 hover:text-magenta-600 rounded transition-colors">Shipping Info</Link>
+              <Link to="/returns" onClick={handleCloseSidebar} className="menu-item block px-4 py-1 md:py-1.5 text-xs text-gray-700 hover:text-magenta-600 rounded transition-colors">Returns & Exchanges</Link>
+              <Link to="/contact" onClick={handleCloseSidebar} className="menu-item block px-4 py-1 md:py-1.5 text-xs text-gray-700 hover:text-magenta-600 rounded transition-colors">Contact Us</Link>
             </div>
           </nav>
         </div>
 
         {/* Footer */}
-        <div className="border-t border-gray-100 px-6 py-4 space-y-3 bg-gray-50">
+        <div className="border-t border-gray-100 px-4 md:px-6 py-3 space-y-2 bg-gray-50 flex-shrink-0">
           <Link
             to="/sign-in"
             onClick={handleCloseSidebar}
-            className="w-full flex items-center justify-center px-4 py-2 rounded-lg bg-magenta-600 text-white hover:bg-magenta-700 transition-colors font-medium text-sm"
+            className="w-full flex items-center justify-center px-4 py-1.5 md:py-2 rounded-lg bg-magenta-600 text-white hover:bg-magenta-700 transition-colors font-medium text-xs md:text-sm"
           >
             Sign In
           </Link>
           <Link
             to="/sign-up"
             onClick={handleCloseSidebar}
-            className="w-full flex items-center justify-center px-4 py-2 rounded-lg border border-magenta-600 text-magenta-600 hover:bg-magenta-50 transition-colors font-medium text-sm"
+            className="w-full flex items-center justify-center px-4 py-1.5 md:py-2 rounded-lg border border-magenta-600 text-magenta-600 hover:bg-magenta-50 transition-colors font-medium text-xs md:text-sm"
           >
             Sign Up
           </Link>

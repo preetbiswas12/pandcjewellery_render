@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router';
 import { gsap } from 'gsap';
-import { Menu, X, Home, ShoppingBag, Heart, User, ShoppingCart, LogOut } from 'lucide-react';
+import { Menu, X, Home, ShoppingBag, Heart, User, ShoppingCart, LogOut, Package } from 'lucide-react';
 import { useUser, useClerk } from '@clerk/clerk-react';
 import { useApp } from '../context/AppContext';
 import { motion, AnimatePresence } from 'motion/react';
@@ -184,6 +184,28 @@ export function Navbar({ }: NavbarProps) {
                   <span className="text-sm font-medium">Wishlist {wishlist.length > 0 && `(${wishlist.length})`}</span>
                 </Link>
 
+                {isLoaded && user && (
+                  <>
+                    <Link
+                      to="/cart"
+                      onClick={() => setIsMenuOpen(false)}
+                      className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100 text-gray-700 hover:text-gray-900 transition-colors"
+                    >
+                      <ShoppingCart size={20} />
+                      <span className="text-sm font-medium">Cart {totalCartItems > 0 && `(${totalCartItems})`}</span>
+                    </Link>
+
+                    <Link
+                      to="/my-orders"
+                      onClick={() => setIsMenuOpen(false)}
+                      className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100 text-gray-700 hover:text-gray-900 transition-colors"
+                    >
+                      <Package size={20} />
+                      <span className="text-sm font-medium">My Orders</span>
+                    </Link>
+                  </>
+                )}
+
                 <Link
                   to={user ? `/${(user.firstName || '').toLowerCase()}/profile` : '/sign-in'}
                   onClick={() => setIsMenuOpen(false)}
@@ -192,6 +214,8 @@ export function Navbar({ }: NavbarProps) {
                   <User size={20} />
                   <span className="text-sm font-medium">Profile</span>
                 </Link>
+
+                
               </div>
             </motion.div>
           </>

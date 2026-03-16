@@ -322,82 +322,82 @@ export default function CheckoutPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-[60px] py-8 md:py-12">
-        <h1 className="text-4xl md:text-5xl tracking-tight mb-8">Checkout</h1>
+      <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-[60px] py-4 md:py-6 lg:py-8">
+        <h1 className="text-2xl md:text-3xl lg:text-5xl tracking-tight mb-4 md:mb-6 lg:mb-8">Checkout</h1>
 
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr,400px] gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr,350px] gap-4 md:gap-6 lg:gap-8">
           {/* Checkout Form */}
-          <div className="space-y-8">
-            <form onSubmit={handleSubmit} className="space-y-8">
+          <div className="space-y-4 md:space-y-6 lg:space-y-8">
+            <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6 lg:space-y-8">
               {/* Contact Information */}
-              <div className="bg-white rounded-3xl p-8">
-              <h2 className="text-2xl font-semibold mb-6">Contact Information</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="bg-white rounded-xl md:rounded-3xl p-4 md:p-6 lg:p-8">
+              <h2 className="text-lg md:text-xl lg:text-2xl font-semibold mb-3 md:mb-4 lg:mb-6">Contact Information</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
                 <div>
-                  <label className="block text-sm font-medium mb-2">First Name *</label>
+                  <label className="block text-xs md:text-sm font-medium mb-1.5 md:mb-2">First Name *</label>
                   <input
                     type="text"
                     name="firstName"
                     required
                     value={formData.firstName}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
+                    className="w-full px-3 md:px-4 py-2 md:py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black text-sm"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium mb-2">Last Name *</label>
+                  <label className="block text-xs md:text-sm font-medium mb-1.5 md:mb-2">Last Name *</label>
                   <input
                     type="text"
                     name="lastName"
                     required
                     value={formData.lastName}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
+                    className="w-full px-3 md:px-4 py-2 md:py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black text-sm"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium mb-2">Email *</label>
+                  <label className="block text-xs md:text-sm font-medium mb-1.5 md:mb-2">Email *</label>
                   <input
                     type="email"
                     name="email"
                     required
                     value={formData.email}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
+                    className="w-full px-3 md:px-4 py-2 md:py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black text-sm"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium mb-2">Phone *</label>
+                  <label className="block text-xs md:text-sm font-medium mb-1.5 md:mb-2">Phone *</label>
                   <input
                     type="tel"
                     name="phone"
                     required
                     value={formData.phone}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
+                    className="w-full px-3 md:px-4 py-2 md:py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black text-sm"
                   />
                 </div>
               </div>
             </div>
 
             {/* Shipping Address */}
-            <div className="bg-white rounded-3xl p-8">
-              <h2 className="text-2xl font-semibold mb-6">Shipping Address</h2>
-              <div className="space-y-4">
+            <div className="bg-white rounded-xl md:rounded-3xl p-4 md:p-6 lg:p-8">
+              <h2 className="text-lg md:text-xl lg:text-2xl font-semibold mb-3 md:mb-4 lg:mb-6">Shipping Address</h2>
+              <div className="space-y-3 md:space-y-4">
                 <div>
-                  <label className="block text-sm font-medium mb-2">Address *</label>
+                  <label className="block text-xs md:text-sm font-medium mb-1.5 md:mb-2">Address *</label>
                   <input
                     type="text"
                     name="address"
                     required
                     value={formData.address}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
+                    className="w-full px-3 md:px-4 py-2 md:py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black text-sm"
                   />
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
                   <div>
-                    <label className="block text-sm font-medium mb-2">City *</label>
+                    <label className="block text-xs md:text-sm font-medium mb-1.5 md:mb-2">City *</label>
                     <input
                       type="text"
                       name="city"

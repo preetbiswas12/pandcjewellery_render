@@ -114,76 +114,72 @@ export default function ProfilePage() {
   }
 
   return (
-    <div ref={profileRef} className="min-h-screen bg-white py-8 md:py-16 px-4 md:px-8 lg:px-12 xl:px-20 2xl:px-[80px]">
+    <div ref={profileRef} className="min-h-screen bg-white py-4 md:py-8 lg:py-12 px-4 md:px-6 lg:px-12">
       <div className="max-w-7xl mx-auto">
         {/* Header with Edit Button */}
-        <div className="flex items-center justify-between mb-12">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">My Profile</h1>
+        <div className="flex items-center justify-between mb-6 md:mb-8 lg:mb-12">
+          <h1 className="text-2xl md:text-3xl lg:text-5xl font-bold tracking-tight">My Profile</h1>
           <button
             onClick={() => setIsEditing(!isEditing)}
-            className={`flex items-center gap-2 px-6 py-3 rounded-full font-medium transition-all ${
-              isEditing
-                ? 'bg-green-500 text-white hover:bg-green-600'
-                : 'border-2 border-black hover:bg-black hover:text-white'
-            }`}
+            className={`flex items-center gap-2 px-4 md:px-6 py-2 md:py-3 rounded-full font-medium text-sm md:text-base transition-all ${isEditing ? 'bg-green-500 text-white hover:bg-green-600' : 'border-2 border-black hover:bg-black hover:text-white'}`}
           >
-            <Edit2 size={18} />
-            {isEditing ? 'Save Changes' : 'Edit Profile'}
+            <Edit2 size={16} className="md:w-4.5 md:h-4.5" />
+            {isEditing ? 'Save' : 'Edit'}
           </button>
         </div>
 
         {/* Main Content Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr,350px] gap-8 lg:gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr,300px] gap-4 md:gap-6 lg:gap-8">
           {/* Personal Information Section */}
-          <div className="space-y-8">
+          <div className="space-y-4 md:space-y-6 lg:space-y-8">
             {/* Profile Card */}
-            <div className="bg-gradient-to-br from-[#8ba888] to-[#b8c4b5] rounded-3xl lg:rounded-[40px] p-8 md:p-12 lg:p-16 text-white">
-              <div className="flex items-center justify-between mb-8">
-                <div>
-                  <p className="text-lg opacity-80 mb-2">Welcome back,</p>
+            <div className="bg-gradient-to-br from-[#8ba888] to-[#b8c4b5] rounded-xl md:rounded-3xl lg:rounded-[40px] p-4 md:p-8 lg:p-12 text-white">
+              <div className="flex items-center justify-between mb-4 md:mb-6 lg:mb-8">
+                <div className="flex-1">
+                  <p className="text-sm md:text-base lg:text-lg opacity-80 mb-1 md:mb-2">Welcome back,</p>
                   {isEditing ? (
                     <input
                       type="text"
                       value={userData.name}
                       onChange={(e) => setUserData({ ...userData, name: e.target.value })}
-                      className="text-4xl md:text-5xl lg:text-6xl font-bold text-black bg-white/90 px-4 py-2 rounded-lg w-full"
+                      className="text-xl md:text-3xl lg:text-5xl font-bold text-black bg-white/90 px-3 md:px-4 py-2 rounded-lg w-full"
                     />
                   ) : (
-                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold">{userData.name}</h2>
+                    <h2 className="text-xl md:text-3xl lg:text-5xl font-bold">{userData.name}</h2>
                   )}
                 </div>
               </div>
-              <p className="text-lg opacity-80">Member since {userData.joinedDate}</p>
+              <p className="text-sm md:text-base lg:text-lg opacity-80">Member since {userData.joinedDate}</p>
             </div>
 
             {/* Contact Information */}
-            <div className="bg-white border border-[rgba(0,0,0,0.1)] rounded-3xl lg:rounded-[40px] p-8 md:p-12">
-              <h3 className="text-2xl md:text-3xl font-bold mb-8">Contact Information</h3>
+            <div className="bg-white border border-[rgba(0,0,0,0.1)] rounded-xl md:rounded-3xl lg:rounded-[40px] p-4 md:p-8 lg:p-12">
+              <h3 className="text-lg md:text-2xl lg:text-3xl font-bold mb-4 md:mb-6 lg:mb-8">Contact Information</h3>
               
-              <div className="space-y-6">
+              <div className="space-y-4 md:space-y-6">
                 {/* Email */}
-                <div className="flex items-start gap-4">
-                  <Mail size={24} className="mt-1 flex-shrink-0" />
+                <div className="flex items-start gap-3 md:gap-4">
+                  <Mail size={20} className="md:w-6 md:h-6 mt-1 flex-shrink-0" />
                   <div className="flex-1">
-                    <p className="text-sm opacity-70 mb-2">Email Address</p>
-                    <p className="text-lg md:text-xl font-medium">{userData.email}</p>
+                    <p className="text-xs md:text-sm opacity-70 mb-1 md:mb-2">Email Address</p>
+                    <p className="text-base md:text-lg lg:text-xl font-medium">{userData.email}</p>
                   </div>
                 </div>
 
                 {/* Phone */}
-                <div className="flex items-start gap-4">
-                  <Phone size={24} className="mt-1 flex-shrink-0" />
+                <div className="flex items-start gap-3 md:gap-4">
+                  <Phone size={20} className="md:w-6 md:h-6 mt-1 flex-shrink-0" />
                   <div className="flex-1">
-                    <p className="text-sm opacity-70 mb-2">Phone Number</p>
+                    <p className="text-xs md:text-sm opacity-70 mb-1 md:mb-2">Phone Number</p>
                     {isEditing ? (
                       <input
                         type="text"
                         value={userData.phone}
                         onChange={(e) => setUserData({ ...userData, phone: e.target.value })}
-                        className="text-lg md:text-xl font-medium border border-[rgba(0,0,0,0.2)] rounded-lg px-3 py-2 w-full"
+                        className="text-sm md:text-base lg:text-lg font-medium border border-[rgba(0,0,0,0.2)] rounded-lg px-3 py-2 w-full"
                       />
                     ) : (
-                      <p className="text-lg md:text-xl font-medium">{userData.phone}</p>
+                      <p className="text-base md:text-lg lg:text-xl font-medium">{userData.phone}</p>
                     )}
                   </div>
                 </div>
@@ -191,13 +187,13 @@ export default function ProfilePage() {
             </div>
 
             {/* Shipping Address */}
-            <div className="bg-white border border-[rgba(0,0,0,0.1)] rounded-3xl lg:rounded-[40px] p-8 md:p-12">
-              <h3 className="text-2xl md:text-3xl font-bold mb-8 flex items-center gap-3">
-                <MapPin size={28} />
+            <div className="bg-white border border-[rgba(0,0,0,0.1)] rounded-xl md:rounded-3xl lg:rounded-[40px] p-4 md:p-8 lg:p-12">
+              <h3 className="text-lg md:text-2xl lg:text-3xl font-bold mb-4 md:mb-6 lg:mb-8 flex items-center gap-2 md:gap-3">
+                <MapPin size={24} className="md:w-7 md:h-7" />
                 Shipping Address
               </h3>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                 {/* Street */}
                 <div className="md:col-span-2">
                   <label className="block text-sm opacity-70 mb-2 font-medium">Street Address</label>

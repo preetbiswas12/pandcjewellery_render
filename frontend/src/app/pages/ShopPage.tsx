@@ -23,8 +23,6 @@ export default function ShopPage() {
   const [selectedCategory, setSelectedCategory] = useState(category || '');
   const [selectedSubCategory, setSelectedSubCategory] = useState(subCategory || '');
   const [selectedColor, setSelectedColor] = useState(searchParams.get('color') || '');
-  const [priceRange, setPriceRange] = useState<[number, number]>([0, 5000]);
-  const [sortBy, setSortBy] = useState('featured');
   
   // ⚠️ OPTIMIZED: Server-side pagination and filtering
   const [displayedProducts, setDisplayedProducts] = useState<any[]>([]);
@@ -43,17 +41,7 @@ export default function ShopPage() {
   const gridRef = useRef<HTMLDivElement>(null);
   const abortControllerRef = useRef<AbortController | null>(null);
 
-  // ⚠️ FIXED: Map sort options properly
-  const mapSortBy = useCallback((sort: string): string => {
-    switch (sort) {
-      case 'price-low': return 'price';
-      case 'price-high': return '-price';
-      case 'newest': return '-createdAt';
-      case 'best-selling': return '-quantity';
-      case 'featured':
-      default: return '-createdAt';
-    }
-  }, []);
+
 
   // ⚠️ OPTIMIZED: Fetch products from server with filters
   const fetchProducts = useCallback(async (pageNum: number = 1) => {
@@ -66,10 +54,6 @@ export default function ShopPage() {
     setError(null);
     
     try {
-      // Validate price range
-      const minPrice = Math.max(0, Math.min(priceRange[0], priceRange[1]));
-      const maxPrice = Math.max(priceRange[0], priceRange[1] || 5000);
-      
       // Build filter params - only include non-empty values
       const filterParams: Record<string, any> = {
         page: pageNum,
@@ -87,13 +71,6 @@ export default function ShopPage() {
       if (selectedColor && selectedColor.trim()) {
         filterParams.color = selectedColor.trim();
       }
-
-      if (minPrice > 0 || maxPrice < 5000) {
-        filterParams.minPrice = minPrice;
-        filterParams.maxPrice = maxPrice;
-      }
-
-      filterParams.sortBy = mapSortBy(sortBy);
 
       const result = await (db as any).getPaginated('products', filterParams);
 
@@ -132,7 +109,7 @@ export default function ShopPage() {
     } finally {
       setIsLoading(false);
     }
-  }, [selectedCategory, selectedSubCategory, selectedColor, priceRange, sortBy, mapSortBy]);
+  }, [selectedCategory, selectedSubCategory, selectedColor]);
 
   // ⚠️ FIXED: Debounced filter changes - only depends on filter values, not pagination
   useEffect(() => {
@@ -141,7 +118,7 @@ export default function ShopPage() {
     }, 500); // Increased debounce delay
 
     return () => clearTimeout(timer);
-  }, [selectedCategory, selectedSubCategory, selectedColor, priceRange, sortBy, fetchProducts]);
+  }, [selectedCategory, selectedSubCategory, selectedColor, fetchProducts]);
 
   // ⚠️ FIXED: Load initial products on mount only
   useEffect(() => {
@@ -199,7 +176,6 @@ export default function ShopPage() {
   const handleClearFilters = () => {
     setSelectedCategory('');
     setSelectedSubCategory('');
-    setPriceRange([0, 5000]);
     setSelectedColor('');
     setSearchParams({});
   };
@@ -208,11 +184,11 @@ export default function ShopPage() {
     <div ref={pageRef} className="min-h-screen">
       {/* Header */}
       <div className="bg-gradient-to-b from-gray-50 to-white border-b border-gray-100">
-        <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-[60px] py-12 md:py-16">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl tracking-tight mb-4">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-[60px] py-6 md:py-8 lg:py-12">
+          <h1 className="text-2xl md:text-3xl lg:text-5xl tracking-tight mb-2 md:mb-4">
             {currentCategory ? currentCategory.name : 'All Jewellery'}
           </h1>
-          <p className="text-lg opacity-70">
+          <p className="text-sm md:text-base lg:text-lg opacity-70">
             {isLoading && displayedProducts.length === 0 
               ? 'Loading...' 
               : pagination.total === 0 
@@ -222,98 +198,68 @@ export default function ShopPage() {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-[60px] py-8 md:py-12">
-        <div className="grid grid-cols-1 lg:grid-cols-[280px,1fr] gap-8">
+      <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-[60px] py-4 md:py-6 lg:py-8">
+        <div className="grid grid-cols-1 lg:grid-cols-[250px,1fr] gap-4 md:gap-6 lg:gap-8">
           {/* Filters Sidebar */}
-          <div className="space-y-6">
-            {/* Error Display */}
-            {error && (
-              <div className="bg-red-50 border border-red-200 p-4 rounded-lg">
-                <p className="text-sm text-red-700">{error}</p>
-              </div>
-            )}
-
-            {/* Active Filters Display */}
-            {(selectedColor || selectedCategory) && (
-              <div className="bg-gray-50 p-4 rounded-lg">
-                <div className="flex items-center justify-between mb-3">
-                  <h3 className="text-sm font-semibold">Active Filters</h3>
-                  <button
-                    onClick={handleClearFilters}
-                    className="text-xs text-red-600 hover:text-red-700 font-medium transition-colors"
-                  >
-                    Clear All
-                  </button>
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  {selectedColor && (
-                    <button
-                      onClick={() => setSelectedColor('')}
-                      className="inline-flex items-center gap-1 bg-white px-3 py-1 rounded-full border border-gray-300 text-xs hover:border-red-500 transition-colors"
-                    >
-                      Color: {selectedColor}
-                      <span className="ml-1 text-gray-500 hover:text-red-600">✕</span>
-                    </button>
-                  )}
-                  {selectedCategory && (
-                    <button
-                      onClick={() => setSelectedCategory('')}
-                      className="inline-flex items-center gap-1 bg-white px-3 py-1 rounded-full border border-gray-300 text-xs hover:border-red-500 transition-colors"
-                    >
-                      Category: {currentCategory?.name}
-                      <span className="ml-1 text-gray-500 hover:text-red-600">✕</span>
-                    </button>
-                  )}
-                </div>
+          <div className="space-y-3 md:space-y-4">
+            {/* Clear All Filters Button */}
+            {(selectedColor || selectedCategory || selectedSubCategory) && (
+              <div className="flex items-center justify-between bg-gradient-to-r from-red-50 to-pink-50 p-2 md:p-4 rounded-lg border border-red-200">
+                <span className="text-xs md:text-sm font-semibold text-gray-800">Active Filters</span>
+                <button
+                  onClick={handleClearFilters}
+                  className="text-xs text-red-600 hover:text-red-700 font-semibold transition-colors underline"
+                >
+                  Clear
+                </button>
               </div>
             )}
             
             {/* Categories */}
-            <div>
-              <h3 className="text-lg font-semibold mb-4">Categories</h3>
-              <div className="space-y-2">
-                <button
-                  onClick={() => {
-                    setSelectedCategory('');
-                    setSelectedSubCategory('');
-                  }}
-                  className={`w-full text-left px-4 py-2 rounded-lg transition-colors ${
-                    !selectedCategory 
-                      ? 'bg-black text-white' 
-                      : 'hover:bg-gray-100'
-                  }`}
-                >
-                  All Jewellery
-                </button>
+            <div className="bg-white p-3 md:p-5 rounded-lg border border-gray-200">
+              <h3 className="font-semibold text-sm md:text-base text-gray-900 mb-2 md:mb-4">Categories</h3>
+              <div className="space-y-2 md:space-y-3">
+                <label className="flex items-center cursor-pointer group">
+                  <input
+                    type="radio"
+                    name="category"
+                    checked={!selectedCategory}
+                    onChange={() => {
+                      setSelectedCategory('');
+                      setSelectedSubCategory('');
+                    }}
+                    className="w-4 h-4 text-black rounded-full border-gray-300 focus:ring-2 focus:ring-black"
+                  />
+                  <span className="ml-2 md:ml-3 text-xs md:text-sm text-gray-700 group-hover:text-gray-900">All Jewellery</span>
+                </label>
                 {categories && categories.filter(cat => cat.isActive).map(cat => (
                   <div key={cat._id}>
-                    <button
-                      onClick={() => {
-                        setSelectedCategory(cat.slug);
-                        setSelectedSubCategory('');
-                      }}
-                      className={`w-full text-left px-4 py-2 rounded-lg transition-colors ${
-                        selectedCategory === cat.slug 
-                          ? 'bg-magenta-950 text-white' 
-                          : 'hover:bg-gray-100'
-                      }`}
-                    >
-                      {cat.name}
-                    </button>
+                    <label className="flex items-center cursor-pointer group">
+                      <input
+                        type="radio"
+                        name="category"
+                        checked={selectedCategory === cat.slug}
+                        onChange={() => {
+                          setSelectedCategory(cat.slug);
+                          setSelectedSubCategory('');
+                        }}
+                        className="w-4 h-4 text-black rounded-full border-gray-300 focus:ring-2 focus:ring-black"
+                      />
+                      <span className="ml-2 md:ml-3 text-xs md:text-sm text-gray-700 group-hover:text-gray-900 font-medium">{cat.name}</span>
+                    </label>
                     {selectedCategory === cat.slug && cat.subCategories && cat.subCategories.length > 0 && (
-                      <div className="ml-4 mt-2 space-y-1">
+                      <div className="ml-7 mt-1 md:mt-2 space-y-1 md:space-y-2 border-l border-gray-200 pl-2 md:pl-3">
                         {cat.subCategories.map((sub: any) => (
-                          <button
-                            key={sub.slug}
-                            onClick={() => setSelectedSubCategory(sub.slug)}
-                            className={`w-full text-left px-4 py-2 rounded-lg text-sm transition-colors ${
-                              selectedSubCategory === sub.slug 
-                                ? 'bg-gray-300' 
-                                : 'hover:bg-gray-100'
-                            }`}
-                          >
-                            {sub.name}
-                          </button>
+                          <label key={sub.slug} className="flex items-center cursor-pointer group">
+                            <input
+                              type="radio"
+                              name="subCategory"
+                              checked={selectedSubCategory === sub.slug}
+                              onChange={() => setSelectedSubCategory(sub.slug)}
+                              className="w-3 h-3 text-black rounded-full border-gray-300 focus:ring-2 focus:ring-black"
+                            />
+                            <span className="ml-2 md:ml-3 text-xs md:text-sm text-gray-600 group-hover:text-gray-900">{sub.name}</span>
+                          </label>
                         ))}
                       </div>
                     )}
@@ -322,66 +268,42 @@ export default function ShopPage() {
               </div>
             </div>
 
-            {/* Price Range */}
-            <div>
-              <h3 className="text-lg font-semibold mb-4">Price Range</h3>
-              <div className="space-y-3">
-                <input
-                  type="range"
-                  min="0"
-                  max="5000"
-                  step="100"
-                  value={priceRange[1]}
-                  onChange={(e) => {
-                    const val = parseInt(e.target.value);
-                    setPriceRange([0, val]);
-                  }}
-                  className="w-full cursor-pointer"
-                />
-                <p className="text-sm opacity-70">
-                  ₹{priceRange[0].toLocaleString('en-IN')} - ₹{priceRange[1].toLocaleString('en-IN')}
-                </p>
-              </div>
-            </div>
 
-            {/* Sort By */}
-            <div>
-              <h3 className="text-lg font-semibold mb-4">Sort By</h3>
-              <select
-                value={sortBy}
-                onChange={(e) => setSortBy(e.target.value)}
-                className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-black transition-colors"
-              >
-                <option value="featured">Featured</option>
-                <option value="best-selling">Best Selling</option>
-                <option value="newest">Newest First</option>
-                <option value="price-low">Price: Low to High</option>
-                <option value="price-high">Price: High to Low</option>
-              </select>
-            </div>
+
+
           </div>
 
           {/* Products Grid */}
           <div>
             {isLoading && displayedProducts.length === 0 ? (
-              <div className="text-center py-20">
-                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-black mx-auto mb-4"></div>
-                <p className="text-xl opacity-70">Loading products...</p>
+              <div className="flex flex-col items-center justify-center py-24">
+                <div className="w-12 h-12 border-3 border-gray-300 border-t-black rounded-full animate-spin mb-4"></div>
+                <p className="text-gray-700 font-medium">Loading products...</p>
               </div>
             ) : displayedProducts.length === 0 ? (
-              <div className="text-center py-20">
-                <p className="text-xl opacity-70 mb-4">No products found</p>
-                <p className="text-sm opacity-50 mb-6">Try adjusting your filters</p>
+              <div className="flex flex-col items-center justify-center py-24 bg-gradient-to-b from-gray-50 to-white rounded-lg border border-gray-200">
+                <svg className="w-16 h-16 text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M20 7l-8-4-8 4m16 0l-8 4m0 0L4 7m16 0v10l-8 4m0 0l-8-4v-10" />
+                </svg>
+                <p className="text-xl font-semibold text-gray-900 mb-2">No Products Found</p>
+                <p className="text-sm text-gray-500 mb-6">Try adjusting your filters or browse different categories</p>
                 <button
                   onClick={handleClearFilters}
-                  className="px-6 py-2 border-2 border-black rounded-full hover:bg-black hover:text-white transition-all"
+                  className="px-6 py-3 bg-black text-white rounded-full h hover:bg-gray-900 transition-colors font-medium"
                 >
-                  Clear Filters
+                  Clear All Filters
                 </button>
               </div>
             ) : (
               <>
-                <div ref={gridRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="mb-4 flex items-center justify-between">
+                  <p className="text-sm text-gray-600">
+                    Showing <span className="font-semibold text-gray-900">{displayedProducts.length}</span> of <span className="font-semibold text-gray-900">{pagination.total}</span> products
+                  </p>
+                  {isLoading && <span className="text-xs text-gray-500 animate-pulse">Loading...</span>}
+                </div>
+
+                <div ref={gridRef} className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                   {displayedProducts.map((product) => (
                     <ProductCard
                       key={product._id}
@@ -402,17 +324,19 @@ export default function ShopPage() {
                     <button
                       onClick={handleLoadMore}
                       disabled={isLoading}
-                      className="px-8 py-3 border-2 border-black rounded-full hover:bg-black hover:text-white transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="px-8 py-3 border-2 border-black text-black rounded-full hover:bg-black hover:text-white transition-all disabled:opacity-50 disabled:cursor-not-allowed font-semibold"
                     >
-                      {isLoading ? 'Loading...' : 'Load More Products'}
+                      {isLoading ? (
+                        <span className="flex items-center gap-2">
+                          <span className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin"></span>
+                          Loading...
+                        </span>
+                      ) : (
+                        'Load More Products'
+                      )}
                     </button>
                   </div>
                 )}
-
-                {/* Pagination info */}
-                <div className="text-center mt-8 opacity-70 text-sm">
-                  Showing {displayedProducts.length} of {pagination.total} products
-                </div>
               </>
             )}
           </div>
