@@ -107,7 +107,7 @@ router.get('/', async (req, res) => {
 
     // ⚠️ OPTIMIZED: Use lean() for faster queries - we don't need Mongoose document features
     const products = await Product.find(filter)
-      .select('name price offerPercentage quantity category subCategory images colors createdAt sku _id')
+      .select('name price offerPercentage quantity category subCategory images colors createdAt sku _id jewelleryType description careInstructions features')
       .sort(sortOptions)
       .skip(skip)
       .limit(limit)

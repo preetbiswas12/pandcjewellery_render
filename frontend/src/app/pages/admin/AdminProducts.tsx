@@ -144,24 +144,67 @@ export default function AdminProducts() {
     setShowGoogleDrivePicker(false);
   };
 
-  const openModal = (product?: typeof products[0]) => {
+  const openModal = async (product?: typeof products[0]) => {
     if (product) {
-      setEditingProduct(product);
-      setFormData({
-        name: product.name,
-        price: product.price.toString(),
-        offerPercentage: product.offerPercentage?.toString() || '0',
-        images: product.images.join(', '),
-        category: product.category,
-        subCategory: product.subCategory,
-        description: product.description,
-        sku: product.sku,
-        quantity: product.quantity.toString(),
-        jewelleryType: product.jewelleryType || '',
-        careInstructions: product.careInstructions || '',
-        colors: product.colors?.join(', ') || '',
-        features: product.features?.join(', ') || ''
-      });
+      // ⚠️ FETCH FULL PRODUCT DATA: Get complete product from API to ensure all fields are present
+      try {
+        const fullProduct = await (db as any).getById<typeof products[0]>('products', product._id || product.id);
+        if (fullProduct) {
+          setEditingProduct(fullProduct);
+          setFormData({
+            name: fullProduct.name,
+            price: fullProduct.price.toString(),
+            offerPercentage: fullProduct.offerPercentage?.toString() || '0',
+            images: fullProduct.images.join(', '),
+            category: fullProduct.category,
+            subCategory: fullProduct.subCategory,
+            description: fullProduct.description || '',
+            sku: fullProduct.sku,
+            quantity: fullProduct.quantity.toString(),
+            jewelleryType: fullProduct.jewelleryType || '',
+            careInstructions: fullProduct.careInstructions || '',
+            colors: fullProduct.colors?.join(', ') || '',
+            features: fullProduct.features?.join(', ') || ''
+          });
+        } else {
+          // Fallback to local product data if API fetch fails
+          setEditingProduct(product);
+          setFormData({
+            name: product.name,
+            price: product.price.toString(),
+            offerPercentage: product.offerPercentage?.toString() || '0',
+            images: product.images.join(', '),
+            category: product.category,
+            subCategory: product.subCategory,
+            description: product.description || '',
+            sku: product.sku,
+            quantity: product.quantity.toString(),
+            jewelleryType: product.jewelleryType || '',
+            careInstructions: product.careInstructions || '',
+            colors: product.colors?.join(', ') || '',
+            features: product.features?.join(', ') || ''
+          });
+        }
+      } catch (error) {
+        console.error('Error fetching product details:', error);
+        // Fallback to local product data
+        setEditingProduct(product);
+        setFormData({
+          name: product.name,
+          price: product.price.toString(),
+          offerPercentage: product.offerPercentage?.toString() || '0',
+          images: product.images.join(', '),
+          category: product.category,
+          subCategory: product.subCategory,
+          description: product.description || '',
+          sku: product.sku,
+          quantity: product.quantity.toString(),
+          jewelleryType: product.jewelleryType || '',
+          careInstructions: product.careInstructions || '',
+          colors: product.colors?.join(', ') || '',
+          features: product.features?.join(', ') || ''
+        });
+      }
     } else {
       resetForm();
     }
