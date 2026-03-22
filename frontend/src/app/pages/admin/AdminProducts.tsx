@@ -247,57 +247,57 @@ export default function AdminProducts() {
   };
 
   return (
-    <div>
-      <div className="flex items-center justify-between mb-8">
+    <div className="w-full">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6 md:mb-8">
         <div>
-          <h1 className="text-4xl font-bold tracking-tight mb-2">Products</h1>
-          <p className="text-lg opacity-70">{products.length} total products</p>
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight mb-1 sm:mb-2">Products</h1>
+          <p className="text-xs sm:text-sm md:text-base opacity-70">{products.length} total products</p>
         </div>
         <button
           onClick={() => openModal()}
-          className="bg-blue-600 text-white px-6 py-3 rounded-full font-medium hover:bg-blue-700 transition-all flex items-center gap-2"
+          className="w-full sm:w-auto bg-blue-600 text-white px-4 sm:px-6 py-2.5 sm:py-3 text-sm sm:text-base rounded-lg sm:rounded-full font-medium hover:bg-blue-700 transition-all flex items-center justify-center gap-2"
         >
-          <Plus size={20} />
-          Add Product
+          <Plus size={18} className="sm:w-5 sm:h-5" />
+          <span>Add Product</span>
         </button>
       </div>
 
       {/* Search */}
-      <div className="bg-white rounded-2xl p-6 mb-6">
+      <div className="bg-white rounded-lg md:rounded-2xl p-3 sm:p-6 mb-4 sm:mb-6">
         <div className="relative">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 opacity-50" size={20} />
+          <Search className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 opacity-50" size={18} />
           <input
             type="text"
             placeholder="Search products..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
+            className="w-full pl-9 sm:pl-12 pr-3 sm:pr-4 py-2.5 sm:py-3 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
           />
         </div>
       </div>
 
       {/* Products Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6">
         {filteredProducts.map((product) => {
           const discountedPrice = calculateDiscountedPrice(product.price, product.offerPercentage);
           return (
-            <div key={product._id} className="bg-white rounded-2xl overflow-hidden">
+            <div key={product._id} className="bg-white rounded-lg md:rounded-2xl overflow-hidden">
               <div className="aspect-square bg-gray-100">
                 <img src={convertGoogleDriveLink(product.images[0])} alt={product.name} className="w-full h-full object-cover" />
               </div>
-              <div className="p-6">
-                <h3 className="text-xl font-semibold mb-1">{product.name}</h3>
-                <p className="text-sm opacity-70 mb-3">SKU: {product.sku}</p>
+              <div className="p-3 sm:p-6">
+                <h3 className="text-base sm:text-lg md:text-xl font-semibold mb-1">{product.name}</h3>
+                <p className="text-xs sm:text-sm opacity-70 mb-3">SKU: {product.sku}</p>
                 <div className="flex items-baseline gap-2 mb-3">
-                  <span className="text-2xl font-bold">₹{discountedPrice.toFixed(2)}</span>
+                  <span className="text-lg sm:text-2xl font-bold">₹{discountedPrice.toFixed(2)}</span>
                   {product.offerPercentage > 0 && (
                     <>
-                      <span className="text-sm opacity-50 line-through">₹{product.price}</span>
-                      <span className="text-sm text-green-600 font-medium">-{product.offerPercentage}%</span>
+                      <span className="text-xs sm:text-sm opacity-50 line-through">₹{product.price}</span>
+                      <span className="text-xs sm:text-sm text-green-600 font-medium">-{product.offerPercentage}%</span>
                     </>
                   )}
                 </div>
-                <p className="text-sm opacity-70 mb-4">Stock: {product.quantity}</p>
+                <p className="text-xs sm:text-sm opacity-70 mb-4">Stock: {product.quantity}</p>
                 <div className="flex gap-2">
                   <button
                     onClick={() => openModal(product)}

@@ -100,23 +100,23 @@ export default function AdminCategories() {
   };
 
   return (
-    <div className="p-6">
-      <div className="flex justify-between items-center mb-6">
+    <div className="w-full">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4 sm:mb-6">
         <div>
-          <h1 className="text-2xl font-bold mb-2">Category Management</h1>
-          <p className="text-gray-600">Manage product categories and subcategories</p>
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-1 sm:mb-2">Category Management</h1>
+          <p className="text-xs sm:text-sm md:text-base text-gray-600">Manage product categories and subcategories</p>
         </div>
         <button
           onClick={() => openModal()}
-          className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 flex items-center gap-2"
+          className="w-full sm:w-auto bg-blue-600 text-white px-4 py-2 sm:py-2.5 text-sm sm:text-base rounded-lg hover:bg-blue-700 flex items-center justify-center gap-2"
         >
-          <Plus className="w-4 h-4" />
+          <Plus className="w-4 h-4 sm:w-5 sm:h-5" />
           Add Category
         </button>
       </div>
 
       {/* Categories List */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
         {categories.map((category) => (
           <CategoryCard
             key={category._id}
@@ -133,7 +133,7 @@ export default function AdminCategories() {
           <p className="text-gray-500">No categories found</p>
           <button
             onClick={() => openModal()}
-            className="mt-4 text-black hover:underline"
+            className="mt-4 text-black hover:underline text-sm"
           >
             Create your first category
           </button>
@@ -142,21 +142,21 @@ export default function AdminCategories() {
 
       {/* Modal */}
       {isModalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[999] p-4">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[999] p-3 sm:p-4">
           <div className="bg-white rounded-lg w-full max-w-2xl max-h-[90vh] overflow-y-auto">
-            <div className="sticky top-0 bg-white border-b px-6 py-4 flex justify-between items-center">
-              <h2 className="text-xl font-bold">
+            <div className="sticky top-0 bg-white border-b px-4 sm:px-6 py-3 sm:py-4 flex justify-between items-center gap-2">
+              <h2 className="text-lg sm:text-xl font-bold">
                 {editingCategory ? 'Edit Category' : 'Add New Category'}
               </h2>
               <button
                 onClick={closeModal}
-                className="text-gray-400 hover:text-gray-600"
+                className="flex-shrink-0 p-1 text-gray-400 hover:text-gray-600"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
-            <form onSubmit={handleSubmit} className="p-6 space-y-6">
+            <form onSubmit={handleSubmit} className="p-4 sm:p-6 space-y-4 sm:space-y-6">
               {/* Category Name */}
               <div>
                 <label className="block text-sm font-medium mb-2">
