@@ -50,7 +50,15 @@ export default function CheckoutPage() {
   }, [isLoaded, user]);
 
   // Calculate totals and costs (must be before useEffect that uses them)
-  const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.cartQuantity, 0);
+  // ⚠️ FIXED: Apply discount percentage to each item's price
+  const getDiscountedPrice = (price: number, offerPercentage: number) => {
+    return price - (price * (offerPercentage || 0) / 100);
+  };
+  
+  const subtotal = cartItems.reduce((sum, item) => {
+    const discountedPrice = getDiscountedPrice(item.price, item.offerPercentage || 0);
+    return sum + (discountedPrice * item.cartQuantity);
+  }, 0);
   const shipping = shippingCost;
   const discount = appliedCoupon ? appliedCoupon.discount : 0;
   const tax = (subtotal - discount) * config.tax.rate;
@@ -239,7 +247,7 @@ export default function CheckoutPage() {
                   productName: item.name,
                   sku: item.sku,
                   quantity: item.cartQuantity,
-                  price: item.price,
+                  price: getDiscountedPrice(item.price, item.offerPercentage || 0),
                   image: item.images[0]
                 })),
                 subtotal,
@@ -526,7 +534,12 @@ export default function CheckoutPage() {
                       <p className="font-medium">{item.name}</p>
                       <p className="text-sm opacity-70">Qty (m): {item.cartQuantity}</p>
                     </div>
-                    <p className="font-medium">₹{(item.price * item.cartQuantity).toFixed(2)}</p>
+                    <div className="flex flex-col items-end gap-1">
+                      {item.offerPercentage && item.offerPercentage > 0 && (
+                        <p className="text-sm opacity-50 line-through">₹{(item.price * item.cartQuantity).toFixed(2)}</p>
+                      )}
+                      <p className="font-medium">₹{(getDiscountedPrice(item.price, item.offerPercentage || 0) * item.cartQuantity).toFixed(2)}</p>
+                    </div>
                   </div>
                 ))}
               </div>

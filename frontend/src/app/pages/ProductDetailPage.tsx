@@ -182,14 +182,14 @@ export default function ProductDetailPage() {
               <label className="block text-xs md:text-sm font-medium mb-2">Quantity</label>
               <div className="flex items-center gap-3 md:gap-4">
                 <button
-                  onClick={() => setQuantity(Math.max(5, quantity - 1))}
+                  onClick={() => setQuantity(Math.max(1, quantity - 1))}
                   className="w-9 h-9 md:w-10 md:h-10 border-2 border-black rounded-lg hover:bg-black hover:text-white transition-all text-sm"
                 >
                   -
                 </button>
                 <span className="text-lg md:text-xl font-medium w-10 md:w-12 text-center">{quantity}</span>
                 <button
-                  onClick={() => setQuantity(Math.min(product.quantity, quantity + 1))}
+                  onClick={() => setQuantity(Math.min(100, Math.min(product.quantity, quantity + 1)))}
                   className="w-9 h-9 md:w-10 md:h-10 border-2 border-black rounded-lg hover:bg-black hover:text-white transition-all text-sm"
                 >
                   +
