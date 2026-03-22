@@ -3,6 +3,7 @@ import { Plus, Search, Edit, Trash2, X, Upload, Image as ImageIcon } from 'lucid
 import { useApp } from '../../context/AppContext';
 import { convertGoogleDriveLink } from '../../../lib/googleDriveUtils';
 import { GoogleDrivePicker } from '../../components/GoogleDrivePicker';
+import { db } from '../../services/database-enhanced';
 
 export default function AdminProducts() {
   const { products, categories, createProduct, updateProduct, deleteProduct: deleteProductDB } = useApp();
