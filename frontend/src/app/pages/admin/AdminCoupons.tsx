@@ -95,58 +95,58 @@ export default function AdminCoupons() {
   };
 
   return (
-    <div>
-      <div className="flex items-center justify-between mb-8">
+    <div className="w-full">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6 md:mb-8">
         <div>
-          <h1 className="text-4xl font-bold tracking-tight mb-2">Coupons</h1>
-          <p className="text-lg opacity-70">{coupons.length} total coupons</p>
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight mb-1 sm:mb-2">Coupons</h1>
+          <p className="text-xs sm:text-sm md:text-base opacity-70">{coupons.length} total coupons</p>
         </div>
         <button
           onClick={() => openModal()}
-          className="bg-blue-600 text-white px-6 py-3 rounded-full font-medium hover:bg-blue-700 transition-all flex items-center gap-2"
+          className="w-full sm:w-auto bg-blue-600 text-white px-4 sm:px-6 py-2.5 sm:py-3 text-sm sm:text-base rounded-lg sm:rounded-full font-medium hover:bg-blue-700 transition-all flex items-center justify-center gap-2"
         >
-          <Plus size={20} />
+          <Plus size={18} className="sm:w-5 sm:h-5" />
           Add Coupon
         </button>
       </div>
 
       {/* Coupons Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6">
         {coupons.map((coupon) => {
           const isExpired = new Date(coupon.validTo) < new Date();
           const isNotYetValid = new Date(coupon.validFrom) > new Date();
           const usagePercentage = (coupon.usedCount / coupon.usageLimit) * 100;
 
           return (
-            <div key={coupon._id} className="bg-white rounded-2xl p-6 relative">
+            <div key={coupon._id} className="bg-white rounded-lg md:rounded-2xl p-4 sm:p-6 relative">
               {/* Status Badge */}
-              <div className="absolute top-4 right-4">
+              <div className="absolute top-3 sm:top-4 right-3 sm:right-4">
                 {!coupon.isActive ? (
-                  <span className="px-3 py-1 bg-gray-200 text-gray-800 rounded-full text-xs font-medium">
+                  <span className="px-2 sm:px-3 py-1 text-xs bg-gray-200 text-gray-800 rounded-full font-medium">
                     Inactive
                   </span>
                 ) : isExpired ? (
-                  <span className="px-3 py-1 bg-red-100 text-red-800 rounded-full text-xs font-medium">
+                  <span className="px-2 sm:px-3 py-1 text-xs bg-red-100 text-red-800 rounded-full font-medium">
                     Expired
                   </span>
                 ) : isNotYetValid ? (
-                  <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-xs font-medium">
+                  <span className="px-2 sm:px-3 py-1 text-xs bg-blue-100 text-blue-800 rounded-full font-medium">
                     Upcoming
                   </span>
                 ) : (
-                  <span className="px-3 py-1 bg-green-100 text-green-800 rounded-full text-xs font-medium">
+                  <span className="px-2 sm:px-3 py-1 text-xs bg-green-100 text-green-800 rounded-full font-medium">
                     Active
                   </span>
                 )}
               </div>
 
               {/* Coupon Code */}
-              <div className="mb-4 pr-20">
+              <div className="mb-4 pr-16 sm:pr-20">
                 <div className="flex items-center gap-2 mb-2">
-                  <Tag size={20} className="opacity-50" />
-                  <h3 className="text-2xl font-bold font-mono">{coupon.code}</h3>
+                  <Tag size={16} className="sm:w-5 sm:h-5 opacity-50" />
+                  <h3 className="text-lg sm:text-2xl font-bold font-mono">{coupon.code}</h3>
                 </div>
-                <p className="text-sm opacity-70">
+                <p className="text-xs sm:text-sm opacity-70">
                   {coupon.discountType === 'percentage' 
                     ? `${coupon.discountValue}% off` 
                     : `₹${coupon.discountValue} off`}
