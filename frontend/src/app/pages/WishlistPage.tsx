@@ -2,14 +2,15 @@ import { useNavigate } from 'react-router';
 import { useApp } from '../context/AppContext';
 import { NoiseButton } from '@/components/ui/noise-button';
 import { convertGoogleDriveLink } from '../../lib/googleDriveUtils';
-import { Trash2, Heart } from 'lucide-react';
-import { useEffect, useRef } from 'react';
+import { Trash2, Heart, ShoppingCart } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 
 export default function WishlistPage() {
   const navigate = useNavigate();
   const { wishlist, toggleWishlist, addToCart, products } = useApp();
   const pageRef = useRef<HTMLDivElement>(null);
+  const [addedProducts, setAddedProducts] = useState<Set<string>>(new Set());
 
   // Get actual products that are in wishlist
   const wishlistProducts = products.filter(p => wishlist.includes(p._id));
@@ -86,12 +87,31 @@ export default function WishlistPage() {
                     )}
                   </div>
                   <div className="flex gap-2">
-                    <NoiseButton
-                      onClick={() => addToCart(product)}
-                      containerClassName="flex-1"
+                    <button
+                      onClick={() => {
+                        if (addedProducts.has(product._id)) {
+                          navigate('/cart');
+                        } else {
+                          addToCart(product);
+                          setAddedProducts(prev => new Set([...prev, product._id]));
+                          setTimeout(() => {
+                            setAddedProducts(prev => {
+                              const newSet = new Set(prev);
+                              newSet.delete(product._id);
+                              return newSet;
+                            });
+                          }, 3000);
+                        }
+                      }}
+                      className={`flex-1 px-6 py-2 rounded-full text-sm font-medium transition-all flex items-center justify-center gap-2 ${
+                        addedProducts.has(product._id)
+                          ? 'bg-green-500 text-white hover:bg-green-600'
+                          : 'bg-black text-white hover:scale-105 active:scale-95'
+                      }`}
                     >
-                      Add to Cart
-                    </NoiseButton>
+                      <ShoppingCart size={16} />
+                      {addedProducts.has(product._id) ? 'View Cart' : 'Add to Cart'}
+                    </button>
                     <button
                       onClick={() => toggleWishlist(product._id)}
                       className="w-10 h-10 border-2 border-red-500 rounded-full flex items-center justify-center hover:bg-red-500 hover:text-white transition-all"

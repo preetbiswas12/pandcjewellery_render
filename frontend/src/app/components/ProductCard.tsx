@@ -1,5 +1,5 @@
-import { Heart } from 'lucide-react';
-import { useEffect, useRef } from 'react';
+import { Heart, ShoppingCart } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { gsap } from 'gsap';
 import { Product } from '../context/AppContext';
@@ -15,6 +15,7 @@ interface ProductCardProps {
 export function ProductCard({ product, onAddToCart, onToggleWishlist, isInWishlist }: ProductCardProps) {
   const navigate = useNavigate();
   const cardRef = useRef<HTMLDivElement>(null);
+  const [isAdded, setIsAdded] = useState(false);
 
   useEffect(() => {
     const card = cardRef.current;
@@ -107,11 +108,22 @@ export function ProductCard({ product, onAddToCart, onToggleWishlist, isInWishli
       <button
         onClick={(e) => {
           e.stopPropagation();
-          onAddToCart(product);
+          if (isAdded) {
+            navigate('/cart');
+          } else {
+            onAddToCart(product);
+            setIsAdded(true);
+            setTimeout(() => setIsAdded(false), 3000);
+          }
         }}
-        className="md:hidden w-full mt-4 bg-black text-white px-6 py-2 rounded-full text-sm font-medium hover:scale-105 active:scale-95 transition-transform"
+        className={`md:hidden w-full mt-4 px-6 py-2 rounded-full text-sm font-medium transition-all flex items-center justify-center gap-2 ${
+          isAdded 
+            ? 'bg-green-500 text-white hover:bg-green-600' 
+            : 'bg-black text-white hover:scale-105 active:scale-95'
+        }`}
       >
-        Add to Cart
+        <ShoppingCart size={16} />
+        {isAdded ? 'View Cart' : 'Add to Cart'}
       </button>
     </div>
   );

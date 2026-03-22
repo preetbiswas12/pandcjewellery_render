@@ -120,7 +120,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
   // Cart Management
   const addToCart = (product: Product, quantity?: number) => {
-    const quantityToAdd = Math.max(5, Math.min(quantity || 5, 100)); // Enforce 5-100 range
+    const quantityToAdd = Math.max(1, Math.min(quantity || 1, 100)); // Default to 1, max 100
     
     setCartItems((prev) => {
       const existingItem = prev.find((item) => item.id === product.id);
@@ -138,8 +138,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
   };
 
   const updateQuantity = (productId: string, quantity: number) => {
-    // Enforce minimum of 5 meters, maximum of 100 meters
-    const validatedQuantity = Math.max(5, Math.min(parseInt(String(quantity), 10) || 5, 100));
+    // Enforce minimum of 1, maximum of 100
+    const validatedQuantity = Math.max(1, Math.min(parseInt(String(quantity), 10) || 1, 100));
     
     setCartItems((prev) =>
       prev.map((item) =>

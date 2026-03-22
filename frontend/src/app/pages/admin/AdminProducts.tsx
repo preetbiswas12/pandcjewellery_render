@@ -277,7 +277,7 @@ export default function AdminProducts() {
       </div>
 
       {/* Products Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-6">
         {filteredProducts.map((product) => {
           const discountedPrice = calculateDiscountedPrice(product.price, product.offerPercentage);
           return (
