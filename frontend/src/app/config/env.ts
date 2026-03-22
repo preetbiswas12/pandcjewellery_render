@@ -80,7 +80,7 @@ export const config = {
 
   // Tax
   tax: {
-    rate: Number(import.meta.env.VITE_TAX_RATE) || 0.18,
+    rate: Number(import.meta.env.VITE_TAX_RATE) || 0,
     gstNumber: import.meta.env.VITE_GST_NUMBER || '',
   },
 
