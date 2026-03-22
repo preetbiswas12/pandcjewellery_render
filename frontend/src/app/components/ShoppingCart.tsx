@@ -13,7 +13,15 @@ interface ShoppingCartProps {
 }
 
 export function ShoppingCart({ isOpen, onClose, items, onUpdateQuantity, onRemoveItem }: ShoppingCartProps) {
-  const total = items.reduce((sum, item) => sum + item.price * item.cartQuantity, 0);
+  // ⚠️ FIXED: Apply discount percentage to each item's price
+  const getDiscountedPrice = (price: number, offerPercentage: number) => {
+    return price - (price * (offerPercentage || 0) / 100);
+  };
+  
+  const total = items.reduce((sum, item) => {
+    const discountedPrice = getDiscountedPrice(item.price, item.offerPercentage || 0);
+    return sum + (discountedPrice * item.cartQuantity);
+  }, 0);
   const cartRef = useRef<HTMLDivElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
 
@@ -74,7 +82,17 @@ export function ShoppingCart({ isOpen, onClose, items, onUpdateQuantity, onRemov
                   />
                   <div className="flex-1">
                     <h3 className="font-medium mb-1">{item.name}</h3>
-                    <p className="text-sm opacity-70 mb-2">₹{item.price}</p>
+                    <div className="text-sm opacity-70 mb-2 flex items-center gap-2">
+                      {item.offerPercentage && item.offerPercentage > 0 ? (
+                        <>
+                          <span className="line-through opacity-50">₹{item.price.toFixed(2)}</span>
+                          <span className="font-medium text-green-600">₹{(item.price - (item.price * item.offerPercentage / 100)).toFixed(2)}</span>
+                          <span className="text-xs bg-red-500 text-white px-1.5 py-0.5 rounded">-{item.offerPercentage}%</span>
+                        </>
+                      ) : (
+                        <span>₹{item.price.toFixed(2)}</span>
+                      )}
+                    </div>
                     <div className="flex items-center gap-2">
                       <button
                         onClick={() => onUpdateQuantity(item.id, Math.max(5, item.cartQuantity - 1))}

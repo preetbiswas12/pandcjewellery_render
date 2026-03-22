@@ -11,7 +11,15 @@ export default function CartPage() {
   const { cartItems, updateQuantity, removeFromCart } = useApp();
   const pageRef = useRef<HTMLDivElement>(null);
 
-  const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.cartQuantity, 0);
+  // ⚠️ FIXED: Apply discount percentage to each item's price when calculating subtotal
+  const getDiscountedPrice = (price: number, offerPercentage: number) => {
+    return price - (price * (offerPercentage || 0) / 100);
+  };
+  
+  const subtotal = cartItems.reduce((sum, item) => {
+    const discountedPrice = getDiscountedPrice(item.price, item.offerPercentage || 0);
+    return sum + (discountedPrice * item.cartQuantity);
+  }, 0);
 
   useEffect(() => {
     // Only animate if there are items
@@ -79,7 +87,7 @@ export default function CartPage() {
                     <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
                       <div className="flex items-center gap-2">
                         <button
-                          onClick={() => updateQuantity(item.id, Math.max(5, item.cartQuantity - 1))}
+                          onClick={() => updateQuantity(item.id, Math.max(1, item.cartQuantity - 1))}
                           className="w-7 h-7 md:w-8 md:h-8 border-2 border-black rounded-lg hover:bg-black hover:text-white transition-all text-sm"
                         >
                           -
@@ -92,7 +100,12 @@ export default function CartPage() {
                           +
                         </button>
                       </div>
-                      <p className="text-base md:text-lg lg:text-xl font-bold">₹{(item.price * item.cartQuantity).toFixed(2)}</p>
+                      <div className="flex flex-col items-end gap-1">
+                        {item.offerPercentage && item.offerPercentage > 0 && (
+                          <p className="text-sm opacity-50 line-through">₹{(item.price * item.cartQuantity).toFixed(2)}</p>
+                        )}
+                        <p className="text-base md:text-lg lg:text-xl font-bold text-green-600">₹{((item.price - (item.price * (item.offerPercentage || 0) / 100)) * item.cartQuantity).toFixed(2)}</p>
+                      </div>
                     </div>
                   </div>
                   <button
