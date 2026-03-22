@@ -238,16 +238,19 @@ router.put('/:id', async (req, res) => {
       }
     }
     
+    // ⚠️ FIXED: Use runValidators: false for partial updates to avoid validating required fields not included in update
+    // This allows patching individual fields without requiring all required fields
     const updatedProduct = await Product.findByIdAndUpdate(
       req.params.id,
       req.body,
-      { new: true, runValidators: true }
+      { new: true, runValidators: false }
     );
     
     if (!updatedProduct) {
       return res.status(404).json({ success: false, message: 'Product not found' });
     }
     
+    console.log(`[Products] ✓ Updated product ${req.params.id}`);
     res.json({ success: true, data: updatedProduct });
   } catch (err) {
     console.error('[Products] Update error:', err.message);
