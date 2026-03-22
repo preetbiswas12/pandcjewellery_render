@@ -21,8 +21,9 @@ export default function AdminDashboard() {
   const { admin, logout } = useAdmin();
   const { refreshAllData } = useApp();
   const [isRefreshing, setIsRefreshing] = useState(false);
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(typeof window !== 'undefined' && window.innerWidth >= 1024);
   const sidebarRef = useRef<HTMLDivElement>(null);
+  const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' && window.innerWidth < 1024);
 
   const handleLogout = async () => {
     await logout();
@@ -48,18 +49,44 @@ export default function AdminDashboard() {
         });
       }
     });
-    return () => ctx.revert();
-  }, []);
+
+    // Handle window resize
+    const handleResize = () => {
+      const isNowMobile = window.innerWidth < 1024;
+      setIsMobile(isNowMobile);
+      if (isNowMobile && isSidebarOpen) {
+        // Don't auto-close, just track state
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => {
+      ctx.revert();
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [isSidebarOpen]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-50">
-      <div className="flex">
+      {/* Mobile Sidebar Overlay */}
+      {isMobile && isSidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black/50 z-40 lg:hidden"
+          onClick={() => setIsSidebarOpen(false)}
+        />
+      )}
+
+      <div className="flex min-h-screen">
         {/* Sidebar */}
         <aside
           ref={sidebarRef}
           className={`${
-            isSidebarOpen ? 'w-72' : 'w-20'
-          } bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 text-white min-h-screen flex flex-col border-r border-slate-700 transition-all duration-300 fixed lg:relative z-50`}
+            isSidebarOpen ? 'w-64 sm:w-72' : 'w-16 sm:w-20'
+          } bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 text-white min-h-screen flex flex-col border-r border-slate-700 transition-all duration-300 ${
+            isMobile 
+              ? (isSidebarOpen ? 'fixed left-0 top-0 z-50' : 'relative') 
+              : 'relative'
+          }`}
         >
           {/* Header */}
           <div className="p-6 border-b border-slate-700/50 flex items-center justify-between">
@@ -151,8 +178,10 @@ export default function AdminDashboard() {
         </aside>
 
         {/* Main Content */}
-        <main className="flex-1 p-8">
-          <Outlet />
+        <main className="flex-1 w-full overflow-x-hidden">
+          <div className="p-3 sm:p-6 md:p-8 bg-gradient-to-br from-slate-50 via-white to-slate-50 min-h-screen">
+            <Outlet />
+          </div>
         </main>
       </div>
     </div>
