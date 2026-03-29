@@ -42,7 +42,22 @@ app.use((req, res, next) => {
 const staticFilePath = path.join(__dirname, '../frontend/dist');
 app.use(express.static(staticFilePath));
 
-// API Routes
+// Health check endpoints - BEFORE DB middleware so they always work
+app.get('/health', (req, res) => {
+  const dbStatus = mongoose.connection.readyState === 1 ? 'connected' : 'disconnected';
+  const isHealthy = mongoose.connection.readyState === 1;
+  res.status(isHealthy ? 200 : 503).json({ 
+    status: 'ok', 
+    database: dbStatus,
+    timestamp: new Date().toISOString()
+  });
+});
+
+app.get('/api/health', (req, res) => {
+  res.json({ status: 'P&C Jewellery Store API is running...' });
+});
+
+// Database connection check middleware (after health checks)
 app.use((req, res, next) => {
   if (mongoose.connection.readyState !== 1) {
     return res.status(503).json({ success: false, message: 'Database not connected' });
@@ -87,17 +102,22 @@ app.use('/api/admin/banners', adminAuth, bannerRoutes);
 app.use('/api/admin/categories', adminAuth, categoryRoutes);
 app.use('/api/admin/users', adminAuth, userRoutes);
 
-// Health check
-app.get('/api/health', (req, res) => {
-  res.json({ status: 'P&C Jewellery Store API is running...' });
-});
-
 // Serve index.html for all non-API routes (client-side routing)
 app.get('*', (req, res) => {
   res.sendFile(path.join(staticFilePath, 'index.html'), (err) => {
     if (err) {
       res.status(404).json({ success: false, message: 'Page not found' });
     }
+  });
+});
+
+// Global error handling middleware (catch-all for route errors)
+app.use((err, req, res, next) => {
+  console.error('❌ Route Error:', err.message, err.stack);
+  res.status(err.status || 500).json({ 
+    success: false, 
+    message: 'Internal server error',
+    error: process.env.NODE_ENV === 'development' ? err.message : undefined
   });
 });
 
@@ -124,13 +144,47 @@ const connectDB = async () => {
 // Start MongoDB connection in background (don't wait for it)
 connectDB();
 
+// MongoDB connection event listeners for debugging
+mongoose.connection.on('disconnected', () => {
+  console.warn('⚠️ MongoDB disconnected');
+});
+
+mongoose.connection.on('error', (err) => {
+  console.error('❌ MongoDB connection error:', err.message);
+});
+
+mongoose.connection.on('reconnected', () => {
+  console.log('✓ MongoDB reconnected successfully');
+});
+
 // Start server immediately for Render health checks
 const server = app.listen(PORT, '0.0.0.0', () => {
   // Server started silently
 });
 
+// Global error handlers to prevent silent crashes
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('❌ Unhandled Rejection at:', promise, 'reason:', reason);
+  // Optionally: send this to error tracking service (e.g., Sentry)
+});
+
+process.on('uncaughtException', (error) => {
+  console.error('❌ Uncaught Exception:', error);
+  // Optionally: send this to error tracking service (e.g., Sentry)
+  // In production, you might want to gracefully restart after logging
+});
+
 // Graceful shutdown
 process.on('SIGTERM', () => {
+  console.log('📍 SIGTERM received, shutting down gracefully...');
+  server.close(() => {
+    mongoose.connection.close();
+    process.exit(0);
+  });
+});
+
+process.on('SIGINT', () => {
+  console.log('📍 SIGINT received, shutting down gracefully...');
   server.close(() => {
     mongoose.connection.close();
     process.exit(0);
